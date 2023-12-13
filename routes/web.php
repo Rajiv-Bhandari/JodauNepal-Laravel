@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TechnicianController;
+
+use App\Enums\UserType;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +34,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
+    Route::get('/user-home', [UserController::class, 'home'])->name('user.home');
+});
+
+Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {
+    Route::get('/technician-dashboard', [TechnicianController::class, 'dashboard'])->name('technician.dashboard');
+});

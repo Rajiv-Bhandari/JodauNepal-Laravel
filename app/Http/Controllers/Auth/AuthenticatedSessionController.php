@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -29,7 +30,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Customize redirection based on usertype
+        switch (auth()->user()->usertype) {
+            case UserType::Admin:
+                return redirect()->route('admin.dashboard');
+            case UserType::Technician:
+                return redirect()->route('technician.dashboard');
+            case UserType::User:
+                return redirect()->route('user.home');
+            default:
+                return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
