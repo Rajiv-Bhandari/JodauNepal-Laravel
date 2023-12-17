@@ -17,7 +17,20 @@ class UserTypeMiddleware
             return $next($request);
         }
 
-        return abort(403); // Or redirect to a different route or show an error page
+        // Redirect based on user type
+        switch ($user->usertype) {
+            case UserType::User:
+                return redirect()->route('user.home');
+                break;
+            case UserType::Admin:
+                return redirect()->route('admin.dashboard');
+                break;
+            case UserType::Technician:
+                return redirect()->route('technician.dashboard');
+                break;
+            default:
+                return abort(403); // Or handle the default behavior according to your needs
+                break;
+        }
     }
 }
-
