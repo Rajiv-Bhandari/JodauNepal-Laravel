@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Technician;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TechnicianController extends Controller
 {
@@ -23,7 +24,7 @@ class TechnicianController extends Controller
             'skill' => 'required|string',
             'yearsofexperience' => 'nullable|integer',
             'dob' => 'required|date',
-            'profilepic' => 'nullable|image',
+            // 'profilepic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
         // Store the technician in the database
@@ -38,10 +39,12 @@ class TechnicianController extends Controller
 
         // Handle profile picture upload
         if ($request->hasFile('profilepic')) {
-            $path = $request->file('profilepic')->store('profile_pictures');
-            $technician->profilepic = $path;
+            $file = $request->file('profilepic');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            
+            Storage::putFileAs('profile_pictures', $file, $filename);
+            $technician->profilepic = $filename;
         }
-
         // Save the technician
         $technician->save();
 

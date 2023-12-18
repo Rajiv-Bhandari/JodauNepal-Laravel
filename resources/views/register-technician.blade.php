@@ -69,8 +69,29 @@
     </style>
 </head>
 <body>
-    <form method="POST" action="{{ route('register-technician') }}">
+    <form method="POST" action="{{ route('register-technician') }}" enctype="multipart/form-data">
         @csrf
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div>
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" name="fullname" required>
