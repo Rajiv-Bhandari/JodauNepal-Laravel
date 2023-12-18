@@ -96,7 +96,7 @@
         <div class="quote">
             <p>Join our platform, Seamlessly connect with proficient technicians for your needs while providing experts with a platform to showcase their talents. Experience a hassle-free, efficient way to address technical issues while empowering technicians to offer their expertise and services. Together, let's revolutionize the way problems are solved.</p>
             <p>Technicians don't just fix problems;<br>they engineer solutions.</p>
-            <a href="#" class="become-technician-btn">Become a Technician</a>
+            <a href="{{route('register-technician-form')}}" class="become-technician-btn">Become a Technician</a>
         </div>
     </div>
 </body>

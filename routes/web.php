@@ -22,6 +22,8 @@ use App\Enums\UserType;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/register-technician-form', [TechnicianController::class, 'showRegistrationForm'])->name('register-technician-form');
+Route::post('/register-technician', [TechnicianController::class, 'register'])->name('register-technician');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
