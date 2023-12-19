@@ -49,7 +49,7 @@ class TechnicianController extends Controller
         $technician->save();
 
         // Redirect or return response as needed
-        return redirect()->back()->with('success', 'Technician registered successfully!');
+        return redirect()->back()->with('success', 'Technician registered successfully! Wait for Admin approval');
     }
 
     public function dashboard()

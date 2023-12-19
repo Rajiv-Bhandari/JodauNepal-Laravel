@@ -20,7 +20,8 @@ class Technician extends Model
         'dob',
         'totaljobs',
         'profilepic',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     protected $casts = [

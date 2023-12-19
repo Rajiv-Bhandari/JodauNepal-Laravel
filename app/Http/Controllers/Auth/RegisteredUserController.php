@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Enums\UserType;
 
 class RegisteredUserController extends Controller
 {
@@ -48,6 +49,16 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('user.home');
+        // switch ($user->usertype) {
+        //     case UserType::Admin:
+        //         return redirect()->route('admin.dashboard');
+        //     case UserType::Technician:
+        //         return redirect()->route('technician.dashboard');
+        //     case UserType::User:
+        //         return redirect()->route('user.home');
+        //     default:
+        //         return redirect(RouteServiceProvider::HOME);
+        // }
     }
 }
