@@ -19,9 +19,7 @@
 
                 {{-- dashboard --}}
                 <li class="nav-item m-1">
-                    <a href="
-                    #
-                    "
+                    <a href="{{route('admin.dashboard')}}"
                         class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home m-1 p-1"></i>
                         <p>
