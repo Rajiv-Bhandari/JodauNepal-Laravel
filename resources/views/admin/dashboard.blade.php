@@ -29,13 +29,34 @@
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Name</th>
+                                            <th>Full Name</th>
                                             <th>Address</th>
+                                            <th>Contact Number</th>
+                                            <th>Email</th>
+                                            <th>Skill</th>
+                                            <th>Years of experience</th>
+                                            <th>DOB</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
-                                    
+                                    @foreach($technicians as $index => $technician)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $technician->fullname }}</td>
+                                            <td>{{ $technician->address }}</td>
+                                            <td>{{ $technician->contactnumber }}</td>
+                                            <td>{{ $technician->email }}</td>
+                                            <td>{{ $technician->skill }}</td>
+                                            <td>{{ $technician->yearsofexperience }}</td>
+                                            <td>{{ $technician->dob }}</td>
+                                            <td class="text-center">{{ $technician->status }}</td>
+                                            <td class="text-center">
+                                                <!-- Actions for each technician (approve, delete, etc.) -->
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </table>
                             </div>
                         </div>
