@@ -36,29 +36,30 @@
                                             <th>Email</th>
                                             <th>Skill</th>
                                             <th>Years of experience</th>
-                                            <th>DOB</th>
+                                            <th>Age</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     @foreach($technicians as $index => $technician)
                                         <tr>
-                                        <td>
-                                            @if($technician->profilepic)
-                                                <img src="{{ asset('storage/app/profile_pictures/' . $technician->profilepic) }}" alt="Profile Picture" style="width: 100px; height: auto;">
-                                            @else
-                                                No Image
-                                            @endif
-                                        </td>
                                             <td>{{ $index + 1 }}</td>
+                                            <td>
+                                                @if($technician->profilepic)
+                                                <img src = "/images/profile_pictures/{{$technician->profilepic}}" alt="Profile" style="width:65px; height:65px; float:left; border-radius:50%; margin-right:5px;">
+                                                <!-- <img src="{{ url('storage/app/profile_pictures/' . $technician->profilepic) }}" alt="Profile Picture" style="width: 100px; height: auto;"> -->
+                                                @else
+                                                    No Image
+                                                @endif
+                                            </td>
                                             <td>{{ $technician->fullname }}</td>
                                             <td>{{ $technician->address }}</td>
                                             <td>{{ $technician->contactnumber }}</td>
                                             <td>{{ $technician->email }}</td>
                                             <td>{{ $technician->skill }}</td>
                                             <td>{{ $technician->yearsofexperience }}</td>
-                                            <td>{{ $technician->dob }}</td>
-                                            <td class="text-center">{{ $technician->status }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($technician->dob)->age }}</td>
+                                            <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td>
                                             <td class="text-center">
                                                 <!-- Actions for each technician (approve, delete, etc.) -->
                                             </td>

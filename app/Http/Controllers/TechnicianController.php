@@ -42,7 +42,7 @@ class TechnicianController extends Controller
             $file = $request->file('profilepic');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             
-            Storage::putFileAs('profile_pictures', $file, $filename);
+            $file->move(public_path('images/profile_pictures'), $filename);
             $technician->profilepic = $filename;
         }
         // Save the technician
