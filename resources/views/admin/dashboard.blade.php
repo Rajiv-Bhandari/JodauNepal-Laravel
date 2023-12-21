@@ -29,6 +29,7 @@
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
+                                            <th>Profile</th>
                                             <th>Full Name</th>
                                             <th>Address</th>
                                             <th>Contact Number</th>
@@ -42,6 +43,13 @@
                                     </thead>
                                     @foreach($technicians as $index => $technician)
                                         <tr>
+                                        <td>
+                                            @if($technician->profilepic)
+                                                <img src="{{ asset('storage/app/profile_pictures/' . $technician->profilepic) }}" alt="Profile Picture" style="width: 100px; height: auto;">
+                                            @else
+                                                No Image
+                                            @endif
+                                        </td>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $technician->fullname }}</td>
                                             <td>{{ $technician->address }}</td>
