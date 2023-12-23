@@ -61,7 +61,9 @@
                                             <td>{{ \Carbon\Carbon::parse($technician->dob)->age }}</td>
                                             <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td>
                                             <td class="text-center">
-                                                <!-- Actions for each technician (approve, delete, etc.) -->
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#approvalModal{{ $technician->id }}">
+                                                    Requested
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -77,5 +79,38 @@
     
     
     </div>
+<!-- Modal for Approve/Reject -->
+<div class="modal fade" id="approvalModal{{ $technician->id }}" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approvalModalLabel">Approve/Reject Technician</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            Choose whether to approve or reject the request: <br><br>
+                <form action="" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="approval_status" value="approved" required> Approve Request
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="approval_status" value="rejected"> Reject Request
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

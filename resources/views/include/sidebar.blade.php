@@ -29,13 +29,11 @@
                 </li>
                 {{-- Subscription --}}
                 <li class="nav-item m-1">
-                    <a href="
-                   #
-                    "
+                    <a href="{{route('admin.dashboard')}}"
                         class="nav-link {{ request()->is('technician') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-funnel-dollar m-1 p-1"></i>
                         <p>
-                            Technician
+                            Technician Request
                         </p>
                     </a>
                 </li>
