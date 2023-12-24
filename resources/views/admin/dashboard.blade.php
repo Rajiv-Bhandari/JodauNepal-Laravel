@@ -47,7 +47,6 @@
                                             <td>
                                                 @if($technician->profilepic)
                                                 <img src = "/images/profile_pictures/{{$technician->profilepic}}" alt="Profile" style="width:65px; height:65px; float:left; border-radius:50%; margin-right:5px;">
-                                                <!-- <img src="{{ url('storage/app/profile_pictures/' . $technician->profilepic) }}" alt="Profile Picture" style="width: 100px; height: auto;"> -->
                                                 @else
                                                     No Image
                                                 @endif
@@ -61,11 +60,46 @@
                                             <td>{{ \Carbon\Carbon::parse($technician->dob)->age }}</td>
                                             <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#approvalModal{{ $technician->id }}">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#approvalModal{{ $technician->id }}{{ $index }}">
                                                     Requested
                                                 </button>
                                             </td>
                                         </tr>
+                                        <!-- Modal for Approve/Reject -->
+                                        <div class="modal fade" id="approvalModal{{ $technician->id }}{{ $index }}" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="approvalModalLabel">Approve/Reject Technician</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Choose whether to approve or reject the request: <br><br>
+                                                        <form id="approvalForm{{ $technician->id }}" method="POST" action="{{ route('approveOrReject') }}">
+                                                            @csrf
+                                                            <input type="hidden" name="technician_id" value="{{ $technician->id }}">
+                                                            <div class="form-group">
+                                                                <label>
+                                                                    <input type="radio" name="approval_status" value="approved"> Approve Request
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>
+                                                                    <input type="radio" name="approval_status" value="rejected"> Reject Request
+                                                                </label>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" onclick="submitForm({{ $technician->id }})">Submit</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
 
                                 </table>
@@ -79,38 +113,18 @@
     
     
     </div>
-<!-- Modal for Approve/Reject -->
-<div class="modal fade" id="approvalModal{{ $technician->id }}" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="approvalModalLabel">Approve/Reject Technician</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            Choose whether to approve or reject the request: <br><br>
-                <form action="" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label>
-                            <input type="radio" name="approval_status" value="approved" required> Approve Request
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="radio" name="approval_status" value="rejected"> Reject Request
-                        </label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+    <script>
+        function submitForm(technicianId) {
+            var form = $('#approvalForm' + technicianId);
+            var approvalStatus = form.find('input[name="approval_status"]:checked').val();
+
+            if (approvalStatus === 'approved') {
+                window.location.href = "{{ route('technician.approve', ':id') }}".replace(':id', technicianId);
+            } else if (approvalStatus === 'rejected') {
+                window.location.href = "{{ route('technician.reject', ':id') }}".replace(':id', technicianId);
+            }
+        }
+    </script>
+
 
 @endsection

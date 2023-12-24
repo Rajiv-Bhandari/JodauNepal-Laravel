@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Jodau Nepal - @yield('title')</title>
-    <link rel="icon" href="{{ url('images/logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="#" type="image/x-icon">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="preload" href="https://fonts.googleapis.com">

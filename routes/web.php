@@ -42,8 +42,12 @@ Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
 
 Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/technician/approve/{id}', [TechnicianController::class, 'approve'])->name('technician.approve');
+    Route::post('/technician/reject/{id}', [TechnicianController::class, 'reject'])->name('technician.reject');
+    Route::post('/approve-or-reject', [TechnicianController::class, 'approveOrReject'])->name('approveOrReject');
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {
     Route::get('/technician-dashboard', [TechnicianController::class, 'dashboard'])->name('technician.dashboard');
+
 });
