@@ -70,6 +70,7 @@ class TechnicianController extends Controller
     {
         $technician = Technician::findOrFail($id);
         $technician->status = TechnicianStatus::Rejected;
+        $technician->rejectmessage = request()->input('rejectmessage');
         $technician->save();
 
         return redirect()->back()->with('success', 'Technician rejected successfully');

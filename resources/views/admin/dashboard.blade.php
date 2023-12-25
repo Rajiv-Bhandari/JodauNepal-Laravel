@@ -36,12 +36,12 @@
                                             <th>Skill</th>
                                             <th>Years of experience</th>
                                             <th>Age</th>
-                                            <th class="text-center">Status</th>
+                                            <!-- <th class="text-center">Status</th> -->
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     @foreach($technicians as $index => $technician)
-                                    <tr>
+                                        <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>
                                                 @if($technician->profilepic)
@@ -57,48 +57,19 @@
                                             <td>{{ $technician->skill }}</td>
                                             <td>{{ $technician->yearsofexperience }}</td>
                                             <td>{{ \Carbon\Carbon::parse($technician->dob)->age }}</td>
-                                            <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td>
+                                            <!-- <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td> -->
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#approvalModal{{ $technician->id }}{{ $index }}">
-                                                    Requested
-                                                </button>
+                                            @if($technician->status==0)
+                                                <button class="btn btn-warning btn-sm btn-request" data-toggle="modal" data-target="#RequestedModal" data-request-id="{{ $technician->id }}">Requested</button>
+
+                                            @elseif($technician->status==1)
+                                                <button class="btn btn-info btn-sm">Approved</button>
+                                            @elseif($technician->status==2)
+                                                <button class="btn btn-danger btn-sm" title="{{$technician->rejectmessage}}">Rejected</button>
+                                            @endif    
                                             </td>
                                         </tr>
 
-                                        <!-- Modal for Approve/Reject -->
-                                        <div class="modal fade" id="approvalModal{{ $technician->id }}{{ $index }}" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="approvalModalLabel">Approve/Reject: {{ $technician->fullname }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Choose whether to approve or reject the request: <br><br>
-                                                        <form id="approvalForm{{ $technician->id }}" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="technician_id" value="{{ $technician->id }}">
-                                                            <div class="form-group">
-                                                                <label>
-                                                                    <input type="radio" name="approval_status" value="approved"> Approve Request
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>
-                                                                    <input type="radio" name="approval_status" value="rejected"> Reject Request
-                                                                </label>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" onclick="submitForm({{ $technician->id }})">Submit</button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     @endforeach
                                 </table>
                             </div>
@@ -109,18 +80,80 @@
         </section>
     </div>
     
-    <script>
-        function submitForm(technicianId) {
-            var form = $('#approvalForm' + technicianId);
-            var approvalStatus = form.find('input[name="approval_status"]:checked').val();
 
-            if (approvalStatus === 'approved') {
-                window.location.href = "{{ route('technician.approve', ['id' => ':id']) }}".replace(':id', technicianId);
-            } else if (approvalStatus === 'rejected') {
-                form.attr('action', "{{ route('technician.reject', ['id' => ':id']) }}".replace(':id', technicianId));
-                form.submit();
-            }
-        }
-    </script>
+{{-- requested modal --}}
+<div class="modal fade" id="RequestedModal" tabindex="-1" aria-labelledby="RequestedModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="approvalForm" method="get">
+                @csrf 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="RequestedModalLabel">Approve/Reject: {{$technician->fullname}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Choose whether to approve or reject the request:<br><br>
+                    <input type="radio" name="action" value="approve" class="mr-2" id="radioApprove">
+                    <label for="radioApprove">Approve Request</label><br>
+                    <input type="radio" name="action" value="reject" class="mr-2" id="radioReject">
+                    <label for="radioReject">Reject Request</label>
+            
+                    <div class="mt-3" id="rejectReason" style="display: none;">
+                        <textarea class="form-control" rows="3" name="rejectmessage" placeholder="Enter rejection reason" id="rejectReasonInput"></textarea>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer"> 
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="approve-btn" class="btn btn-primary" id="modalConfirmButton">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<script>    
+        $(document).ready(function () {
+            $('.btn-request').click(function () {
+                var technicianId = $(this).data('request-id');
+                var technicianName = $(this).closest('tr').find('td:nth-child(3)').text(); // Get technician's name from the third column
+                $('#RequestedModal').find('.modal-title').text("Approve/Reject: " + technicianName);
+                $('#RequestedModal').modal('show');
+                $('#approvalForm').data('request-id', technicianId); // Store technician ID
+            });
+
+
+                $('input[name="action"]').on('change', function () {
+                    if ($(this).val() === 'reject') {
+                        $('#rejectReason').show();
+                    } else {
+                        $('#rejectReason').hide();
+                    }
+                });
+
+                $('#approvalForm').on('submit', function (event) {
+                    
+                    
+                    // Clear the form action
+                    var requestId = $('#approvalForm').data('request-id');
+                    var rejectReason = $('#rejectReasonInput').val();
+                    if ($('#radioReject').is(':checked')) {
+                        var rejectUrl = "{{ route('technician.reject', '') }}/" + requestId;
+                        $('#approvalForm').attr('action', rejectUrl);
+                        if(!rejectReason){
+                        alert('Please provide a rejection reason.');
+                        event.preventDefault(); // Prevent form submission if rejection reason is not provided
+                        }
+                    }
+                    else{
+                        var approveUrl = "{{ route('technician.approve', '') }}/" + requestId;
+                        $('#approvalForm').attr('action', approveUrl); 
+                    }
+            
+                });
+            });
+
+</script>
 @endsection
