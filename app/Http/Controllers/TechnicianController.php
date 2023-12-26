@@ -80,6 +80,11 @@ class TechnicianController extends Controller
         $technician->rejectmessage = request()->input('rejectmessage');
         $technician->save();
 
+        // Send an email to the approved technician
+        Mail::send('emails.rejected', ['technician' => $technician], function ($message) use ($technician) {
+            $message->to($technician->email, $technician->fullname)
+                    ->subject('Sorry! You have been rejected');
+        });
         return redirect()->back();
     }
 
