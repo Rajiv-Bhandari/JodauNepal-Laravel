@@ -1,5 +1,5 @@
 @extends('extends.main')
-@section('title','subscription')
+@section('title','Technicians')
 @section('content')
     {{-- work here --}}
     <div class="content">
@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-right">
-                            <li class="breadcrumb-item active">Subscription</li>
+                            <li class="breadcrumb-item active">Technicians</li>
                         </ol>
                     </div>
                 </div>

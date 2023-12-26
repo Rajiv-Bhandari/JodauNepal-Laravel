@@ -6,6 +6,7 @@ use App\Models\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
+use Illuminate\Support\Facades\Mail;
 
 class TechnicianController extends Controller
 {
@@ -57,13 +58,19 @@ class TechnicianController extends Controller
     {
         return view('technician.dashboard');
     }
-        public function approve($id)
+    public function approve($id)
     {
         $technician = Technician::findOrFail($id);
         $technician->status = TechnicianStatus::Approved;
         $technician->save();
 
-        return redirect()->back()->with('success', 'Technician approved successfully');
+        // Send an email to the approved technician
+        Mail::send('emails.approved', ['technician' => $technician], function ($message) use ($technician) {
+            $message->to($technician->email, $technician->fullname)
+                    ->subject('You have been approved');
+        });
+
+        return redirect()->back();
     }
 
     public function reject($id)
@@ -73,7 +80,7 @@ class TechnicianController extends Controller
         $technician->rejectmessage = request()->input('rejectmessage');
         $technician->save();
 
-        return redirect()->back()->with('success', 'Technician rejected successfully');
+        return redirect()->back();
     }
 
 }
