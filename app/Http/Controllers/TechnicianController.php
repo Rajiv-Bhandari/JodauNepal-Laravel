@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Technician;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
 use Illuminate\Support\Facades\Mail;
+use App\Enums\Usertype; 
+use Illuminate\Support\Str;
 
 class TechnicianController extends Controller
 {
@@ -64,8 +67,11 @@ class TechnicianController extends Controller
         $technician->status = TechnicianStatus::Approved;
         $technician->save();
 
-        // Send an email to the approved technician
-        Mail::send('emails.approved', ['technician' => $technician], function ($message) use ($technician) {
+        // Create a new user with technician role
+        $generatedPassword = $this->createTechnicianUser($technician);   
+
+        // Send an email to the approved technician along with the generated password
+        Mail::send('emails.approved', ['technician' => $technician, 'password' => $generatedPassword], function ($message) use ($technician) {
             $message->to($technician->email, $technician->fullname)
                     ->subject('You have been approved');
         });
@@ -88,4 +94,22 @@ class TechnicianController extends Controller
         return redirect()->back();
     }
 
+    private function createTechnicianUser($technician)
+    {
+        $user = new User();
+        $user->name = $technician->fullname;
+        $user->email = $technician->email;
+        $user->address = $technician->address;
+        $user->contactno = $technician->contactnumber;
+        $password = Str::random(10); 
+        $user->password = bcrypt($password);
+        $user->usertype = Usertype::Technician;
+        $user->save();
+
+        // Update the technician table with the created user's ID
+        $technician->user_id = $user->id;
+        $technician->save();
+
+        return $password; 
+    }
 }

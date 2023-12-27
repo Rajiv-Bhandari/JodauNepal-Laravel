@@ -63,7 +63,7 @@
                                                 <button class="btn btn-warning btn-sm btn-request" data-toggle="modal" data-target="#RequestedModal" data-request-id="{{ $technician->id }}">Requested</button>
 
                                             @elseif($technician->status==1)
-                                                <button class="btn btn-info btn-sm">Approved</button>
+                                                <button class="btn btn-success btn-sm">Approved</button>
                                             @elseif($technician->status==2)
                                                 <button class="btn btn-danger btn-sm" title="{{$technician->rejectmessage}}">Rejected</button>
                                             @endif    
