@@ -10,6 +10,9 @@ use App\Enums\TechnicianStatus;
 use Illuminate\Support\Facades\Mail;
 use App\Enums\Usertype; 
 use Illuminate\Support\Str;
+use App\Jobs\SendApprovalEmailJob;
+use App\Mail\ApprovedEmail;
+use App\Jobs\SendRejectionEmailJob;
 
 class TechnicianController extends Controller
 {
@@ -66,16 +69,12 @@ class TechnicianController extends Controller
         $technician = Technician::findOrFail($id);
         $technician->status = TechnicianStatus::Approved;
         $technician->save();
-
-        // Create a new user with technician role
-        $generatedPassword = $this->createTechnicianUser($technician);   
-
-        // Send an email to the approved technician along with the generated password
-        Mail::send('emails.approved', ['technician' => $technician, 'password' => $generatedPassword], function ($message) use ($technician) {
-            $message->to($technician->email, $technician->fullname)
-                    ->subject('You have been approved');
-        });
-
+    
+        $generatedPassword = $this->createTechnicianUser($technician);
+    
+        SendApprovalEmailJob::dispatch($technician, $generatedPassword)
+            ->onQueue('mails'); // Optional: Queue the job
+    
         return redirect()->back();
     }
 
