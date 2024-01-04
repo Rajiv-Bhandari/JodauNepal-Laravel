@@ -20,7 +20,7 @@ class SendApprovalEmail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(Technician $technician, $generatedPassword)
+    public function __construct($technician, $generatedPassword)
     {
         $this->technician = $technician;
         $this->generatedPassword = $generatedPassword;

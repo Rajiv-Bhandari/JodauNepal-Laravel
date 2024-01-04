@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>You have been approved</title>
+    <title>Welcome to our company</title>
 </head>
 <body>
-    <p>Hello {{ $technician->fullname }},</p>
-    <p>Congratulations! You have been approved in Jodau Nepal as a role for {{ $technician->skill }}</p>
-    <p>Your current password is: {{ $password }}</p>
-    <p>Change your password now by logging in to our website</p>
+    <h1>Hello, {{ $fullname }}</h1>
+    <p>You have been registered in our company Jodau Nepal as a Technician.</p>
+    <p>Contact Us: +977-9823722405</p>
 </body>
 </html>
