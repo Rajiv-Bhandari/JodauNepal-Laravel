@@ -10,8 +10,7 @@ use App\Enums\TechnicianStatus;
 use Illuminate\Support\Facades\Mail;
 use App\Enums\Usertype; 
 use Illuminate\Support\Str;
-use App\Jobs\SendApprovalEmailJob;
-use App\Mail\ApprovedEmail;
+use App\Jobs\SendApprovalEmail;
 use App\Jobs\SendRejectionEmailJob;
 
 class TechnicianController extends Controller
@@ -72,8 +71,8 @@ class TechnicianController extends Controller
     
         $generatedPassword = $this->createTechnicianUser($technician);
     
-        SendApprovalEmailJob::dispatch($technician, $generatedPassword)
-            ->onQueue('mails'); // Optional: Queue the job
+        SendApprovalEmail::dispatch($technician, $generatedPassword);
+
     
         return redirect()->back();
     }
