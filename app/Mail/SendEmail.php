@@ -14,10 +14,14 @@ class SendEmail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $fullname;
+    public $generatedPassword;
+    public $skill;
 
-    public function __construct($fullname)
+    public function __construct($fullname,$generatedPassword,$skill)
     {
         $this->fullname = $fullname;
+        $this->generatedPassword = $generatedPassword;
+        $this->skill = $skill;
     }
 
     public function build()
@@ -25,6 +29,8 @@ class SendEmail extends Mailable implements ShouldQueue
         return $this->from('bhandas.3282@gmail.com')
                     ->subject('You have been approved as our technician')
                     ->view('emails.approved')
-                    ->with(['name' => $this->fullname]);
+                    ->with(['name' => $this->fullname,
+                    'generatedPassword' => $this->generatedPassword,
+                    'skill' => $this->skill]);
     }
 }

@@ -70,10 +70,9 @@ class TechnicianController extends Controller
         $technician->status = TechnicianStatus::Approved;
         $technician->save();
     
-        // $generatedPassword = $this->createTechnicianUser($technician);
+        $generatedPassword = $this->createTechnicianUser($technician);
     
-        // SendApprovalEmail::dispatch($technician, $generatedPassword);
-        EmailQueue::dispatch($technician->fullname, $technician->email);
+        EmailQueue::dispatch($technician->fullname, $technician->email, $generatedPassword, $technician->skill);
     
         return redirect()->back();
     }
