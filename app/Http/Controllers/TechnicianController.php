@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Enums\Usertype; 
 use Illuminate\Support\Str;
 use App\Jobs\EmailQueue;
-use App\Jobs\SendApprovalEmail;
-use App\Jobs\SendRejectionEmailJob;
+use App\Jobs\RejectedQueue;
 
 class TechnicianController extends Controller
 {
@@ -85,10 +84,8 @@ class TechnicianController extends Controller
         $technician->save();
 
         // Send an email to the approved technician
-        Mail::send('emails.rejected', ['technician' => $technician], function ($message) use ($technician) {
-            $message->to($technician->email, $technician->fullname)
-                    ->subject('Sorry! You have been rejected');
-        });
+        RejectedQueue::dispatch($technician->fullname, $technician->email,$technician->rejectmessage, $technician->skill);
+      
         return redirect()->back();
     }
 
