@@ -45,9 +45,9 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>
                                                 @if($technician->profilepic)
-                                                <img src = "/images/profile_pictures/{{$technician->profilepic}}" alt="Profile" style="width:65px; height:65px; float:left; border-radius:50%; margin-right:5px;">
+                                                    <img src = "/images/profile_pictures/{{$technician->profilepic}}" alt="Profile" style="width:65px; height:65px; float:left; border-radius:50%; margin-right:5px;">
                                                 @else
-                                                    No Image
+                                                    <img src = "/images/profile_pictures/default.jpg" alt="Profile" style="width:65px; height:65px; float:left; border-radius:50%; margin-right:5px;">
                                                 @endif
                                             </td>
                                             <td>{{ $technician->fullname }}</td>
