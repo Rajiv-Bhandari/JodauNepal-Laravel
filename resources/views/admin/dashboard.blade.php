@@ -20,10 +20,16 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 class="card-title font-weight-bold">Pending Technicians</h1>
-                                <a href="" class="btn btn-primary px-4 m-2 float-right">Add</a>
+                                <h1 class="card-title font-weight-bold">Technicians</h1>
+                                <a href="{{ route('admin.dashboard') }}" class="btn btn-primary px-4 m-2 float-right">All Technicians</a>
+                                <a href="{{ route('admin.dashboard', ['status' => 'rejected']) }}" class="btn btn-danger px-4 m-2 float-right">Rejected</a>
+                                <a href="{{ route('admin.dashboard', ['status' => 'approved']) }}" class="btn btn-success px-4 m-2 float-right">Approved</a>
+                                <a href="{{ route('admin.dashboard', ['status' => 'requested']) }}" class="btn btn-warning px-4 m-2 float-right">Requested</a>
                             </div>
                             <div class="card-body table-responsive p-2">
+                            @if ($technicians->isEmpty())
+                                <h5 style="text-align:center;">No technicians available for this status.</h5>
+                            @else
                                 <table class="datatable table">
                                     <thead>
                                         <tr>
@@ -72,6 +78,7 @@
 
                                     @endforeach
                                 </table>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -82,6 +89,7 @@
     
 
 {{-- requested modal --}}
+@if ($technicians->isNotEmpty())
 <div class="modal fade" id="RequestedModal" tabindex="-1" aria-labelledby="RequestedModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -113,6 +121,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <script>    
         $(document).ready(function () {
