@@ -30,6 +30,11 @@ class AdminController extends Controller
     
         return view('admin.dashboard', compact('technicians'));
     }
+
+    public function category()
+    {
+        return view('admin.category');
+    }
 }
 
 

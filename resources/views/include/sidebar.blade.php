@@ -37,6 +37,16 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item m-1">
+                    <a href="{{route('admin.category')}}"
+                        class="nav-link {{ request()->is('admin/category') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-funnel-dollar m-1 p-1"></i>
+                        <p>
+                            Category
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 
