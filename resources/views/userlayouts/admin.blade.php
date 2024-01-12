@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Amity Store || Admin </title>
+        <title>Jodau Nepal</title>
 
        <!-- plugins:css -->
         <link rel="stylesheet" href="{{asset('user/vendors/mdi/css/materialdesignicons.min.css')}}">

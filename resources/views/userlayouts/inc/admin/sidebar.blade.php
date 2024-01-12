@@ -15,8 +15,8 @@
         </a>
         <div class="collapse" id="category">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">View Category</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Add Category</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">Electrician</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">Plumber</a></li>
           </ul>
         </div>
       </li>
@@ -31,7 +31,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="mdi mdi-account-multiple menu-icon"></i>
-          <span class="menu-title">Users</span>
+          <span class="menu-title">History</span>
         </a>
       </li>
    

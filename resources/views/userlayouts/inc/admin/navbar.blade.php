@@ -21,7 +21,7 @@
                 
                 <a class="dropdown-item" href="{{ url('/') }}">
                   <i class="mdi mdi-store text-primary"></i>
-                  Store Page
+                  Profile
                 </a>
 
                 <a class="dropdown-item" href="{{ route('logout') }}"
