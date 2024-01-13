@@ -33,11 +33,11 @@ class AdminController extends Controller
     }
 
     public function category()
-    {
-        Alert::toast('Category page!', 'success')->position('bottom-right');
+    {   
         return view('admin.category');
-        
     }
+    
+    
 }
 
 

@@ -2,6 +2,7 @@
 @section('title','Technicians')
 @section('content')
     {{-- work here --}}
+    @include('sweetalert::alert')
     <div class="content">
         <section class="content-header">
             <div class="container-fluid">

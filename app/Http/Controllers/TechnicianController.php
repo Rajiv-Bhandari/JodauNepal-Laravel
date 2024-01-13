@@ -12,6 +12,7 @@ use App\Enums\Usertype;
 use Illuminate\Support\Str;
 use App\Jobs\EmailQueue;
 use App\Jobs\RejectedQueue;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TechnicianController extends Controller
 {
@@ -72,7 +73,10 @@ class TechnicianController extends Controller
         $generatedPassword = $this->createTechnicianUser($technician);
     
         EmailQueue::dispatch($technician->fullname, $technician->email, $generatedPassword, $technician->skill);
-    
+        
+        $message = $technician->fullname . ' Approved Successfully';
+        Alert::toast($message, 'success');
+
         return redirect()->back();
     }
 
@@ -86,6 +90,9 @@ class TechnicianController extends Controller
         // Send an email to the approved technician
         RejectedQueue::dispatch($technician->fullname, $technician->email,$technician->rejectmessage, $technician->skill);
       
+        $message = $technician->fullname . ' Rejected Successfully';
+        Alert::toast($message, 'error');
+
         return redirect()->back();
     }
 
