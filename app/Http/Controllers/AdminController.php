@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Technician;
 use App\Enums\TechnicianStatus;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -33,7 +34,9 @@ class AdminController extends Controller
 
     public function category()
     {
+        Alert::toast('Category page!', 'success')->position('bottom-right');
         return view('admin.category');
+        
     }
 }
 
