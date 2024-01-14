@@ -45,6 +45,7 @@ Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
     Route::get('/technician/approve/{id}', [TechnicianController::class, 'approve'])->name('technician.approve');
     Route::get('/technician/reject/{id}', [TechnicianController::class, 'reject'])->name('technician.reject');
     Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
+    require __DIR__ . '/web/category.php';
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {

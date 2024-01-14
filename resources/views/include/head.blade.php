@@ -19,7 +19,7 @@
 
     <!-- sweetalert -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert/sweetalert.css') }}">
-
+    @livewireStyles
     
     <!-- Datatables style css -->
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css "> --}}
