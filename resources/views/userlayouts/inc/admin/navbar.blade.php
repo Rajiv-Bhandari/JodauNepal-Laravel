@@ -19,7 +19,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 
-                <a class="dropdown-item" href="{{ url('/') }}">
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">
                   <i class="mdi mdi-store text-primary"></i>
                   Profile
                 </a>

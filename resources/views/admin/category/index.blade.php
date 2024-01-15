@@ -2,6 +2,9 @@
 @section('title', 'Category')
 @section('content')
 
+@php
+    use App\Enums\Status;
+@endphp
 @include('sweetalert::alert')
 <div class="content">
     <section class="content-header">

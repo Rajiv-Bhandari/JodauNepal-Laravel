@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TechnicianController;
 use App\Enums\UserType;
 
 /*
@@ -29,26 +25,21 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    require __DIR__ . '/web/profile.php';
 });
 
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
-    Route::get('/user-home', [UserController::class, 'home'])->name('user.home');
+    require __DIR__ . '/web/user.php';
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
-    Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/technician/approve/{id}', [TechnicianController::class, 'approve'])->name('technician.approve');
-    Route::get('/technician/reject/{id}', [TechnicianController::class, 'reject'])->name('technician.reject');
-    Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
+    require __DIR__ . '/web/admin.php';
     require __DIR__ . '/web/category.php';
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {
-    Route::get('/technician-dashboard', [TechnicianController::class, 'dashboard'])->name('technician.dashboard');
+    require __DIR__ . '/web/technician.php';
 
 });
