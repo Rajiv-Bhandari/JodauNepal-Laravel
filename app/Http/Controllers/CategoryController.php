@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         try {
             $category = $this->categoryService->edit($id);
-            return view('admin.backend.category.edit', compact('category'));
+            return view('admin.category.edit', compact('category'));
         } catch (Exception $e) {
         }
     }
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryService->toggle($id);
-            $this->attendanceSystem->message('Category Status Updated', 'success');
+            // $this->attendanceSystem->message('Category Status Updated', 'success');
             return redirect()->back();
         } catch (Exception $e) {
             throw new Exception(Message::Failed);
@@ -85,7 +85,7 @@ class CategoryController extends Controller
             $category = new Category();
             $category = $this->attendanceSystem->getObject($category, $request);
             $category = $this->categoryService->update($category, $id, $request);
-            $this->attendanceSystem->message('Category Updated Successfully', 'success');
+            // $this->attendanceSystem->message('Category Updated Successfully', 'success');
             return redirect()->intended(route('category.index'));
         } catch (Exception $e) {
             $this->attendanceSystem->message('oops! something went wrong', 'error');

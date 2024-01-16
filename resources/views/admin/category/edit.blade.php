@@ -1,4 +1,4 @@
-@extends('admin.backend.admin')
+@extends('extends.main')
 @section('title', 'Edit')
 @section('content')
     {{-- @include('validation-error-message') --}}
