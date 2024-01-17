@@ -7,6 +7,7 @@ use App\Enums\UserType;
 use App\Functions\JodauNepal;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Services\Interfaces\CategoryService;
 use Exception;
@@ -72,7 +73,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryService->toggle($id);
-            // $this->attendanceSystem->message('Category Status Updated', 'success');
+            // $this->jodauNepal->message('Category Status Updated', 'success');
             return redirect()->back();
         } catch (Exception $e) {
             throw new Exception(Message::Failed);
@@ -83,12 +84,12 @@ class CategoryController extends Controller
     {
         try {
             $category = new Category();
-            $category = $this->attendanceSystem->getObject($category, $request);
-            $category = $this->categoryService->update($category, $id, $request);
-            // $this->attendanceSystem->message('Category Updated Successfully', 'success');
+            // $category = $this->jodauNepal->getObject($category, $request);
+            // $category = $this->categoryService->update($category, $id, $request);
+            // $this->jodauNepal->message('Category Updated Successfully', 'success');
             return redirect()->intended(route('category.index'));
         } catch (Exception $e) {
-            $this->attendanceSystem->message('oops! something went wrong', 'error');
+            // $this->jodauNepal->message('oops! something went wrong', 'error');
             return back();
         }
     }
