@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Technician;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
@@ -18,7 +19,8 @@ class TechnicianController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('register-technician');
+        $skills = Category::pluck('name', 'id');
+        return view('register-technician',compact('skills'));
     }
 
     public function register(Request $request)
@@ -41,7 +43,7 @@ class TechnicianController extends Controller
         $technician->contactnumber = $validatedData['contactnumber'];
         $technician->address = $validatedData['address'];
         $technician->email = $validatedData['email'];
-        $technician->skill = $validatedData['skill'];
+        $technician->skill_id = $validatedData['skill'];
         $technician->yearsofexperience = $validatedData['yearsofexperience'];
         $technician->dob = $validatedData['dob'];
 

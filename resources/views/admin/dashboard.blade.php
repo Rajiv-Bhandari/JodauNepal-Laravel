@@ -61,10 +61,9 @@
                                             <td>{{ $technician->address }}</td>
                                             <td>{{ $technician->contactnumber }}</td>
                                             <td>{{ $technician->email }}</td>
-                                            <td>{{ $technician->skill }}</td>
+                                            <td>{{ $technician->skill->name }}</td>
                                             <td>{{ $technician->yearsofexperience }}</td>
                                             <td>{{ \Carbon\Carbon::parse($technician->dob)->age }}</td>
-                                            <!-- <td class="text-center">{{ \App\Enums\TechnicianStatus::getDescription($technician->status) }}</td> -->
                                             <td class="text-center">
                                             @if($technician->status==0)
                                                 <button class="btn btn-warning btn-sm btn-request" data-toggle="modal" data-target="#RequestedModal" data-request-id="{{ $technician->id }}">Requested</button>

@@ -108,13 +108,13 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
         </div>
-        <!-- Skill label and dropdown on the same row -->
         <div class="select-row">
             <label for="skill" class="skill-label">Skill</label>
             <select id="skill" name="skill" required>
                 <option value="">Select Skill</option>
-                <option value="Electrician">Electrician</option>
-                <option value="Plumber">Plumber</option>
+                @foreach($skills as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                @endforeach
             </select>
         </div>
         <div>

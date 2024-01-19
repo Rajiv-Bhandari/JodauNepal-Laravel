@@ -15,13 +15,14 @@ class Technician extends Model
         'contactnumber',
         'address',
         'email',
-        'skill',
+        'skill_id',
         'yearsofexperience',
         'dob',
         'totaljobs',
         'profilepic',
         'user_id',
-        'status'
+        'status',
+        'rejectmessage'
     ];
 
     protected $casts = [
@@ -32,5 +33,10 @@ class Technician extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function skill()
+    {
+        return $this->belongsTo(Category::class, 'skill_id');
+    }
+
 }
 
