@@ -20,14 +20,14 @@ class RejectedQueue implements ShouldQueue
     protected $fullname;
     protected $email;
     protected $rejectmessage;
-    protected $skill;
 
-    public function __construct($fullname, $email, $rejectmessage, $skill)
+
+    public function __construct($fullname, $email, $rejectmessage)
     {
         $this->fullname = $fullname;
         $this->email = $email;
         $this->rejectmessage = $rejectmessage;
-        $this->skill = $skill;
+
     }
 
     /**
@@ -35,7 +35,7 @@ class RejectedQueue implements ShouldQueue
      */
     public function handle(): void
     {
-        $mailable = new RejectedEmail($this->fullname,$this->rejectmessage,$this->skill);
+        $mailable = new RejectedEmail($this->fullname,$this->rejectmessage);
         try {
             Mail::to($this->email)->send($mailable);
         } catch (\Exception $e) {

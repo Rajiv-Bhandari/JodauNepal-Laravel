@@ -73,8 +73,8 @@ class TechnicianController extends Controller
         $technician->save();
     
         $generatedPassword = $this->createTechnicianUser($technician);
-    
-        EmailQueue::dispatch($technician->fullname, $technician->email, $generatedPassword, $technician->skill);
+      
+        EmailQueue::dispatch($technician->fullname, $technician->email, $generatedPassword);
         
         $message = $technician->fullname . ' Approved Successfully';
         Alert::toast($message, 'success');
@@ -90,7 +90,7 @@ class TechnicianController extends Controller
         $technician->save();
 
         // Send an email to the approved technician
-        RejectedQueue::dispatch($technician->fullname, $technician->email,$technician->rejectmessage, $technician->skill);
+        RejectedQueue::dispatch($technician->fullname, $technician->email,$technician->rejectmessage);
       
         $message = $technician->fullname . ' Rejected Successfully';
         Alert::toast($message, 'error');

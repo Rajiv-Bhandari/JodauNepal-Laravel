@@ -15,13 +15,13 @@ class SendEmail extends Mailable implements ShouldQueue
 
     public $fullname;
     public $generatedPassword;
-    public $skill;
 
-    public function __construct($fullname,$generatedPassword,$skill)
+
+    public function __construct($fullname,$generatedPassword)
     {
         $this->fullname = $fullname;
         $this->generatedPassword = $generatedPassword;
-        $this->skill = $skill;
+       
     }
 
     public function build()
@@ -30,7 +30,6 @@ class SendEmail extends Mailable implements ShouldQueue
                     ->subject('You have been approved as our technician')
                     ->view('emails.approved')
                     ->with(['name' => $this->fullname,
-                    'generatedPassword' => $this->generatedPassword,
-                    'skill' => $this->skill]);
+                    'generatedPassword' => $this->generatedPassword]);
     }
 }

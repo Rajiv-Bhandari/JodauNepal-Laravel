@@ -15,15 +15,15 @@ class RejectedEmail extends Mailable
 
     public $fullname;
     public $rejectmessage;
-    public $skill;
+   
     /**
      * Create a new message instance.
      */
-    public function __construct($fullname, $rejectmessage, $skill)
+    public function __construct($fullname, $rejectmessage)
     {
         $this->fullname = $fullname;
         $this->rejectmessage = $rejectmessage;
-        $this->skill = $skill;
+       
     }
 
     public function build()
@@ -32,7 +32,6 @@ class RejectedEmail extends Mailable
                     ->subject('You have been rejected as our technician')
                     ->view('emails.rejected')
                     ->with(['name' => $this->fullname,
-                    'rejectmessage' => $this->rejectmessage,
-                    'skill' => $this->skill]);
+                    'rejectmessage' => $this->rejectmessage]);
     }
 }
