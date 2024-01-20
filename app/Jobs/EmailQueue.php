@@ -20,16 +20,16 @@ class EmailQueue implements ShouldQueue
     protected $fullname;
     protected $email;
     protected $generatedPassword;
-   
+    protected $skill_id;
     /**
      * Create a new job instance.
      */
-    public function __construct($fullname, $email, $generatedPassword)
+    public function __construct($fullname, $email, $generatedPassword, $skill_id)
     {
         $this->fullname = $fullname;
         $this->email = $email;
         $this->generatedPassword = $generatedPassword;
-        
+        $this->skill_id = $skill_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class EmailQueue implements ShouldQueue
      */
     public function handle(): void
     {
-        $mailable = new SendEmail($this->fullname,$this->generatedPassword);
+        $mailable = new SendEmail($this->fullname,$this->generatedPassword,$this->skill_id);
         try {
             Mail::to($this->email)->send($mailable);
         } catch (\Exception $e) {

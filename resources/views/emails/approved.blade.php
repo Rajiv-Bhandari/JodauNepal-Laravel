@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Hello, {{ $fullname }}</h1>
-    <p>Congratulations! You have been approved in Jodau Nepal.</p>
+    <p>Congratulations! You have been approved in Jodau Nepal for the role of {{ $skill->name }}.</p>
     <p>Your current password is: {{ $generatedPassword }}</p>
     <p>Change your password now by logging in to our website</p>
     <p>If have any enquiry - Contact Us: +977-9823722405</p>

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Category;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,13 +16,16 @@ class SendEmail extends Mailable implements ShouldQueue
 
     public $fullname;
     public $generatedPassword;
+    public $skill_id;
+    public $skill;
 
-
-    public function __construct($fullname,$generatedPassword)
+    public function __construct($fullname,$generatedPassword, $skill_id)
     {
         $this->fullname = $fullname;
         $this->generatedPassword = $generatedPassword;
-       
+        $this->skill_id = $skill_id;
+
+        $this->skill = Category::findOrFail($this->skill_id);
     }
 
     public function build()
@@ -30,6 +34,7 @@ class SendEmail extends Mailable implements ShouldQueue
                     ->subject('You have been approved as our technician')
                     ->view('emails.approved')
                     ->with(['name' => $this->fullname,
-                    'generatedPassword' => $this->generatedPassword]);
+                    'generatedPassword' => $this->generatedPassword,
+                    'skill' => $this->skill]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Category;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,15 +16,18 @@ class RejectedEmail extends Mailable
 
     public $fullname;
     public $rejectmessage;
-   
+    public $skill_id;
+    public $skill;
     /**
      * Create a new message instance.
      */
-    public function __construct($fullname, $rejectmessage)
+    public function __construct($fullname, $rejectmessage, $skill_id)
     {
         $this->fullname = $fullname;
         $this->rejectmessage = $rejectmessage;
-       
+        $this->skill_id = $skill_id;
+
+        $this->skill = Category::findOrFail($this->skill_id);
     }
 
     public function build()
@@ -32,6 +36,7 @@ class RejectedEmail extends Mailable
                     ->subject('You have been rejected as our technician')
                     ->view('emails.rejected')
                     ->with(['name' => $this->fullname,
-                    'rejectmessage' => $this->rejectmessage]);
+                    'rejectmessage' => $this->rejectmessage,
+                    'skill' => $this->skill]);
     }
 }
