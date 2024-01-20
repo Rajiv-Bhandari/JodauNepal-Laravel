@@ -38,6 +38,8 @@ Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
 Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
     require __DIR__ . '/web/admin.php';
     require __DIR__ . '/web/category.php';
+    require __DIR__ . '/web/adminuser.php';
+    
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {

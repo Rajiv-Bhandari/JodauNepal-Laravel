@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Technician;
+use App\Models\User;
 use App\Enums\TechnicianStatus;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,6 +37,13 @@ class AdminController extends Controller
     {   
         return view('admin.category');
     }
+
+    public function userindex()
+    {   
+        $users = User::where('usertype', 0)->get();
+        return view('admin.user.index', compact('users'));
+    }
+    
     
     
 }

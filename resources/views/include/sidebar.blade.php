@@ -49,8 +49,8 @@
                 </li>
 
                 <li class="nav-item m-1">
-                    <a href="#"
-                        class="nav-link {{ request()->is('users') ? 'active' : '' }}">
+                    <a href="{{route('user.index')}}"
+                        class="nav-link {{ request()->is('admin-user') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-alt m-1 p-1"></i>
                         <p>
                             Users
