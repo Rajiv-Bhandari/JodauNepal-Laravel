@@ -10,10 +10,31 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+       
+        nav {
+            background-color: #007bff;
+            overflow: hidden;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
+            padding: 0 20px;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .right-links {
+            float: right;
         }
         form {
             background-color: #fff;
@@ -22,6 +43,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
+            margin: 20px auto;
         }
         div {
             margin-bottom: 15px;
@@ -54,7 +76,6 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
-        /* Position skill label and dropdown in the same row */
         div.select-row {
             display: flex;
             align-items: center;
@@ -65,10 +86,15 @@
             text-align: left;
             flex-shrink: 0;
         }
-        
     </style>
 </head>
 <body>
+   
+    <nav>
+        <a href="/">Home</a>
+        <a style="margin-right:-1150px;" href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+    </nav>
     <form method="POST" action="{{ route('register-technician') }}" enctype="multipart/form-data">
         @csrf
             @if ($errors->any())
@@ -131,5 +157,6 @@
         </div>
         <button type="submit">Register Technician</button>
     </form>
+
 </body>
 </html>
