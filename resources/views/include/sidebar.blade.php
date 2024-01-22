@@ -19,8 +19,8 @@
 
                 {{-- dashboard --}}
                 <li class="nav-item m-1">
-                    <a href="{{route('admin.dashboard')}}"
-                        class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                    <a href="{{route('admin.home')}}"
+                        class="nav-link {{ request()->is('admin-dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home m-1 p-1"></i>
                         <p>
                             Dashboard
@@ -30,7 +30,7 @@
                 
                 <li class="nav-item m-1">
                     <a href="{{route('admin.dashboard')}}"
-                        class="nav-link {{ request()->is('admin-dashboard') ? 'active' : '' }}">
+                        class="nav-link {{ request()->is('admin-technicians') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-child m-1 p-1"></i>
                         <p>
                             Technician Request

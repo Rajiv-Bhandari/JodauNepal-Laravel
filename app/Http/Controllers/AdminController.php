@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Technician;
+use App\Models\Category;
 use App\Models\User;
 use App\Enums\TechnicianStatus;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -42,6 +43,16 @@ class AdminController extends Controller
     {   
         $users = User::where('usertype', 0)->get();
         return view('admin.user.index', compact('users'));
+    }
+
+    public function home()
+    {
+        $category = Category::count();
+        $users = User::where('usertype', 0)->count();
+        $pending = Technician::where('status', TechnicianStatus::Pending)->count();
+        $approved = Technician::where('status', TechnicianStatus::Approved)->count();
+        $rejected = Technician::where('status', TechnicianStatus::Rejected)->count();
+        return view('admin.home', compact('category', 'users','pending','approved','rejected'));
     }
     
     

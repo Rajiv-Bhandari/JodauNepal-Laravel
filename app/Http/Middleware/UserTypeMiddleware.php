@@ -23,7 +23,7 @@ class UserTypeMiddleware
                 return redirect()->route('user.home');
                 break;
             case UserType::Admin:
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.home');
                 break;
             case UserType::Technician:
                 return redirect()->route('technician.dashboard');
