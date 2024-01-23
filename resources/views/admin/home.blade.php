@@ -13,9 +13,7 @@
         border-radius: 10px;
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
     }
-    .row{
-        margin-top:20px;
-    }
+   
     .box h2 {
         margin: 0;
         font-size: 28px;
@@ -67,7 +65,7 @@
         background-color: #b72a73;
         color: white;
     }
-    /* request */
+   
     .box-request{
         background-color: #6C747C;
         color: white;
@@ -99,7 +97,7 @@
     }
 </style>
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top:30px;">
         
         <!-- <div class="col-md-4 box-bg">
             <a href="{{ url('/admin-technicians?status=requested') }}">
