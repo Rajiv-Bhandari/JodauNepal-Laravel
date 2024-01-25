@@ -84,12 +84,12 @@ class CategoryController extends Controller
     {
         try {
             $category = new Category();
-            // $category = $this->jodauNepal->getObject($category, $request);
-            // $category = $this->categoryService->update($category, $id, $request);
-            // $this->jodauNepal->message('Category Updated Successfully', 'success');
+             $category = $this->jodauNepal->getObject($category, $request);
+            $category = $this->categoryService->update($category, $id, $request);
+             $this->jodauNepal->message('Category Updated Successfully', 'success');
             return redirect()->intended(route('category.index'));
         } catch (Exception $e) {
-            // $this->jodauNepal->message('oops! something went wrong', 'error');
+            $this->jodauNepal->message('oops! something went wrong', 'error');
             return back();
         }
     }
