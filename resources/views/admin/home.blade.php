@@ -99,7 +99,7 @@
 <div class="container">
     <div class="row" style="margin-top:30px;">
         
-        <!-- <div class="col-md-4 box-bg">
+        <div class="col-md-4 box-bg">
             <a href="{{ url('/admin-technicians?status=requested') }}">
                 <div class="box box-vendor">
                     <i class="fas fa-truck box-icon"></i>
@@ -125,11 +125,9 @@
                     <p>Rejected Technicians</p>
                 </div>
             </a>
-        </div> -->
+        </div>
 
-
-
-        <!-- <div class="col-md-4 box-bg">
+        <div class="col-md-4 box-bg">
             <a href="{{route('user.index')}}">
                 <div class="box box-branch">
                     <i class="fas fa-code-branch box-icon"></i>
@@ -146,7 +144,7 @@
                     <p>Category</p>
                 </div>
             </a>
-        </div> -->
+        </div>
 
     </div>
 </div>
