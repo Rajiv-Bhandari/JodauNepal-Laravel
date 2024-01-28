@@ -23,7 +23,11 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
+                        @if(Auth::user()->usertype=='0')
+                        <x-dropdown-link :href="route('user.home')">
+                            {{ __('Dashboard') }}
+                        </x-dropdown-link>
+                        @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
