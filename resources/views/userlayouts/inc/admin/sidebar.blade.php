@@ -17,6 +17,7 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="#">Electrician</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Plumber</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('user.category')}}">Home Tution</a></li>
           </ul>
         </div>
       </li>
@@ -30,7 +31,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <i class="mdi mdi-account-multiple menu-icon"></i>
+          <i class="mdi mdi-history menu-icon"></i>
           <span class="menu-title">History</span>
         </a>
       </li>
