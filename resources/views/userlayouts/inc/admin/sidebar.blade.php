@@ -9,18 +9,26 @@
       
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="ui-basic">
-          <i class="mdi mdi-view-list menu-icon"></i>
-          <span class="menu-title">Category</span>
-          <i class="menu-arrow"></i>
+            <i class="mdi mdi-view-list menu-icon"></i>
+            <span class="menu-title">Category</span>
+            <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="category">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Electrician</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Plumber</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{route('user.category')}}">Home Tution</a></li>
-          </ul>
+            <ul class="nav flex-column sub-menu">
+                @php
+                    $categories = \App\Models\Category::all();
+                @endphp
+                @foreach($categories as $category)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.category', ['category' => $category->id]) }}">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
         </div>
-      </li>
+    </li>
+
       
       <li class="nav-item">
         <a class="nav-link" href="#">

@@ -14,4 +14,9 @@ class Category extends Model
     protected $fillable = [
         'name', 'status'
     ];
+
+    public function technicians()
+    {
+        return $this->hasMany(Technician::class, 'skill_id');
+    }
 }

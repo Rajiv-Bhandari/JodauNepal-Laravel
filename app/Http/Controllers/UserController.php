@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Technician;
+use App\Models\Category;
 
 class UserController extends Controller
 {
@@ -12,9 +13,11 @@ class UserController extends Controller
         return view('user.home');
     }
 
-    public function category()
+    public function category($categoryId)
     {
-        $technicians = Technician::all();
-        return view('user.category.category',compact('technicians'));
+        $category = Category::findOrFail($categoryId);
+        $technicians = $category->technicians()->get();
+    
+        return view('user.category.category', compact('technicians'));
     }
 }
