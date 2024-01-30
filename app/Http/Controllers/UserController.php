@@ -18,6 +18,6 @@ class UserController extends Controller
         $category = Category::findOrFail($categoryId);
         $technicians = $category->technicians()->get();
     
-        return view('user.category.category', compact('technicians'));
+        return view('user.category.category', compact('technicians','category'));
     }
 }
