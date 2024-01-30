@@ -20,4 +20,12 @@ class UserController extends Controller
     
         return view('user.category.category', compact('technicians','category'));
     }
+
+    public function showTechnicianDetail($technicianId)
+    {
+        $technician = Technician::findOrFail($technicianId);
+
+        return view('user.category.detail', compact('technician'));
+    }
+
 }

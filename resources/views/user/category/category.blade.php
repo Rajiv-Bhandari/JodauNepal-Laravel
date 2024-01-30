@@ -1,3 +1,4 @@
+
 @extends('userlayouts.admin')
 
 @section('content')
@@ -37,36 +38,51 @@
         margin-bottom: 5px;
     }
 
-    .experience, .address, .contact, .age {
+    .experience, .jobscompleted, .address, .contact, .age {
         margin-bottom: 5px;
     }
+
+    .technician-link {
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.3s;
+    }
+
+    .technician-link:hover {
+        background-color: #f0f0f0;
+        color: #1a1a1a; 
+        text-decoration: none; 
+        font-weight: bold;
+    }
 </style>
-<h2 style="margin-bottom:20px; color: #333; font-size: 24px; font-weight: bold;">
+<h2 style="margin-bottom:20px; margin-top:15px; color: #333; font-size: 24px; font-weight: bold;">
     Technicians for {{ $category->name }}
 </h2>
 
 <div class="technicians-list">
     @foreach ($technicians as $technician)
-    <div class="technician-details">
-        <div class="image-container">
-            @if($technician->profilepic)
-            <img src="/images/profile_pictures/{{ $technician->profilepic }}" alt="Profile" class="profile-image">
-            @else
-            <img src="/images/profile_pictures/default.jpg" alt="Profile" class="profile-image">
-            @endif
-        </div>
-        <div class="details">
-            <div class="details-top">
-                <h3>{{ $technician->fullname }}</h3>
-                <p class="experience">Years of Experience: {{ $technician->yearsofexperience }}</p>
+    <a href="{{ route('user.technician.detail', ['technician' => $technician->id]) }}" class="technician-link">
+        <div class="technician-details">
+            <div class="image-container">
+                @if($technician->profilepic)
+                <img src="/images/profile_pictures/{{ $technician->profilepic }}" alt="Profile" class="profile-image">
+                @else
+                <img src="/images/profile_pictures/default.jpg" alt="Profile" class="profile-image">
+                @endif
             </div>
-            <p class="address">Address: {{ $technician->address }}</p>
-            <div class="details-bottom">
-                <p class="contact">Contact Number: {{ $technician->contactnumber }}</p>
-                <p class="age">Age: {{ now()->diffInYears($technician->dob) }}</p>
+            <div class="details">
+                <div class="details-top">
+                    <h3>{{ $technician->fullname }}</h3>
+                    <p class="experience">Years of Experience: {{ $technician->yearsofexperience }}</p>
+                </div>
+                <p class="address">Address: {{ $technician->address }}</p>
+                <div class="details-bottom">
+                    <p class="contact">Contact Number: {{ $technician->contactnumber }}</p>
+                    <p class="age">Age: {{ now()->diffInYears($technician->dob) }}</p>
+                </div>
             </div>
         </div>
-    </div>
+    </a>
     @endforeach
 </div>
 @endsection
