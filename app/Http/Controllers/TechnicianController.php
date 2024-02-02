@@ -116,4 +116,9 @@ class TechnicianController extends Controller
 
         return $password; 
     }
+    
+    public function timeslotindex()
+    {
+        return view('technician.timeslot.index');
+    }
 }
