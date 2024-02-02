@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use App\Jobs\EmailQueue;
 use App\Jobs\RejectedQueue;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TechnicianController extends Controller
 {
@@ -128,4 +130,59 @@ class TechnicianController extends Controller
     {
         return view('technician.timeslot.create');
     }
+
+    public function timeslotstore(Request $request)
+    {
+        $request->validate([
+            'day' => 'required',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+        ]);
+    
+        $userId = Auth::id();
+        // Get the technician id for the current user
+        $technician = Technician::where('user_id', $userId)->first();
+    
+        if (!$technician) {
+            // Handle the case where the technician is not found for the current user
+            return redirect()->back()->withErrors(['user_id' => 'Technician not found for the current user.']);
+        }
+    
+        $technicianId = $technician->id;
+    
+        // Check if the technician already has a timeslot for the selected day and time
+        $existingSlot = TechnicianTimeSlot::where('technician_id', $technicianId)
+            ->where('day', $request->day)
+            ->where(function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('start_time', '>=', $request->start_time)
+                        ->where('start_time', '<', $request->end_time);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('end_time', '>', $request->start_time)
+                        ->where('end_time', '<=', $request->end_time);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('start_time', '<', $request->start_time)
+                        ->where('end_time', '>', $request->end_time);
+                });
+            })
+            ->exists();
+
+    
+        if ($existingSlot) {
+            return redirect()->back()->withErrors(['start_time' => 'The selected timeslot conflicts with an existing one.']);
+        }
+    
+        // Create the new timeslot
+        TechnicianTimeSlot::create([
+            'technician_id' => $technicianId,
+            'day' => $request->day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+        ]);
+    
+        return redirect()->route('technician.timeslot')->with('success', 'Timeslot added successfully.');
+    }    
+
 }

@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <h2 class="card-title font-weight-bold">Add Timeslot</h2>
                             </div>
-                            <form method="POST" action="#" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('timeslot.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 
                                 <div class="card-body">
@@ -48,7 +48,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="technician">Technician</label>
