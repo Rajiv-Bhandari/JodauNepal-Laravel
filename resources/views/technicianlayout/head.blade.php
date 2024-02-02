@@ -1,7 +1,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jodau Nepal | Technician Dashboard</title>
+  <title>Jodau Nepal | @yield('title')</title>
+  <link rel="icon" href="#" type="image/x-icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -23,4 +24,12 @@
   <link rel="stylesheet" href="{{ asset('techniciandashboard/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('techniciandashboard/plugins/summernote/summernote-bs4.min.css') }}">
+
+    <!-- Datatables style css -->
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css "> --}}
+    <link rel="stylesheet" href="{{asset('admin/dist/datatables.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+    <script src="{{ asset('admin/dist/jquery.js')}}"></script>
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>

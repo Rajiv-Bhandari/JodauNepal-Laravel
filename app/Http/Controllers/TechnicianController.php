@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Technician;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\TechnicianTimeSlot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
@@ -119,6 +120,12 @@ class TechnicianController extends Controller
     
     public function timeslotindex()
     {
-        return view('technician.timeslot.index');
+        $timeslot = TechnicianTimeSlot::all();
+        return view('technician.timeslot.index', compact('timeslot'));
+    }
+
+    public function timeslotcreate()
+    {
+        return view('technician.timeslot.create');
     }
 }

@@ -1,5 +1,5 @@
 @extends('technicianlayout.main')
-
+@section('title', 'Dashboard')
 @section('content')
  
 <div>
