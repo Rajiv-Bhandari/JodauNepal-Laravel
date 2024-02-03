@@ -17,6 +17,7 @@ use App\Jobs\RejectedQueue;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class TechnicianController extends Controller
 {
@@ -122,9 +123,9 @@ class TechnicianController extends Controller
     
     public function timeslotindex()
     {
-        $timeslot = TechnicianTimeSlot::all();
+        $timeslot = TechnicianTimeSlot::orderBy('day')->get();
         return view('technician.timeslot.index', compact('timeslot'));
-    }
+    }    
 
     public function timeslotcreate()
     {
@@ -182,7 +183,9 @@ class TechnicianController extends Controller
             'end_time' => $request->end_time,
         ]);
     
-        return redirect()->route('technician.timeslot')->with('success', 'Timeslot added successfully.');
+        Alert::toast('Timeslot added successfully', 'success');
+
+        return redirect()->route('technician.timeslot');
     }    
 
     public function timeslotedit($id)
@@ -192,16 +195,55 @@ class TechnicianController extends Controller
         return view('technician.timeslot.edit', compact('timeslot'));
     }
 
+
     public function timeslotupdate(Request $request, $id)
     {
-        // Validation logic...
-
+        $userId = Auth::id();
+        // Get the technician id for the current user
+        $technician = Technician::where('user_id', $userId)->first();
+    
+        if (!$technician) {
+            // Handle the case where the technician is not found for the current user
+            return redirect()->back()->withErrors(['user_id' => 'Technician not found for the current user.']);
+        }
+    
+        $technicianId = $technician->id;
+    
+        // Check if the technician already has a timeslot for the selected day and time
+        $existingSlot = TechnicianTimeSlot::where('technician_id', $technicianId)
+            ->where('day', $request->day)
+            ->where(function ($query) use ($request, $id) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('start_time', '>=', $request->start_time)
+                        ->where('start_time', '<', $request->end_time);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('end_time', '>', $request->start_time)
+                        ->where('end_time', '<=', $request->end_time);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('start_time', '<', $request->start_time)
+                        ->where('end_time', '>', $request->end_time);
+                });
+            })
+            ->where('id', '!=', $id) // Exclude the current timeslot from the check during update
+            ->exists();
+    
+        if ($existingSlot) {
+            return redirect()->back()->withErrors(['start_time' => 'The selected timeslot conflicts with an existing one.']);
+        }
+    
+        // Update only the fields that are present in the request
         $timeslot = TechnicianTimeSlot::findOrFail($id);
+        $timeslot->update(array_filter($request->only(['day', 'start_time', 'end_time'])));
+        Alert::toast('Timeslot updated successfully', 'success');
 
-        // Update logic...
+        return redirect()->route('technician.timeslot');
 
-        return redirect()->route('technician.timeslot')->with('success', 'Timeslot updated successfully.');
     }
-
-
+    
+    
+    
+    
+    
 }

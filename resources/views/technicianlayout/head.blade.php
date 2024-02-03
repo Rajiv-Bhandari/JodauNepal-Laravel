@@ -25,6 +25,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('techniciandashboard/plugins/summernote/summernote-bs4.min.css') }}">
 
+  @livewireStyles
     <!-- Datatables style css -->
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css "> --}}
     <link rel="stylesheet" href="{{asset('admin/dist/datatables.min.css')}}">
