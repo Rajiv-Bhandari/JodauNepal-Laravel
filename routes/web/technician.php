@@ -9,3 +9,5 @@ Route::get('/technician-dashboard', [TechnicianController::class, 'dashboard'])-
 Route::get('/technician/timeslot', [TechnicianController::class, 'timeslotindex'])->name('technician.timeslot');
 Route::get('/technician/timeslot/create', [TechnicianController::class, 'timeslotcreate'])->name('timeslot.create');
 Route::post('/technician/timeslot/store', [TechnicianController::class, 'timeslotstore'])->name('timeslot.store');
+Route::get('/technician/timeslot/{id}/edit', [TechnicianController::class, 'timeslotedit'])->name('timeslot.edit');
+Route::put('/technician/timeslot/{id}/update', [TechnicianController::class, 'timeslotupdate'])->name('timeslot.update');

@@ -20,37 +20,48 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <div class="card-body table-responsive p-2">
-        <table class="datatable table">
-            <thead>
-                <tr>
-                    <th>S.N</th>
-                    <th>Day</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th class="text-center">Action</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($timeslot as $timeslot)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$timeslot->day}}</td>
-                    <td>{{$timeslot->start_time}}</td>
-                    <td>{{$timeslot->end_time}}</td>
-                    
-                    <td class="text-center">
-                        <a href="#" title="Edit">
-                            <i class="fas fa-edit fa-lg"></i>
-                        </a>
-                    </td>
-                
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+              
+                    <div class="card">
+                      
+                        <div class="card-body table-responsive p-2">
+                            <table class="datatable table">
+                                <thead>
+                                    <tr>
+                                        <th>S.N</th>
+                                        <th>Day</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th class="text-center">Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($timeslot as $timeslot)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{ \App\Enums\DayOfWeek::getDescription($timeslot->day) }}</td>
+                                        <td>{{$timeslot->start_time}}</td>
+                                        <td>{{$timeslot->end_time}}</td>
+                                        
+                                        <td class="text-center">
+                                            <a href="{{route('timeslot.edit', [$timeslot->id])}}" title="Edit">
+                                                <i class="fas fa-edit fa-lg"></i>
+                                            </a>
+                                        </td>
+                                    
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+              </div>
+         </div>
+     </section>
 </div>
 
 @endsection

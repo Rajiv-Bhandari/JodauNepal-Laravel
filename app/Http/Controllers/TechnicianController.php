@@ -185,4 +185,23 @@ class TechnicianController extends Controller
         return redirect()->route('technician.timeslot')->with('success', 'Timeslot added successfully.');
     }    
 
+    public function timeslotedit($id)
+    {
+        $timeslot = TechnicianTimeSlot::findOrFail($id);
+        
+        return view('technician.timeslot.edit', compact('timeslot'));
+    }
+
+    public function timeslotupdate(Request $request, $id)
+    {
+        // Validation logic...
+
+        $timeslot = TechnicianTimeSlot::findOrFail($id);
+
+        // Update logic...
+
+        return redirect()->route('technician.timeslot')->with('success', 'Timeslot updated successfully.');
+    }
+
+
 }
