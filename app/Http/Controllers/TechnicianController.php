@@ -185,7 +185,7 @@ class TechnicianController extends Controller
     
         Alert::toast('Timeslot added successfully', 'success');
 
-        return redirect()->route('technician.timeslot');
+        return redirect()->route('timeslot.technician');
     }    
 
     public function timeslotedit($id)
@@ -238,7 +238,7 @@ class TechnicianController extends Controller
         $timeslot->update(array_filter($request->only(['day', 'start_time', 'end_time'])));
         Alert::toast('Timeslot updated successfully', 'success');
 
-        return redirect()->route('technician.timeslot');
+        return redirect()->route('timeslot.technician');
 
     }
     

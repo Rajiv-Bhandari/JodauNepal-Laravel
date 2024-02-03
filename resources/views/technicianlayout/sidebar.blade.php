@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('technician.timeslot')}}" class="nav-link   {{ Route::is('technician.timeslot') ? 'active' : '' }}">
+            <a href="{{route('timeslot.technician')}}" class="nav-link   {{ Route::is('timeslot.*') ? 'active' : '' }}">
               <i class="nav-icon far fa-clock"></i>
               <p>
                 Time Slot

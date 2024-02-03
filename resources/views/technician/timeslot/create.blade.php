@@ -11,7 +11,7 @@
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('technician.timeslot') }}">Timeslot</a>
+                            <a href="{{ route('timeslot.technician') }}">Timeslot</a>
                         </li>
                         <li class="breadcrumb-item active">Add</li>
                     </ol>
