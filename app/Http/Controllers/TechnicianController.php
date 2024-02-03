@@ -123,9 +123,16 @@ class TechnicianController extends Controller
     
     public function timeslotindex()
     {
-        $timeslot = TechnicianTimeSlot::orderBy('day')->get();
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+    
+        $technicianId = $technician->id;
+    
+        $timeslot = TechnicianTimeSlot::where('technician_id', $technicianId)->orderBy('day')->get();
+    
         return view('technician.timeslot.index', compact('timeslot'));
-    }    
+    }
+     
 
     public function timeslotcreate()
     {
