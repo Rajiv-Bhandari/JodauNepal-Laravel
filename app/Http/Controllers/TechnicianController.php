@@ -132,7 +132,6 @@ class TechnicianController extends Controller
     
         return view('technician.timeslot.index', compact('timeslot'));
     }
-     
 
     public function timeslotcreate()
     {
@@ -249,8 +248,14 @@ class TechnicianController extends Controller
 
     }
     
-    
-    
-    
-    
+    public function timeslotdestroy($id)
+    {
+        $timeslot = TechnicianTimeSlot::findOrFail($id);
+        $timeslot->delete();
+
+        Alert::toast('Timeslot deleted successfully', 'success');
+
+        return redirect()->route('timeslot.technician');
+    }
+
 }

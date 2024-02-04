@@ -11,3 +11,5 @@ Route::get('/technician/timeslot/create', [TechnicianController::class, 'timeslo
 Route::post('/technician/timeslot/store', [TechnicianController::class, 'timeslotstore'])->name('timeslot.store');
 Route::get('/technician/timeslot/{id}/edit', [TechnicianController::class, 'timeslotedit'])->name('timeslot.edit');
 Route::put('/technician/timeslot/{id}/update', [TechnicianController::class, 'timeslotupdate'])->name('timeslot.update');
+Route::delete('/technician/timeslot/{id}', [TechnicianController::class, 'timeslotdestroy'])->name('timeslot.destroy');
+

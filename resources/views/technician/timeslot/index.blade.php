@@ -35,8 +35,8 @@
                                         <th>Day</th>
                                         <th>Start Time</th>
                                         <th>End Time</th>
-                                        <th class="text-center">Action</th>
-                                        
+                                        <th class="text-center">Edit</th>
+                                        <th class="text-center">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,7 +52,15 @@
                                                 <i class="fas fa-edit fa-lg"></i>
                                             </a>
                                         </td>
-                                    
+                                        <td class="text-center">
+                                            <form method="POST" action="{{ route('timeslot.destroy', $timeslot->id) }}" onsubmit="return confirm('Are you sure you want to delete this timeslot?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" style="background: none; border: none; color: red;" title="Delete">
+                                                    <i class="fas fa-trash-alt fa-lg" style="color: red;"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
