@@ -88,6 +88,7 @@
                                         <button type="submit" class="btn btn-primary px-3">Update</button>
                                     </div>
                             </form>
+                            <p style="margin-top:20px;">*please put 2 hours gap or average of your time to fix a customer problem</p>
                         </div>
                     </div>
                 </div>

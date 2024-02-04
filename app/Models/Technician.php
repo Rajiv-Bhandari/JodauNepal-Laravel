@@ -38,5 +38,10 @@ class Technician extends Model
         return $this->belongsTo(Category::class, 'skill_id');
     }
 
+    public function timeslots()
+    {
+        return $this->hasMany(TechnicianTimeSlot::class, 'technician_id');
+    }
+
 }
 
