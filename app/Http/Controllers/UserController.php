@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Technician;
 use App\Models\Category;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -32,7 +33,8 @@ class UserController extends Controller
     public function profile()
     {
         $profile = Auth::user();
-        return view('user.profile.profile', compact('profile'));
+        $addresses = Address::where('user_id', $profile->id)->get();
+        return view('user.profile.profile', compact('profile', 'addresses'));
     }
 
     public function profileupdate(Request $request)

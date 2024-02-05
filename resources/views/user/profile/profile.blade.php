@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <h4>Your Details</h4>
                     <div class="card card-primary">
                         <form method="POST" action="{{ route('profile.userupdate') }}" enctype="multipart/form-data">
                             @csrf
@@ -69,6 +70,7 @@
                             </div>
                         </form>
                     </div>
+                    @include('user.profile.address')
                 </div>
             </div>
         </div>
