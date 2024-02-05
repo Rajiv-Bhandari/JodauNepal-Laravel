@@ -58,10 +58,10 @@ class UserController extends Controller
             'state' => 'required',
             'city' => 'required',
             'street' => 'required',
-            'address_name' => 'required|in:Home,Office', // Make sure it's one of the specified values
+            'address_name' => 'required|in:Home,Office', // Making sure it's one of the specified values
             'contact_name' => 'required',
             'contact_number' => 'required',
-            'alt_contact_number' => 'nullable', // It's optional, so use nullable rule
+            'alt_contact_number' => 'nullable', // It's optional, so used nullable rule
         ]);
     
         // using relationship set up in my User model

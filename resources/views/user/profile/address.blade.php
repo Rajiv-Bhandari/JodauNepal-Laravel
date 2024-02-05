@@ -1,20 +1,44 @@
 <!-- resources/views/user/profile/address.blade.php -->
 
-<h4>Address Details</h4>
+<div class="main-container bg-white p-4" style="margin-top:20px;">
+    <h4>Your Address Details</h4>
 
-<!-- Display existing addresses -->
-<div class="address-list">
-    @foreach ($addresses as $address)
-        <div class="address-item">
-            <!-- Display address details here -->
-            <p>{{ $address->street }}, {{ $address->city }}, {{ $address->state }}, {{ $address->country }}</p>
-            <!-- Add any other address details you want to display -->
+    <!-- Display existing addresses -->
+    <div class="address-list row">
+        @foreach ($addresses as $address)
+            <div class="col-md-4">
+                <div class="address-item card mb-3">
+                    <div class="card-body">
+                        <!-- Display address details here in a Bootstrap card -->
+                        <h5 class="card-title">{{ $address->address_name }}</h5>
+                        <p class="card-text">
+                            {{ $address->country }}, {{ $address->state }}, {{ $address->city }}<br>
+                        </p>
+                        <p class="card-text">
+                            Street: {{ $address->street }}
+                        </p>
+                        <p class="card-text">
+                            {{ $address->contact_name }}, {{ $address->contact_number }} <br>
+                        </p>
+                        <p class="card-text">
+                            @if (!empty($address->alt_contact_number))
+                                Alternative Contact Number: {{ $address->alt_contact_number }}
+                            @else
+                                No Alternative Contact Number
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        <div class="col-md-4" style="margin-top:60px;">
+            <button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
         </div>
-    @endforeach
-</div>
+    </div>
 
-<!-- "Add New" button -->
-<button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
+    <!-- "Add New" button -->
+    <!-- <button id="addAddressBtn" class="btn btn-primary">Add New Address</button> -->
+</div>
 
 <!-- Address Form (Initially hidden) -->
 <div id="addressForm" style="display: none;">

@@ -6,8 +6,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Your Details</h4>
+                    
                     <div class="card card-primary">
+                    <h4 style="margin-left:25px;margin-top:20px;">Your Details</h4>
                         <form method="POST" action="{{ route('profile.userupdate') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

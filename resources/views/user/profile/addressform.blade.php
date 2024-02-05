@@ -63,14 +63,14 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="contact_number">Contact Number</label>
-                <input type="text" class="form-control" id="contact_number" name="contact_number" required>
+                <input type="number" class="form-control" id="contact_number" name="contact_number" required>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
                 <label for="alt_contact_number">Alternative Contact Number</label>
-                <input type="text" class="form-control" id="alt_contact_number" name="alt_contact_number">
+                <input type="number" class="form-control" id="alt_contact_number" name="alt_contact_number">
             </div>
         </div>
     </div>
