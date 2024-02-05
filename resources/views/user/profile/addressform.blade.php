@@ -1,7 +1,7 @@
 <!-- resources/views/user/profile/addressform.blade.php -->
 
 <!-- Address Form -->
-<form method="POST" action="#" enctype="multipart/form-data">
+<form method="POST" action="{{ route('profile.address.store') }}" enctype="multipart/form-data">
     @csrf
 
     <!-- First Row -->

@@ -51,4 +51,23 @@ class UserController extends Controller
         return redirect()->route('profile.user')->with('message', 'Profile updated successfully.');
     }
 
+    public function storeAddress(Request $request)
+    {
+        $request->validate([
+            'country' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'address_name' => 'required|in:Home,Office', // Make sure it's one of the specified values
+            'contact_name' => 'required',
+            'contact_number' => 'required',
+            'alt_contact_number' => 'nullable', // It's optional, so use nullable rule
+        ]);
+    
+        // using relationship set up in my User model
+        auth()->user()->addresses()->create($request->all());
+    
+        return redirect()->route('profile.user')->with('message', 'Address added successfully.');
+    }    
+
 }
