@@ -26,8 +26,11 @@ class UserController extends Controller
     public function showTechnicianDetail($technicianId)
     {
         $technician = Technician::findOrFail($technicianId);
+        $profile = Auth::user();
+        $addresses = Address::where('user_id', $profile->id)->get();
+        $selectedAddressId = $profile->selected_address_id;
 
-        return view('user.category.detail', compact('technician'));
+        return view('user.category.detail', compact('technician','addresses','selectedAddressId'));
     }
 
     public function profile()
@@ -67,7 +70,15 @@ class UserController extends Controller
         // using relationship set up in my User model
         auth()->user()->addresses()->create($request->all());
     
-        return redirect()->route('profile.user')->with('message', 'Address added successfully.');
+        return redirect()->back()->with('success', 'Address added successfully.');
     }    
+    public function deleteAddress($id)
+    {
+        $address = Address::find($id);
+        $address->delete();
+        // Redirect back or to a specific page after deletion
+        return redirect()->back()->with('success', 'Address deleted successfully');
+    }
+
 
 }

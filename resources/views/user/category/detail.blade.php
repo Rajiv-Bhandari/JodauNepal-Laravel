@@ -157,7 +157,8 @@
                 @endforeach
             </select>
         @endif
-    </div>
+</div>
+@include('user.category.address')
 <script>
     // JavaScript to handle the dynamic update of timeslots based on the selected day
     document.getElementById('daySelect').addEventListener('change', function() {

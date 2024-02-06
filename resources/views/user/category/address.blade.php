@@ -1,19 +1,29 @@
 <!-- resources/views/user/profile/address.blade.php -->
 
+<style>
+    .address-item-container.selected-address {
+        border: 2px solid #007BFF; /* Blue color border */
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .address-item-container.selected-address .card-title {
+        font-weight: bold; /* Bold text for the selected address */
+    }
+</style>
+
 <div class="main-container bg-white p-4" style="margin-top:20px;">
     <h4 style="margin-bottom:20px;">Your Address Details</h4>
 
     <!-- Display existing addresses -->
     <div class="address-list row">
         @foreach ($addresses as $address)
-            <div class="col-md-4">
+            <div class="col-md-4 address-item-container" data-address-id="{{ $address->id }}">
                 <div class="address-item card mb-3">
                     <div class="card-body">
-
                         <a href="#" class="float-right text-danger" onclick="confirmDelete({{ $address->id }})">
                             <i class="mdi mdi-delete"></i>
                         </a>
-    
                         <form id="deleteForm{{ $address->id }}" action="{{ route('profile.address.delete', ['id' => $address->id]) }}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
@@ -41,13 +51,13 @@
             </div>
         @endforeach
         @if($addresses->count() > 0)
-        <div class="col-md-4" style="margin-top:60px;">
-            <button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
-        </div>
+            <div class="col-md-4" style="margin-top:60px;">
+                <button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
+            </div>
         @else
-        <div class="col-md-4">
-            <button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
-        </div>
+            <div class="col-md-4">
+                <button id="addAddressBtn" class="btn btn-primary">Add New Address</button>
+            </div>
         @endif
     </div>
 
@@ -60,11 +70,12 @@
     @include('user.profile.addressform')
 </div>
 
-<!-- JavaScript to handle showing/hiding the address form -->
+<!-- JavaScript to handle showing/hiding the address form and highlighting selected address -->
 <script>
     // Get the elements
     var addAddressBtn = document.getElementById('addAddressBtn');
     var addressForm = document.getElementById('addressForm');
+    var addressItemContainers = document.querySelectorAll('.address-item-container');
 
     // Show the address form when the "Add New" button is clicked
     addAddressBtn.addEventListener('click', function () {
@@ -76,12 +87,25 @@
         addressForm.style.display = 'none';
     });
 
+    // Highlight the clicked address and store its ID
+    addressItemContainers.forEach(function (container) {
+        container.addEventListener('click', function () {
+            addressItemContainers.forEach(function (c) {
+                c.classList.remove('selected-address');
+            });
+
+            container.classList.add('selected-address');
+
+            // Get the selected address ID and store it in a variable or send it to the server as needed
+            var selectedAddressId = container.dataset.addressId;
+            console.log('Selected Address ID:', selectedAddressId);
+        });
+    });
+
     function confirmDelete(addressId) {
         if (confirm('Are you sure you want to delete this address?')) {
             // Submit the corresponding delete form
             document.getElementById('deleteForm' + addressId).submit();
         }
     }
-
 </script>
-
