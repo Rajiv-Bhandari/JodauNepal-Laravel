@@ -108,6 +108,10 @@
     .book-btn {
         text-align: left;
     }
+    #bookButton:disabled {
+        opacity: 0.6; /* Adjust the opacity to your liking */
+        cursor: not-allowed;
+    }
 </style>
 
 <h2>Technician Detail</h2>
@@ -203,11 +207,16 @@
         <h3>Problem Statement</h3>
         <textarea name="problem_statement" class="problem-statement-textarea" placeholder="Describe your problem..." required></textarea>
     </div>
-
-    <!-- Book button section -->
-    <div class="detail-section book-btn">
-        <button type="submit" class="btn btn-primary">Book</button>
-    </div>
+    @if($technician->timeslots->isEmpty())
+        <div class="detail-section book-btn">
+            <button type="button" class="btn btn-danger" id="bookButton" disabled>Book</button>
+        </div>
+    @else
+        <!-- Book button section -->
+        <div class="detail-section book-btn">
+            <button type="submit" class="btn btn-primary">Book</button>
+        </div>
+    @endif
 </form>
 
 <!-- Update the JavaScript to use timeslot->id as the value for timeslot options -->
