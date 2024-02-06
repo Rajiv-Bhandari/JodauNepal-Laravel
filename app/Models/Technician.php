@@ -42,6 +42,10 @@ class Technician extends Model
     {
         return $this->hasMany(TechnicianTimeSlot::class, 'technician_id');
     }
+    public function techniciantimeslots()
+    {
+        return $this->hasMany(TechnicianTimeslot::class);
+    }
 
 }
 

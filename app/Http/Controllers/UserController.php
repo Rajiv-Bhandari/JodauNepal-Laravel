@@ -30,7 +30,7 @@ class UserController extends Controller
         $addresses = Address::where('user_id', $profile->id)->get();
         $selectedAddressId = $profile->selected_address_id;
 
-        return view('user.category.detail', compact('technician','addresses','selectedAddressId'));
+        return view('user.category.detail', compact('technician','addresses','selectedAddressId','profile'));
     }
 
     public function profile()

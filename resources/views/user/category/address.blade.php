@@ -14,7 +14,11 @@
 
 <div class="main-container bg-white p-4" style="margin-top:20px;">
     <h4 style="margin-bottom:20px;">Your Address Details</h4>
-
+    @if ($errors->has('address_id'))
+        <x-validation-errors>
+            {{ $errors->first('address_id') }}
+        </x-validation-errors>
+    @endif
     <!-- Display existing addresses -->
     <div class="address-list row">
         @foreach ($addresses as $address)

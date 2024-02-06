@@ -3,6 +3,7 @@
 @extends('userlayouts.admin')
 
 @section('content')
+
 <style>
     .detail-container {
         margin-top: 20px;
@@ -83,6 +84,30 @@
         margin: 0;
         color: #777;
     }
+
+    .problem-statement-section {
+        margin-top: 20px;
+    }
+
+    .problem-statement-section h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .problem-statement-textarea {
+        width: 100%;
+        height: 100px;
+        padding: 8px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .book-btn {
+        text-align: left;
+    }
 </style>
 
 <h2>Technician Detail</h2>
@@ -131,55 +156,136 @@
         </div>
     </div>
 
-    
-
-
 </div>
 <div class="detail-section timeslot-section">
-        <h3>Availability</h3>
-        @if($technician->timeslots->isEmpty())
-            <p class="no-timeslots">No timeslots available.</p>
-        @else
-            <label for="daySelect" class="select-label">Select Day:</label>
-            <select id="daySelect" class="select-dropdown">
-                @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
-                    <option value="{{ $value }}">{{ $label }}</option>
-                @endforeach
-            </select>
+    <h3>Availability</h3>
+    @if($technician->timeslots->isEmpty())
+        <p class="no-timeslots">No timeslots available.</p>
+    @else
+        <label for="daySelect" class="select-label">Select Day:</label>
+        <select id="daySelect" class="select-dropdown">
+            <option value="" selected disabled>Select Day</option>
+            @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
+                <option value="{{ $value }}">{{ $label }}</option>
+            @endforeach
+        </select>
 
-            <label for="timeSelect" class="select-label">Select Time:</label>
-            <select id="timeSelect" class="select-dropdown">
-                <!-- Timeslots for the first day will be preloaded -->
-                @foreach ($technician->timeslots->where('day', key(\App\Enums\DayOfWeek::asAssociativeArray())) as $timeslot)
-                    <option value="{{ $timeslot->start_time }} - {{ $timeslot->end_time }}">
-                        {{ $timeslot->start_time }} - {{ $timeslot->end_time }}
-                    </option>
-                @endforeach
-            </select>
-        @endif
+        <label for="timeSelect" class="select-label">Select Time:</label>
+        <select id="timeSelect" class="select-dropdown">
+            <option value="" selected disabled>Select Time</option>
+            <!-- Timeslots for the first day will be preloaded -->
+            @foreach ($technician->timeslots->where('day', key(\App\Enums\DayOfWeek::asAssociativeArray())) as $timeslot)
+                <option value="{{ $timeslot->id }}">
+                    {{ $timeslot->start_time }} - {{ $timeslot->end_time }}
+                </option>
+            @endforeach
+        </select>
+    @endif
+    @if ($errors->has('technician_timeslot_id'))
+        <x-validation-errors>
+            {{ $errors->first('technician_timeslot_id') }}
+        </x-validation-errors>
+    @endif
 </div>
+
 @include('user.category.address')
+
+
+<form method="post" action="{{ route('booking.store') }}">
+    @csrf
+    <!-- Hidden input fields -->
+    <input type="hidden" name="user_id" value="{{ $profile->id }}">
+    <input type="hidden" name="technician_id" value="{{ $technician->id }}">
+    <input type="hidden" name="address_id" id="selectedAddressId" value="{{ $selectedAddressId }}">
+    <input type="hidden" name="technician_timeslot_id" id="selectedTimeslotId" value="">
+
+    <div class="detail-section problem-statement-section">
+        <h3>Problem Statement</h3>
+        <textarea name="problem_statement" class="problem-statement-textarea" placeholder="Describe your problem..." required></textarea>
+    </div>
+
+    <!-- Book button section -->
+    <div class="detail-section book-btn">
+        <button type="submit" class="btn btn-primary">Book</button>
+    </div>
+</form>
+
+<!-- Update the JavaScript to use timeslot->id as the value for timeslot options -->
 <script>
-    // JavaScript to handle the dynamic update of timeslots based on the selected day
     document.getElementById('daySelect').addEventListener('change', function() {
-    // Get the selected day
-    var selectedDay = this.value;
+        var selectedDay = this.value;
+        var timeSelect = document.getElementById('timeSelect');
+        timeSelect.innerHTML = '';
 
-    // Clear existing options in the timeslots dropdown
-    var timeSelect = document.getElementById('timeSelect');
-    timeSelect.innerHTML = '';
+        // Add the default option
+        var defaultOption = document.createElement('option');
+        defaultOption.value = "";
+        defaultOption.text = "Select Time";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        timeSelect.add(defaultOption);
 
-    // Populate timeslots for the selected day
-    @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
-        @foreach ($technician->timeslots->where('day', $value) as $timeslot)
-            if (selectedDay === '{{ $value }}') {
-                var option = document.createElement('option');
-                option.value = '{{ $timeslot->start_time }} - {{ $timeslot->end_time }}';
-                option.text = '{{ $timeslot->start_time }} - {{ $timeslot->end_time }}';
-                timeSelect.add(option);
-            }
+        @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
+            @foreach ($technician->timeslots->where('day', $value) as $timeslot)
+                if (selectedDay === '{{ $value }}') {
+                    var option = document.createElement('option');
+                    option.value = '{{ $timeslot->id }}'; // Use timeslot->id as the value
+                    option.text = '{{ $timeslot->start_time }} - {{ $timeslot->end_time }}';
+                    timeSelect.add(option);
+                }
+            @endforeach
         @endforeach
-    @endforeach
+    });
+
+    document.getElementById('timeSelect').addEventListener('change', function() {
+        var selectedTimeslotId = this.value;
+        document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
     });
 </script>
+
+<!-- JavaScript to handle showing/hiding the address form and highlighting selected address -->
+<script>
+    // Get the elements
+    var addAddressBtn = document.getElementById('addAddressBtn');
+    var addressForm = document.getElementById('addressForm');
+    var addressItemContainers = document.querySelectorAll('.address-item-container');
+
+    // Show the address form when the "Add New" button is clicked
+    addAddressBtn.addEventListener('click', function () {
+        addressForm.style.display = 'block';
+    });
+
+    // Hide the address form when the "Close" button is clicked
+    closeAddressFormBtn.addEventListener('click', function () {
+        addressForm.style.display = 'none';
+    });
+
+    // Highlight the clicked address and store its ID in the hidden field
+    addressItemContainers.forEach(function (container) {
+        container.addEventListener('click', function () {
+            // Remove the "selected-address" class from all containers
+            addressItemContainers.forEach(function (c) {
+                c.classList.remove('selected-address');
+            });
+
+            // Add the "selected-address" class to the clicked container
+            container.classList.add('selected-address');
+
+            // Get the selected address ID and set it in the hidden field
+            var selectedAddressId = container.dataset.addressId;
+            console.log('Selected Address ID:', selectedAddressId);
+
+            // Set the selected address ID in the hidden field
+            document.getElementById('selectedAddressId').value = selectedAddressId;
+        });
+    });
+
+    function confirmDelete(addressId) {
+        if (confirm('Are you sure you want to delete this address?')) {
+            // Submit the corresponding delete form
+            document.getElementById('deleteForm' + addressId).submit();
+        }
+    }
+</script>
+
 @endsection
