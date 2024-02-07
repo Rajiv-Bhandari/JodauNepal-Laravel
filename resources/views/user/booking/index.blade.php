@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th>S.N</th>
+                                        <th>Booking Code</th>
                                         <th>Technician</th>
                                         <th>Address</th>
                                         <th>Time</th>
@@ -32,6 +33,7 @@
                                     @foreach ($bookings as $booking)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
+                                        <td>{{$booking->booking_code}}</td>
                                         <td>{{ $booking->technician->fullname }}</td>
                                         <td>{{ $booking->address->address_name }}</td>
                                         <td>
