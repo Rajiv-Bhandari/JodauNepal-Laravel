@@ -14,6 +14,7 @@ class Booking extends Model
     protected $table = 'bookings';
 
     protected $fillable = [
+        'booking_code',
         'user_id',
         'technician_id',
         'address_id',
@@ -26,7 +27,7 @@ class Booking extends Model
 
     protected $casts = [
         'date_time' => 'datetime',
-        'status' => BookingStatus::class,
+       
     ];
 
     public function user()
