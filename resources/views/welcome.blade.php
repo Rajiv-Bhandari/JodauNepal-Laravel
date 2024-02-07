@@ -78,11 +78,29 @@
     </style>
 </head>
 <body>
+@php
+    use App\Enums\UserType;
+@endphp
+
     <div class="container">
         @if (Route::has('login'))
             <div class="auth-links">
                 @auth
-                    <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    <!-- <a href="{{ url('/dashboard') }}">Dashboard</a> -->
+                    @auth
+                        @php
+                            $userType = auth()->user()->usertype;
+                        @endphp
+
+                        <a href="{{ route(
+                            match($userType) {
+                                UserType::Admin => 'admin.dashboard',
+                                UserType::Technician => 'technician.dashboard',
+                                UserType::User => 'user.home',
+                            }
+                        ) }}">Dashboard</a>
+                    @endauth
+
                 @else
                     <a href="{{ route('login') }}">Log in</a>
 
