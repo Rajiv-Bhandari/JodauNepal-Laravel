@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryService->toggle($id);
-             $this->jodauNepal->message('Category Status Updated', 'success');
+            $this->jodauNepal->message('Category Status Updated', 'success');
             return redirect()->back();
         } catch (Exception $e) {
             throw new Exception(Message::Failed);

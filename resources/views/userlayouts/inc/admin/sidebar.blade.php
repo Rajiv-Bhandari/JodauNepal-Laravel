@@ -31,7 +31,7 @@
 
       
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('user.booking')}}">
           <i class="mdi mdi-shopping menu-icon"></i>
           <span class="menu-title">Booking</span>
         </a>

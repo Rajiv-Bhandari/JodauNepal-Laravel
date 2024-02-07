@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Enums\BookingStatus;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -36,6 +37,14 @@ class BookingController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Booking successful!');
+    }
+
+    public function index()
+    {
+        $userId = Auth::id();
+        $bookings = Booking::where('user_id', $userId)->get();
+    
+        return view('user.booking.index', compact('bookings'));
     }
 }
 
