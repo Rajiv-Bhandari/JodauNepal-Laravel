@@ -18,33 +18,35 @@
                             <table id="bookingTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>S.N</th>
-                                        <th>Booking Code</th>
-                                        <th>Technician</th>
-                                        <th>Address</th>
-                                        <th>Time</th>
+                                        <th>Sceduled For</th>
+                                        <th>Booking Id</th>
+                                        <th>Technician Name</th>
+                                      
                                         <th>Booked Date</th>
+                                      
+                                        <th>Cost (Rs)</th>
                                         <th>Status</th>
-                                        <th>Problem Statement</th>
-                                        <th>Cost</th>
+                                        <th>Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($bookings as $booking)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$booking->booking_code}}</td>
-                                        <td>{{ $booking->technician->fullname }}</td>
-                                        <td>{{ $booking->address->address_name }}</td>
-                                        <td>
+                                        <td><i class="mdi mdi-clock-outline menu-icon"></i>
                                             {{ \App\Enums\DayOfWeek::getDescription($booking->technicianTimeslot->day) }},
-                                            {{ $booking->technicianTimeslot->start_time }} -
-                                            {{ $booking->technicianTimeslot->end_time }}
+                                            {{ \Carbon\Carbon::parse($booking->technicianTimeslot->start_time)->format('H:i') }} -
+                                            {{ \Carbon\Carbon::parse($booking->technicianTimeslot->end_time)->format('H:i') }}
                                         </td>
-                                        <td>{{ $booking->date_time->format('Y-m-d H:i') }}</td>
+                                        <td>#{{$booking->booking_code}}</td>
+                                        <td>{{ $booking->technician->fullname }}</td>
+                                        
+                                        <td>{{ $booking->date_time->format('Y-m-d, H:i') }}</td>
+                                        
+                                        <td>{{ $booking->total_cost ?? 0 }}</td>
                                         <td>{{ \App\Enums\BookingStatus::getDescription($booking->status) }}</td>
-                                        <td>{{ $booking->problem_statement }}</td>
-                                        <td>{{ $booking->total_cost }}</td>
+                                        <td class="text-center">
+                                            <i class="mdi mdi-information-outline menu-icon icon-md" title="Details"></i>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
