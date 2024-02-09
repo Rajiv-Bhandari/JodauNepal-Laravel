@@ -45,7 +45,9 @@
                                         <td>{{ $booking->total_cost ?? 0 }}</td>
                                         <td>{{ \App\Enums\BookingStatus::getDescription($booking->status) }}</td>
                                         <td class="text-center">
-                                            <i class="mdi mdi-information-outline menu-icon icon-md" title="Details"></i>
+                                            <a href="{{ route('user.bookings.details', ['id' => $booking->id]) }}">
+                                                <i class="mdi mdi-information-outline menu-icon icon-md" title="Details"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach

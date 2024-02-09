@@ -68,5 +68,12 @@ class BookingController extends Controller
     
         return view('user.booking.index', compact('bookings'));
     }
+
+    public function details($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        return view('user.booking.details', compact('booking'));
+    }
 }
 
