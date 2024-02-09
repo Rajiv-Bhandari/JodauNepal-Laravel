@@ -58,7 +58,7 @@ class BookingController extends Controller
             'booking_code' => $bookingCode,
         ]);
 
-        return redirect()->route('user.booking')->with('success', 'Booking successful!');
+        return redirect()->route('user.bookingsuccessful', ['bookingCode' => $bookingCode])->with('success', 'Booking successful!');
     }
 
     public function index()
@@ -74,6 +74,13 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
 
         return view('user.booking.details', compact('booking'));
+    }
+
+    public function bookingsuccessful($bookingCode)
+    {
+        $booking = Booking::where('booking_code', $bookingCode)->firstOrFail();
+
+        return view('user.booking.bookingsuccessful', compact('booking'));
     }
 }
 
