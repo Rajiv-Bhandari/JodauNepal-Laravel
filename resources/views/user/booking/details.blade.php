@@ -47,9 +47,15 @@
         font-weight: bold;
     }
 </style>
-<h2 style="margin-bottom:20px; margin-top:15px; color: #333; font-size: 24px; font-weight: bold;">
-    Booking Details
-</h2>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="margin-bottom: 20px; margin-top: 15px; color: #333; font-size: 24px; font-weight: bold;">
+        Booking Details
+    </h2>
+
+    @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
+        <a href="{{ route('user.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
+    @endif
+</div>
 
 <div class="technicians-list">
    

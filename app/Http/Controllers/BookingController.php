@@ -82,5 +82,16 @@ class BookingController extends Controller
 
         return view('user.booking.bookingsuccessful', compact('booking'));
     }
+
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        $booking->update(['status' => \App\Enums\BookingStatus::Cancelled]);
+
+        // Redirect back to the booking details page or any other desired page
+        return redirect()->back();
+    }
+
 }
 
