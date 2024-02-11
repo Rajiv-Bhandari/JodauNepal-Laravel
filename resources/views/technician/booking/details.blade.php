@@ -11,7 +11,7 @@
                 <h2 class="mb-4 text-dark font-weight-bold">Booking Details</h2>
 
                 @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
-                    <a href="#" class="btn btn-danger">Cancel</a>
+                    <a href="{{route('technician.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
                 @endif
             </div>
         </div>

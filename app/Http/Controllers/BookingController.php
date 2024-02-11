@@ -115,5 +115,13 @@ class BookingController extends Controller
         return view('technician.booking.details', compact('booking'));
     }
 
+    public function cancelBookingTechnician($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->update(['status' => \App\Enums\BookingStatus::Cancelled]);
+
+        return redirect()->back();
+    }
+
 }
 
