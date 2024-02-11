@@ -18,3 +18,4 @@ Route::delete('/technician/timeslot/{id}', [TechnicianController::class, 'timesl
 Route::get('/technician/booking', [BookingController::class, 'bookingindex'])->name('technician.booking');
 Route::get('/technician/booking/{id}/details', [BookingController::class, 'technicianbookingdetails'])->name('technician.bookings.details');
 Route::get('/technician/booking/cancel/{id}', [BookingController::class, 'cancelBookingTechnician'])->name('technician.booking.cancel');
+Route::get('/technician/booking/confirm/{id}', [BookingController::class, 'confirmBookingTechnician'])->name('technician.booking.confirm');

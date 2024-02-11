@@ -10,11 +10,18 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="mb-4 text-dark font-weight-bold">Booking Details</h2>
 
-                @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
-                    <a href="{{route('technician.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
-                @endif
+                <div class="ml-auto">
+                    @if($booking->status == \App\Enums\BookingStatus::Pending)
+                        <a href="{{ route('technician.booking.confirm', ['id' => $booking->id]) }}" class="btn btn-info mr-2">Confirm</a>
+                    @endif
+
+                    @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
+                        <a href="{{ route('technician.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
+                    @endif
+                </div>
             </div>
         </div>
+
         <div class="card-body table-responsive p-2">
             <div class="card">
                 <div class="card-body">

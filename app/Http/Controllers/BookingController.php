@@ -123,5 +123,12 @@ class BookingController extends Controller
         return redirect()->back();
     }
 
+    public function confirmBookingTechnician($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->update(['status' => \App\Enums\BookingStatus::Confirmed]);
+
+        return redirect()->back();
+    }
 }
 
