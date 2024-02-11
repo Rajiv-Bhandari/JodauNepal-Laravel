@@ -19,3 +19,4 @@ Route::get('/technician/booking', [BookingController::class, 'bookingindex'])->n
 Route::get('/technician/booking/{id}/details', [BookingController::class, 'technicianbookingdetails'])->name('technician.bookings.details');
 Route::get('/technician/booking/cancel/{id}', [BookingController::class, 'cancelBookingTechnician'])->name('technician.booking.cancel');
 Route::get('/technician/booking/confirm/{id}', [BookingController::class, 'confirmBookingTechnician'])->name('technician.booking.confirm');
+Route::post('/technician/booking/{id}/complete', [BookingController::class, 'completeBooking'])->name('technician.booking.complete');

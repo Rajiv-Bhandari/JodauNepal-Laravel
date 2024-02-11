@@ -130,5 +130,18 @@ class BookingController extends Controller
 
         return redirect()->back();
     }
+
+    public function completeBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $totalCost = request('totalamount');
+        $booking->update([
+            'status' => \App\Enums\BookingStatus::Completed,
+            'total_cost' => $totalCost,
+        ]);
+
+        return redirect()->back();
+    }
+
 }
 
