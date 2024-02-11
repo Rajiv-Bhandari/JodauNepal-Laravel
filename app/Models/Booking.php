@@ -30,6 +30,11 @@ class Booking extends Model
        
     ];
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'technician_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

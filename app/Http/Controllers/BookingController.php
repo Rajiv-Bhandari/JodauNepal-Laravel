@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Technician;
 use App\Enums\BookingStatus;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,12 +87,29 @@ class BookingController extends Controller
     public function cancelBooking($id)
     {
         $booking = Booking::findOrFail($id);
-
         $booking->update(['status' => \App\Enums\BookingStatus::Cancelled]);
 
-        // Redirect back to the booking details page or any other desired page
         return redirect()->back();
     }
+
+    public function bookingindex()
+    {
+        // Retrieve the authenticated technician
+        $technician = Technician::where('user_id', Auth::id())->first();
+    
+        if ($technician) {
+            // Get the bookings related to the technician along with user information
+            $bookings = Booking::where('technician_id', $technician->id)->with('user')->get();
+    
+            return view('technician.booking.index', compact('bookings'));
+        } else {
+            // Handle the case where the technician is not found, for example, redirect to a different page
+            return redirect()->route('technician.dashboard')->with('error', 'Technician not found.');
+        }
+    }
+    
+    
+
 
 }
 

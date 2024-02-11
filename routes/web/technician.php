@@ -3,6 +3,7 @@
 //Technician
 
 use App\Http\Controllers\TechnicianController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/technician-dashboard', [TechnicianController::class, 'dashboard'])->name('technician.dashboard');
@@ -12,4 +13,7 @@ Route::post('/technician/timeslot/store', [TechnicianController::class, 'timeslo
 Route::get('/technician/timeslot/{id}/edit', [TechnicianController::class, 'timeslotedit'])->name('timeslot.edit');
 Route::put('/technician/timeslot/{id}/update', [TechnicianController::class, 'timeslotupdate'])->name('timeslot.update');
 Route::delete('/technician/timeslot/{id}', [TechnicianController::class, 'timeslotdestroy'])->name('timeslot.destroy');
+
+// technician booking
+Route::get('/technician/booking', [BookingController::class, 'bookingindex'])->name('technician.booking');
 
