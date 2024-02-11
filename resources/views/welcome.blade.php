@@ -95,7 +95,7 @@
                         <a href="{{ route(
                             match($userType) {
                                 UserType::Admin => 'admin.dashboard',
-                                UserType::Technician => 'technician.dashboard',
+                                UserType::Technician => 'dashboard.technician',
                                 UserType::User => 'user.home',
                             }
                         ) }}">Dashboard</a>

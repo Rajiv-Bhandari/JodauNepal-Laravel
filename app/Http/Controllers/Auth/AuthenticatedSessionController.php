@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
             case UserType::Admin:
                 return redirect()->route('admin.dashboard');
             case UserType::Technician:
-                return redirect()->route('technician.dashboard');
+                return redirect()->route('dashboard.technician');
             case UserType::User:
                 return redirect()->route('user.home');
             default:

@@ -20,7 +20,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('technician.dashboard')}}" class="nav-link  {{ Route::is('technician.dashboard') ? 'active' : '' }}">
+            <a href="{{route('dashboard.technician')}}" class="nav-link  {{ Route::is('dashboard.technician') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('technician.booking')}}" class="nav-link">
+            <a href="{{route('technician.booking')}}" class="nav-link  {{ Route::is('technician.*') ? 'active' : '' }}" >
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Booking

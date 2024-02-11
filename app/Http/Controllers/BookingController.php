@@ -108,8 +108,12 @@ class BookingController extends Controller
         }
     }
     
-    
+    public function technicianbookingdetails($id)
+    {
+        $booking = Booking::findOrFail($id);
 
+        return view('technician.booking.details', compact('booking'));
+    }
 
 }
 

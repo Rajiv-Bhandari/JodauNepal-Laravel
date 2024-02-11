@@ -32,7 +32,7 @@
                                 <tbody>
                                     @foreach ($bookings as $booking)
                                     <tr>
-                                        <td><i class="mdi mdi-clock-outline menu-icon"></i>
+                                        <td><i class="far fa-clock"></i>
                                             {{ \App\Enums\DayOfWeek::getDescription($booking->technicianTimeslot->day) }},
                                             {{ \Carbon\Carbon::parse($booking->technicianTimeslot->start_time)->format('H:i') }} -
                                             {{ \Carbon\Carbon::parse($booking->technicianTimeslot->end_time)->format('H:i') }}
@@ -43,8 +43,8 @@
                                         <td>{{ $booking->total_cost ?? 0 }}</td>
                                         <td>{{ \App\Enums\BookingStatus::getDescription($booking->status) }}</td>
                                         <td class="text-center">
-                                            <a href="#">
-                                                <i class="mdi mdi-information-outline menu-icon icon-md" title="Details"></i>
+                                            <a href="{{ route('technician.bookings.details', ['id' => $booking->id]) }}">
+                                                <i class="fas fa-info-circle fa-lg" title="Details"></i>
                                             </a>
                                         </td>
                                     </tr>
