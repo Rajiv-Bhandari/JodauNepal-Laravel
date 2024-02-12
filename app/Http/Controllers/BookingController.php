@@ -139,7 +139,8 @@ class BookingController extends Controller
             'status' => \App\Enums\BookingStatus::Completed,
             'total_cost' => $totalCost,
         ]);
-
+        $booking->technician->increment('totaljobs');
+        
         return redirect()->back();
     }
 

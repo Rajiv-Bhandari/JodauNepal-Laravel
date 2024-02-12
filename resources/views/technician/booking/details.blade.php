@@ -40,6 +40,7 @@
                                     <div class="details-bottom">
                                         <p class="contact">Booked Date: {{ $booking->date_time->format('Y-m-d, H:i') }}</p>
                                         <p class="age"> Problem statement: {{ $booking->problem_statement }}</p>
+                                        <p class="cost"> Total Cost: {{ $booking->total_cost ?? "-" }}</p>
                                     </div>
                                 </div>
                                 <div class="text-right">
