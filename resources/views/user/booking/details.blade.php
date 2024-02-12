@@ -46,6 +46,27 @@
         text-decoration: none; 
         font-weight: bold;
     }
+    /* rating */
+    .rating {
+    display: flex;
+    align-items: center;
+    }
+
+    .stars-container {
+        display: flex;
+        justify-content: space-between; /* Distribute stars evenly */
+    }
+
+    .star-label {
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .star-label:hover,
+    .rated {
+        color: gold; /* Or your preferred color */
+    }
+
 </style>
 <div style="display: flex; justify-content: space-between; align-items: center;">
     <h2 style="margin-bottom: 20px; margin-top: 15px; color: #333; font-size: 24px; font-weight: bold;">
@@ -127,6 +148,52 @@
         </div>
     </div>
 </div>
+
+@if($booking->status == \App\Enums\BookingStatus::Completed)
+    <h2 style="margin-bottom: 20px; margin-top: 15px; margin-left:5px; color: #333; font-size: 24px; font-weight: bold;">
+        Rate
+    </h2>
+    <div class="rating" style="margin-left:5px; ">
+        
+        <form action="{{ route('user.booking.rate', ['id' => $booking->id]) }}" method="post">
+            @csrf
+            <div class="stars-container">
+                @for($i = 1; $i <= 5; $i++)
+                    <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" {{ $i == $booking->rating ? 'checked' : '' }} style="display: none;">
+                    <label for="star{{ $i }}" class="star-label" data-rating="{{ $i }}">
+                        <i class="mdi mdi-star {{ $i <= $booking->rating ? 'rated' : '' }}"></i>
+                    </label>
+                @endfor
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Submit Rating</button>
+        </form>
+    </div>
+@endif
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('.star-label');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function () {
+            const rating = this.dataset.rating;
+
+            // Update stars based on previously selected rating
+            stars.forEach(s => {
+                s.classList.remove('rated');
+                if (s.dataset.rating <= rating && s.dataset.rating >= {{$booking->rating}}) {
+                    s.classList.add('rated');
+                }
+            });
+
+            // Update hidden radio input value
+            document.querySelector('input[name="rating"]').value = rating;
+        });
+    });
+});
+
+</script>
 
 
 

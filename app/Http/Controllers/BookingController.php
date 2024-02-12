@@ -144,5 +144,19 @@ class BookingController extends Controller
         return redirect()->back();
     }
 
+    public function rateTechnician($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        request()->validate([
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        $rating = request('rating');
+        $booking->update(['rating' => $rating]);
+
+        return redirect()->back();
+    }
+
 }
 
