@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Technician;
 use App\Models\Category;
 use App\Models\Address;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -30,7 +31,10 @@ class UserController extends Controller
         $addresses = Address::where('user_id', $profile->id)->get();
         $selectedAddressId = $profile->selected_address_id;
 
-        return view('user.category.detail', compact('technician','addresses','selectedAddressId','profile'));
+        // Retrieve comments for the technician
+        $comments = Comment::where('technician_id', $technicianId)->with('user', 'replies')->get();
+
+        return view('user.category.detail', compact('technician','addresses','selectedAddressId','profile','comments'));
     }
 
     public function profile()

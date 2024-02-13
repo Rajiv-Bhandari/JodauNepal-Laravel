@@ -219,6 +219,8 @@
     @endif
 </form>
 
+@include('user.category.comments')
+
 <!-- Update the JavaScript to use timeslot->id as the value for timeslot options -->
 <script>
     document.getElementById('daySelect').addEventListener('change', function() {

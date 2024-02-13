@@ -104,7 +104,7 @@
 </div>
 
 
-<div class="container mt-4">
+<div class="card-body table-responsive p-2">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
