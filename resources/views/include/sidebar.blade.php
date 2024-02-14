@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="nav-item m-1">
-                    <a href="#"
+                    <a href="{{route('category.index')}}"
                         class="nav-link {{ Route::is('category.*') ? 'active' : '' }}">
                         <i class="nav-icon fab fa-fort-awesome m-1 p-1"></i>
                         <p>

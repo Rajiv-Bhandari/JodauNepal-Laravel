@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Technician;
+use App\Models\Booking;
 use App\Models\Category;
 use App\Models\User;
 use App\Enums\TechnicianStatus;
+use App\Enums\BookingStatus;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
@@ -52,7 +54,9 @@ class AdminController extends Controller
         $pending = Technician::where('status', TechnicianStatus::Pending)->count();
         $approved = Technician::where('status', TechnicianStatus::Approved)->count();
         $rejected = Technician::where('status', TechnicianStatus::Rejected)->count();
-        return view('admin.home', compact('category', 'users','pending','approved','rejected'));
+        $totalbooking = Booking::where('status', BookingStatus::Completed)->count();
+
+        return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking'));
     }
     
     

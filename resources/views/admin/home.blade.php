@@ -38,6 +38,11 @@
         color: white;
     }
 
+    .box-booking {
+        background-color: #8B4513;
+        color: white;
+    }
+
     .box-category {
         background-color: #e74c3c;
         color: white;
@@ -142,6 +147,15 @@
                     <i class="fas fa-tags box-icon"></i>
                     <h2>{{ $category }}</h2>
                     <p>Category</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 box-bg">
+            <a href="#">
+                <div class="box box-booking">
+                    <i class="fas fa-tags box-icon"></i>
+                    <h2>{{ $totalbooking }}</h2>
+                    <p>Completed Bookings</p>
                 </div>
             </a>
         </div>
