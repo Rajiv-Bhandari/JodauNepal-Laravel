@@ -100,6 +100,23 @@
     .box {
         border: none;
     }
+    .box-chart {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .box-chart:hover {
+        background-color: transparent;
+    }
+    .chart-container {
+    width: 100%; /* Make sure the chart takes the full width of the container */
+    }
+
 </style>
 <div class="container">
     <div class="row" style="margin-top:30px;">
@@ -159,8 +176,11 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-4 box-bg">
-            <div class="box">
+    </div><br>
+    <div class="row">
+        <!-- First Box -->
+        <div class="col-md-6">
+            <div class="box box-chart">
                 <h2>Booking Status</h2>
                 <div class="chart-container">
                     <canvas id="bookingStatusChart"></canvas>
@@ -168,6 +188,12 @@
             </div>
         </div>
 
+        <!-- Second Box (Add your content here) -->
+        <div class="col-md-6">
+            <div class="box">
+                <h2>other chart</h2>
+            </div>
+        </div>
     </div>
 </div>
 
