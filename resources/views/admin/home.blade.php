@@ -159,7 +159,36 @@
                 </div>
             </a>
         </div>
+        <div class="col-md-4 box-bg">
+            <div class="box">
+                <h2>Booking Status</h2>
+                <div class="chart-container">
+                    <canvas id="bookingStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Draw the pie chart
+        const pieChartData = @json($pieChartData);
+
+        const ctx = document.getElementById('bookingStatusChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(pieChartData),
+                datasets: [{
+                    data: Object.values(pieChartData),
+                    backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f39c12'],
+                }],
+            },
+        });
+    });
+</script>
+
 @endsection

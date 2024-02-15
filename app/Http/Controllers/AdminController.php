@@ -56,7 +56,15 @@ class AdminController extends Controller
         $rejected = Technician::where('status', TechnicianStatus::Rejected)->count();
         $totalbooking = Booking::where('status', BookingStatus::Completed)->count();
 
-        return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking'));
+        // Pie chart data
+        $pieChartData = [
+            'Pending' => Booking::where('status', BookingStatus::Pending)->count(),
+            'Cancelled' => Booking::where('status', BookingStatus::Cancelled)->count(),
+            'Confirmed' => Booking::where('status', BookingStatus::Confirmed)->count(),
+            'Completed' => Booking::where('status', BookingStatus::Completed)->count(),
+        ];
+
+        return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking','pieChartData'));
     }
     
     
