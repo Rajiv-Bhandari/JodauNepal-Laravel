@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Enums\TechnicianStatus;
 use App\Enums\BookingStatus;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -64,7 +65,22 @@ class AdminController extends Controller
             'Completed' => Booking::where('status', BookingStatus::Completed)->count(),
         ];
 
-        return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking','pieChartData'));
+        // Bar chart data for total users in the last five weeks
+        $totalUsersLastFiveWeeks = [];
+        $labels = [];
+        for ($i = 4; $i >= 0; $i--) {
+            $startOfWeek = Carbon::now()->subWeeks($i)->startOfWeek();
+            $endOfWeek = Carbon::now()->subWeeks($i)->endOfWeek();
+            
+            $totalUsersLastFiveWeeks[] = User::where('usertype', 0)
+                ->whereDate('created_at', '>=', $startOfWeek)
+                ->whereDate('created_at', '<=', $endOfWeek)
+                ->count();
+        
+            $labels[] = $startOfWeek->format('M d') . ' - ' . $endOfWeek->format('M d');
+        }
+
+        return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking','pieChartData', 'totalUsersLastFiveWeeks', 'labels'));
     }
     
     

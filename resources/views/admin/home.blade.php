@@ -108,14 +108,18 @@
     transition: background-color 0.3s;
     border-radius: 10px;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    }
+    height: 350px; /* Set a fixed height for both boxes */
+}
 
-    .box-chart:hover {
-        background-color: transparent;
-    }
-    .chart-container {
-    width: 100%; /* Make sure the chart takes the full width of the container */
-    }
+.box-chart:hover {
+    background-color: transparent;
+}
+
+.chart-container {
+    width: 100%;
+    height: 100%; /* Make sure the chart takes the full height of the container */
+}
+
 
 </style>
 <div class="container">
@@ -190,8 +194,11 @@
 
         <!-- Second Box (Add your content here) -->
         <div class="col-md-6">
-            <div class="box">
-                <h2>other chart</h2>
+            <div class="box box-chart">
+                <h2>Users Gained (Last 5 Weeks)</h2>
+                <div class="chart-container">
+                    <canvas id="totalUsersChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -212,6 +219,33 @@
                     data: Object.values(pieChartData),
                     backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f39c12'],
                 }],
+            },
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Bar chart for total users in the last five weeks
+        const totalUsersData = @json($totalUsersLastFiveWeeks);
+        const labels = @json($labels);
+
+        const ctxTotalUsers = document.getElementById('totalUsersChart').getContext('2d');
+        new Chart(ctxTotalUsers, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Users',
+                    data: totalUsersData,
+                    backgroundColor: '#3498db',
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
             },
         });
     });
