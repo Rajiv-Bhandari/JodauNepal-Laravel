@@ -38,13 +38,6 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="mdi mdi-history menu-icon"></i>
-          <span class="menu-title">History</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
         <a class="nav-link" href="{{route('profile.user')}}">
           <i class="mdi mdi-account-circle menu-icon"></i>
           <span class="menu-title">Profile</span>

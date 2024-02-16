@@ -92,21 +92,30 @@ class BookingController extends Controller
         return redirect()->back();
     }
 
-    public function bookingindex()
+    public function bookingindex(Request $request)
     {
         // Retrieve the authenticated technician
         $technician = Technician::where('user_id', Auth::id())->first();
     
-        if ($technician) {
-            // Get the bookings related to the technician along with user information
-            $bookings = Booking::where('technician_id', $technician->id)->with('user')->get();
+        $status = $request->input('status');
     
-            return view('technician.booking.index', compact('bookings'));
-        } else {
-            // Handle the case where the technician is not found, for example, redirect to a different page
-            return redirect()->route('technician.dashboard')->with('error', 'Technician not found.');
+        $query = Booking::where('technician_id', $technician->id)->with('user');
+    
+        if ($status === 'pending') {
+            $query->where('status', BookingStatus::Pending);
+        } elseif ($status === 'completed') {
+            $query->where('status', BookingStatus::Completed);
+        } elseif ($status === 'cancelled') {
+            $query->where('status', BookingStatus::Cancelled);
+        } elseif ($status === 'confirmed') {
+            $query->where('status', BookingStatus::Confirmed);
         }
+    
+        $bookings = $query->get();
+    
+        return view('technician.booking.index', compact('bookings'));
     }
+    
     
     public function technicianbookingdetails($id)
     {

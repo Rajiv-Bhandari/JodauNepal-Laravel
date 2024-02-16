@@ -44,15 +44,6 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
-              <p>
-                History
-              </p>
-            </a>
-          </li>
-
         </ul>
         <!-- Logout Button -->
         <div class="text-center mt-auto p-3">

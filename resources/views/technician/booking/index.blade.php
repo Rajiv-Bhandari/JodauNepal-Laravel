@@ -11,12 +11,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">My Bookings</h3>
-                        </div>
+                    <div class="card" style="margin-top:20px">
+                        
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h1 class="card-title font-weight-bold" style="margin-top:15px">My Bookings</h1>                           
+                            <a href="{{ route('technician.booking', ['status' => 'cancelled']) }}" class="btn btn-danger px-4 m-2 float-right">Cancelled</a>
+                            <a href="{{ route('technician.booking', ['status' => 'confirmed']) }}" class="btn btn-success px-4 m-2 float-right">Confirmed</a>
+                            <a href="{{ route('technician.booking', ['status' => 'completed']) }}" class="btn btn-info px-4 m-2 float-right">Completed</a>
+                            <a href="{{ route('technician.booking', ['status' => 'pending']) }}" class="btn btn-warning px-4 m-2 float-right">Pending</a>
+                            <a href="{{ route('technician.booking') }}" class="btn btn-primary px-4 m-2 float-right">All</a>
+                        </div>
+
                         <div class="card-body">
+                            @if ($bookings->isEmpty())
+                                <h5 style="text-align:center;">No bookings available for this status.</h5>
+                            @else
                             <table id="bookingTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -57,6 +67,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                         <!-- /.card-body -->
                     </div>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Technician;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Booking;
 use App\Models\TechnicianTimeSlot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
 use Illuminate\Support\Facades\Mail;
 use App\Enums\Usertype; 
+use App\Enums\BookingStatus;
 use Illuminate\Support\Str;
 use App\Jobs\EmailQueue;
 use App\Jobs\RejectedQueue;
@@ -68,8 +70,19 @@ class TechnicianController extends Controller
 
     public function dashboard()
     {
-        return view('technician.dashboard');
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+        $technicianId = $technician->id;
+
+        // Count of bookings with different statuses
+        $pendingCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Pending)->count();
+        $cancelledCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Cancelled)->count();
+        $confirmedCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Confirmed)->count();
+        $completedCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Completed)->count();
+    
+        return view('technician.dashboard', compact('pendingCount', 'cancelledCount', 'confirmedCount', 'completedCount'));
     }
+    
     public function approve($id)
     {
         $technician = Technician::findOrFail($id);
