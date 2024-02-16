@@ -55,7 +55,7 @@
                                             @if($booking->status != \App\Enums\BookingStatus::Confirmed)
                                                 {{ \App\Enums\BookingStatus::getDescription($booking->status) }}
                                             @else
-                                                <button class="btn btn-warning btn-sm btn-request" data-toggle="modal" data-target="#cancelRequestModal" data-request-id="{{ $booking->id }}">Confirmed</button>
+                                                <button class="btn btn-success btn-sm btn-request" data-toggle="modal" data-target="#cancelRequestModal" data-request-id="{{ $booking->id }}">Confirmed</button>
                                             @endif
                                         </td>
                                         <td class="text-center">
