@@ -75,6 +75,37 @@
         .auth-links a:hover {
             color: #007bff;
         }
+        .services {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px;
+            background-color: black;
+            border-radius: 0;
+            color: #fff;
+        }
+
+        .services h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .services ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .services li {
+            background-color: brown;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -115,7 +146,19 @@
             <p>Join our platform, Seamlessly connect with proficient technicians for your needs while providing experts with a platform to showcase their talents. Experience a hassle-free, efficient way to address technical issues while empowering technicians to offer their expertise and services. Together, let's revolutionize the way problems are solved.</p>
             <p>Technicians don't just fix problems;<br>they engineer solutions.</p>
             <a href="{{route('register-technician-form')}}" class="become-technician-btn">Become a Technician</a>
+            
         </div>
     </div>
+    <div class="services">
+        <h3>Our Services : </h3>
+        <ul>
+            @forelse ($categories as $category)
+                <li>{{ $category->name }}</li>
+            @empty
+                <p>No categories available.</p>
+            @endforelse
+        </ul>
+    </div>
+
 </body>
 </html>

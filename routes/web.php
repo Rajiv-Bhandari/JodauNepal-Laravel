@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Enums\UserType;
 use App\Http\Controllers\TechnicianController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,8 @@ use App\Http\Controllers\TechnicianController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AdminController::class, 'welcome']);
+
 Route::get('/register-technician-form', [TechnicianController::class, 'showRegistrationForm'])->name('register-technician-form');
 Route::post('/register-technician', [TechnicianController::class, 'register'])->name('register-technician');
 

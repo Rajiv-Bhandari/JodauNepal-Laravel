@@ -14,6 +14,12 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+
+    public function welcome()
+    {
+        $categories = Category::all();
+        return view('welcome', compact('categories'));
+    }
     public function dashboard(Request $request)
     {
         $status = $request->input('status'); // Get the status parameter from the request
