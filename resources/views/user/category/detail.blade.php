@@ -166,23 +166,17 @@
     @if($technician->timeslots->isEmpty())
         <p class="no-timeslots">No timeslots available.</p>
     @else
+        <label for="chooseDate" class="select-label">Choose Date:</label>
+        <input type="date" id="chooseDate" name="chooseDate" min="{{ now()->toDateString() }}" class="date-input">
+
         <label for="daySelect" class="select-label">Select Day:</label>
         <select id="daySelect" class="select-dropdown">
             <option value="" selected disabled>Select Day</option>
-            @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
-                <option value="{{ $value }}">{{ $label }}</option>
-            @endforeach
         </select>
 
         <label for="timeSelect" class="select-label">Select Time:</label>
         <select id="timeSelect" class="select-dropdown">
             <option value="" selected disabled>Select Time</option>
-            <!-- Timeslots for the first day will be preloaded -->
-            @foreach ($technician->timeslots->where('day', key(\App\Enums\DayOfWeek::asAssociativeArray())) as $timeslot)
-                <option value="{{ $timeslot->id }}">
-                    {{ $timeslot->start_time }} - {{ $timeslot->end_time }}
-                </option>
-            @endforeach
         </select>
     @endif
     @if ($errors->has('technician_timeslot_id'))
@@ -198,6 +192,7 @@
 <form method="post" action="{{ route('booking.store') }}">
     @csrf
     <!-- Hidden input fields -->
+    <input type="hidden" name="selected_date" id="selectedDate" value="">
     <input type="hidden" name="user_id" value="{{ $profile->id }}">
     <input type="hidden" name="technician_id" value="{{ $technician->id }}">
     <input type="hidden" name="address_id" id="selectedAddressId" value="{{ $selectedAddressId }}">
@@ -221,24 +216,44 @@
 
 @include('user.category.comments')
 
-<!-- Update the JavaScript to use timeslot->id as the value for timeslot options -->
+<!-- Update the JavaScript to automatically set the day when a date is selected -->
 <script>
-    document.getElementById('daySelect').addEventListener('change', function() {
-        var selectedDay = this.value;
+    document.getElementById('chooseDate').addEventListener('change', function() {
+        var selectedDate = this.value;
+        var daySelect = document.getElementById('daySelect');
         var timeSelect = document.getElementById('timeSelect');
+        daySelect.innerHTML = '';
         timeSelect.innerHTML = '';
 
-        // Add the default option
-        var defaultOption = document.createElement('option');
-        defaultOption.value = "";
-        defaultOption.text = "Select Time";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        timeSelect.add(defaultOption);
+        // Add the default option for day
+        var defaultDayOption = document.createElement('option');
+        defaultDayOption.value = "";
+        defaultDayOption.text = "Select Day";
+        defaultDayOption.disabled = true;
+        defaultDayOption.selected = true;
+        daySelect.add(defaultDayOption);
 
+        // Add the default option for time
+        var defaultTimeOption = document.createElement('option');
+        defaultTimeOption.value = "";
+        defaultTimeOption.text = "Select Time";
+        defaultTimeOption.disabled = true;
+        defaultTimeOption.selected = true;
+        timeSelect.add(defaultTimeOption);
+
+        // Get the day corresponding to the selected date
+        var selectedDay = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
+
+        // Add the selected day to the dropdown
+        var selectedDayOption = document.createElement('option');
+        selectedDayOption.value = selectedDay;
+        selectedDayOption.text = selectedDay;
+        daySelect.add(selectedDayOption);
+
+        // Load timeslots dynamically based on the selected day
         @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
             @foreach ($technician->timeslots->where('day', $value) as $timeslot)
-                if (selectedDay === '{{ $value }}') {
+                if ('{{ $label }}' === selectedDay) {
                     var option = document.createElement('option');
                     option.value = '{{ $timeslot->id }}'; // Use timeslot->id as the value
                     option.text = '{{ $timeslot->start_time }} - {{ $timeslot->end_time }}';
@@ -246,6 +261,12 @@
                 }
             @endforeach
         @endforeach
+
+        // Automatically select the day in the dropdown
+        daySelect.value = selectedDay;
+        
+        // Set the selected date in the hidden field
+        document.getElementById('selectedDate').value = selectedDate;
     });
 
     document.getElementById('timeSelect').addEventListener('change', function() {
@@ -253,6 +274,8 @@
         document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
     });
 </script>
+
+
 
 <!-- JavaScript to handle showing/hiding the address form and highlighting selected address -->
 <script>
