@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('techniciantimeslots', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('technician_id');
-            $table->integer('day');
+            $table->date('date'); 
             $table->time('start_time');
             $table->time('end_time');
+            $table->boolean('isBooked')->default(false);
             $table->timestamps();
 
             // Foreign key constraint

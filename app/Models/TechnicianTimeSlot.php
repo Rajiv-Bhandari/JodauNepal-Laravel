@@ -13,8 +13,9 @@ class TechnicianTimeSlot extends Model
 
     protected $fillable = [
         'technician_id',
-        'day',
+        'date',
         'start_time',
-        'end_time'
+        'end_time',
+        'isBooked',
     ];
 }
