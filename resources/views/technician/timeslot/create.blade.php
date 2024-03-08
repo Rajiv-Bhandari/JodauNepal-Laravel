@@ -35,20 +35,16 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="day">Day</label>
-                                                <select class="form-control" id="day" name="day">
-                                                    @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
-                                                        <option value="{{ $value }}" {{ old('day') == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('day'))
+                                                <label for="date">Date</label>
+                                                <input type="date" class="form-control" id="date" name="date" min="{{ now()->toDateString() }}" value="{{ old('date') }}">
+                                                @if ($errors->has('date'))
                                                     <x-validation-errors>
-                                                        {{ $errors->first('day') }}
+                                                        {{ $errors->first('date') }}
                                                     </x-validation-errors>
                                                 @endif
                                             </div>
                                         </div>
-                                        
+                                            
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="technician">Technician</label>

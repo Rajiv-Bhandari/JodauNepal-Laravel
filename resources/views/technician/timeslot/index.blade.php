@@ -32,9 +32,10 @@
                                 <thead>
                                     <tr>
                                         <th>S.N</th>
-                                        <th>Day</th>
+                                        <th>Date</th>
                                         <th>Start Time</th>
                                         <th>End Time</th>
+                                        <th>Is Booked</th>
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Delete</th>
                                     </tr>
@@ -43,10 +44,12 @@
                                     @foreach ($timeslot as $timeslot)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{ \App\Enums\DayOfWeek::getDescription($timeslot->day) }}</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($timeslot->date)->format('l, F j, Y') }}
+                                        </td>
                                         <td>{{$timeslot->start_time}}</td>
                                         <td>{{$timeslot->end_time}}</td>
-                                        
+                                        <td> {{ $timeslot->isBooked ? 'Yes' : 'No' }}</td>
                                         <td class="text-center">
                                             <a href="{{route('timeslot.edit', [$timeslot->id])}}" title="Edit">
                                                 <i class="fas fa-edit fa-lg"></i>

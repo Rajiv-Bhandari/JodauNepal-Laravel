@@ -89,7 +89,6 @@
                     <p class="experience"><b>Status: {{ \App\Enums\BookingStatus::getDescription($booking->status) }}</b></p>
                 </div>
                 <p class="address"><i class="mdi mdi-clock-outline menu-icon"></i> Scheduled for:
-                    {{ $booking->booked_for}},
                     {{ \App\Enums\DayOfWeek::getDescription($booking->technicianTimeslot->day) }},
                     {{ \Carbon\Carbon::parse($booking->technicianTimeslot->start_time)->format('H:i') }} -
                     {{ \Carbon\Carbon::parse($booking->technicianTimeslot->end_time)->format('H:i') }}

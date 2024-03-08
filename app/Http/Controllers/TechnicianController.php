@@ -141,7 +141,7 @@ class TechnicianController extends Controller
     
         $technicianId = $technician->id;
     
-        $timeslot = TechnicianTimeSlot::where('technician_id', $technicianId)->orderBy('day')->get();
+        $timeslot = TechnicianTimeSlot::where('technician_id', $technicianId)->orderBy('date')->get();
     
         return view('technician.timeslot.index', compact('timeslot'));
     }
@@ -154,7 +154,7 @@ class TechnicianController extends Controller
     public function timeslotstore(Request $request)
     {
         $request->validate([
-            'day' => 'required',
+            'date' => 'required|date_format:Y-m-d|after_or_equal:' . now()->toDateString(),
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
@@ -170,9 +170,9 @@ class TechnicianController extends Controller
     
         $technicianId = $technician->id;
     
-        // Check if the technician already has a timeslot for the selected day and time
+        // Check if the technician already has a timeslot for the selected date and time
         $existingSlot = TechnicianTimeSlot::where('technician_id', $technicianId)
-            ->where('day', $request->day)
+            ->where('date', $request->date)
             ->where(function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
                     $q->where('start_time', '>=', $request->start_time)
@@ -188,7 +188,6 @@ class TechnicianController extends Controller
                 });
             })
             ->exists();
-
     
         if ($existingSlot) {
             return redirect()->back()->withErrors(['start_time' => 'The selected timeslot conflicts with an existing one.']);
@@ -197,15 +196,16 @@ class TechnicianController extends Controller
         // Create the new timeslot
         TechnicianTimeSlot::create([
             'technician_id' => $technicianId,
-            'day' => $request->day,
+            'date' => $request->date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
         ]);
     
         Alert::toast('Timeslot added successfully', 'success');
-
+    
         return redirect()->route('timeslot.technician');
-    }    
+    }
+      
 
     public function timeslotedit($id)
     {
@@ -213,7 +213,6 @@ class TechnicianController extends Controller
         
         return view('technician.timeslot.edit', compact('timeslot'));
     }
-
 
     public function timeslotupdate(Request $request, $id)
     {
@@ -228,9 +227,9 @@ class TechnicianController extends Controller
     
         $technicianId = $technician->id;
     
-        // Check if the technician already has a timeslot for the selected day and time
+        // Check if the technician already has a timeslot for the selected date and time
         $existingSlot = TechnicianTimeSlot::where('technician_id', $technicianId)
-            ->where('day', $request->day)
+            ->where('date', $request->date)
             ->where(function ($query) use ($request, $id) {
                 $query->where(function ($q) use ($request) {
                     $q->where('start_time', '>=', $request->start_time)
@@ -254,11 +253,10 @@ class TechnicianController extends Controller
     
         // Update only the fields that are present in the request
         $timeslot = TechnicianTimeSlot::findOrFail($id);
-        $timeslot->update(array_filter($request->only(['day', 'start_time', 'end_time'])));
+        $timeslot->update(array_filter($request->only(['date', 'start_time', 'end_time'])));
         Alert::toast('Timeslot updated successfully', 'success');
-
+    
         return redirect()->route('timeslot.technician');
-
     }
     
     public function timeslotdestroy($id)
