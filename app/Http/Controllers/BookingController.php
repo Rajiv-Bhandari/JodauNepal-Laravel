@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Technician;
+use App\Models\TechnicianTimeslot;
 use App\Enums\BookingStatus;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,6 @@ class BookingController extends Controller
             'address_id' => 'required|exists:addresses,id',
             'technician_timeslot_id' => 'required|exists:techniciantimeslots,id', // Adjusted table name
             'problem_statement' => 'required|string',
-            'selected_date' => 'required|date_format:Y-m-d',
         ], [   
             'address_id.required' => 'Please select an address or if dont have create a new one.',
             'technician_timeslot_id.required' => 'Please select both Day and Time.',
@@ -54,12 +54,15 @@ class BookingController extends Controller
             'technician_id' => $request->technician_id,
             'address_id' => $request->address_id,
             'technician_timeslot_id' => $request->technician_timeslot_id,
-            'date_time' => now(), // You may adjust this based on your requirements
-            'booked_for' => $request->selected_date . ' ' . now()->format('H:i:s'),
+            'date_time' => now(), 
             'status' => BookingStatus::Pending,
             'problem_statement' => $request->problem_statement,
             'booking_code' => $bookingCode,
         ]);
+
+        // Mark the corresponding TechnicianTimeslot as booked
+        $timeslot = TechnicianTimeslot::findOrFail($request->technician_timeslot_id);
+        $timeslot->update(['isBooked' => true]);
 
         return redirect()->route('user.bookingsuccessful', ['bookingCode' => $bookingCode])->with('success', 'Booking successful!');
     }

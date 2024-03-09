@@ -166,12 +166,9 @@
     @if($technician->timeslots->isEmpty())
         <p class="no-timeslots">No timeslots available.</p>
     @else
-        <label for="chooseDate" class="select-label">Choose Date:</label>
-        <input type="date" id="chooseDate" name="chooseDate" min="{{ now()->toDateString() }}" class="date-input">
-
-        <label for="daySelect" class="select-label">Select Day:</label>
+        <label for="daySelect" class="select-label">Select Date:</label>
         <select id="daySelect" class="select-dropdown">
-            <option value="" selected disabled>Select Day</option>
+            <option value="" selected disabled>Select Date</option>
         </select>
 
         <label for="timeSelect" class="select-label">Select Time:</label>
@@ -192,7 +189,6 @@
 <form method="post" action="{{ route('booking.store') }}">
     @csrf
     <!-- Hidden input fields -->
-    <input type="hidden" name="selected_date" id="selectedDate" value="">
     <input type="hidden" name="user_id" value="{{ $profile->id }}">
     <input type="hidden" name="technician_id" value="{{ $technician->id }}">
     <input type="hidden" name="address_id" id="selectedAddressId" value="{{ $selectedAddressId }}">
@@ -218,64 +214,89 @@
 
 <!-- Update the JavaScript to automatically set the day when a date is selected -->
 <script>
-    document.getElementById('chooseDate').addEventListener('change', function() {
-        var selectedDate = this.value;
-        var daySelect = document.getElementById('daySelect');
-        var timeSelect = document.getElementById('timeSelect');
-        daySelect.innerHTML = '';
-        timeSelect.innerHTML = '';
+// Function to get unique dates from an array of timeslots
+function getUniqueDates(timeslots) {
+    return [...new Set(timeslots.map(timeslot => timeslot.date))];
+}
 
-        // Add the default option for day
-        var defaultDayOption = document.createElement('option');
-        defaultDayOption.value = "";
-        defaultDayOption.text = "Select Day";
-        defaultDayOption.disabled = true;
-        defaultDayOption.selected = true;
-        daySelect.add(defaultDayOption);
+// Function to populate the date dropdown
+function populateDateDropdown() {
+    var daySelect = document.getElementById('daySelect');
+    var timeSelect = document.getElementById('timeSelect');
+    
+    // Clear existing options
+    daySelect.innerHTML = '';
+    timeSelect.innerHTML = '';
 
-        // Add the default option for time
-        var defaultTimeOption = document.createElement('option');
-        defaultTimeOption.value = "";
-        defaultTimeOption.text = "Select Time";
-        defaultTimeOption.disabled = true;
-        defaultTimeOption.selected = true;
-        timeSelect.add(defaultTimeOption);
+    // Add the default option for date
+    var defaultDateOption = document.createElement('option');
+    defaultDateOption.value = "";
+    defaultDateOption.text = "Select Date";
+    defaultDateOption.disabled = true;
+    defaultDateOption.selected = true;
+    daySelect.add(defaultDateOption);
 
-        // Get the day corresponding to the selected date
-        var selectedDay = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
+    // Get unique dates from technician's timeslots
+    var uniqueDates = getUniqueDates(@json($technician->timeslots->toArray()));
 
-        // Add the selected day to the dropdown
-        var selectedDayOption = document.createElement('option');
-        selectedDayOption.value = selectedDay;
-        selectedDayOption.text = selectedDay;
-        daySelect.add(selectedDayOption);
-
-        // Load timeslots dynamically based on the selected day
-        @foreach (\App\Enums\DayOfWeek::asAssociativeArray() as $value => $label)
-            @foreach ($technician->timeslots->where('day', $value) as $timeslot)
-                if ('{{ $label }}' === selectedDay) {
-                    var option = document.createElement('option');
-                    option.value = '{{ $timeslot->id }}'; // Use timeslot->id as the value
-                    option.text = '{{ $timeslot->start_time }} - {{ $timeslot->end_time }}';
-                    timeSelect.add(option);
-                }
-            @endforeach
-        @endforeach
-
-        // Automatically select the day in the dropdown
-        daySelect.value = selectedDay;
-        
-        // Set the selected date in the hidden field
-        document.getElementById('selectedDate').value = selectedDate;
+    // Add each unique date to the dropdown
+    uniqueDates.forEach(function (date) {
+        var option = document.createElement('option');
+        option.value = date;
+        option.text = date;
+        daySelect.add(option);
     });
+}
 
-    document.getElementById('timeSelect').addEventListener('change', function() {
-        var selectedTimeslotId = this.value;
-        document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
+// Function to load timeslots based on the selected date
+// Function to load timeslots based on the selected date
+function loadTimeSlots() {
+    var daySelect = document.getElementById('daySelect');
+    var timeSelect = document.getElementById('timeSelect');
+
+    // Clear existing options
+    timeSelect.innerHTML = '';
+
+    // Retrieve selected date from the dropdown
+    var selectedDate = daySelect.value;
+
+    // Filter timeslots for the selected date and not booked
+    var availableTimeslots = @json($technician->timeslots->toArray());
+
+    // Add the default option for time
+    var defaultTimeOption = document.createElement('option');
+    defaultTimeOption.value = "";
+    defaultTimeOption.text = "Select Time";
+    defaultTimeOption.disabled = true;
+    defaultTimeOption.selected = true;
+    timeSelect.add(defaultTimeOption);
+
+    // Add available times for the selected date to the dropdown
+    availableTimeslots.forEach(function (timeslot) {
+        if (timeslot.date === selectedDate && !timeslot.isBooked) {
+            var option = document.createElement('option');
+            option.value = timeslot.id;
+            option.text = timeslot.start_time + ' - ' + timeslot.end_time;
+            timeSelect.add(option);
+        }
     });
+}
+
+
+// Event listener for date dropdown change
+document.getElementById('daySelect').addEventListener('change', function () {
+    // Call the function to load timeslots based on the selected date
+    loadTimeSlots();
+});
+document.getElementById('timeSelect').addEventListener('change', function() {
+    var selectedTimeslotId = this.value;
+    document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
+});
+
+// Call the function to populate the date dropdown initially
+populateDateDropdown();
+
 </script>
-
-
 
 <!-- JavaScript to handle showing/hiding the address form and highlighting selected address -->
 <script>

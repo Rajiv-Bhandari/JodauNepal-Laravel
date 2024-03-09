@@ -33,7 +33,7 @@
                                         <h3>Booking Id: {{ $booking->booking_code }}</h3>
                                     </div>
                                     <p class="address"><i class="fas fa-clock fa-lg"></i> Scheduled for:
-                                        {{ \App\Enums\DayOfWeek::getDescription($booking->technicianTimeslot->day) }},
+                                        {{ $booking->technicianTimeslot->date }},
                                         {{ \Carbon\Carbon::parse($booking->technicianTimeslot->start_time)->format('H:i') }} -
                                         {{ \Carbon\Carbon::parse($booking->technicianTimeslot->end_time)->format('H:i') }}
                                     </p>

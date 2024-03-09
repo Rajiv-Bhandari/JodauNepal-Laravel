@@ -43,7 +43,7 @@
                                     @foreach ($bookings as $booking)
                                     <tr>
                                         <td><i class="far fa-clock"></i>
-                                            {{ \App\Enums\DayOfWeek::getDescription($booking->technicianTimeslot->day) }},
+                                            {{ $booking->technicianTimeslot->date }},
                                             {{ \Carbon\Carbon::parse($booking->technicianTimeslot->start_time)->format('H:i') }} -
                                             {{ \Carbon\Carbon::parse($booking->technicianTimeslot->end_time)->format('H:i') }}
                                         </td>
