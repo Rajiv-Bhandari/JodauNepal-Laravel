@@ -239,16 +239,24 @@
         // Get unique dates from technician's timeslots
         var uniqueDates = getUniqueDates(@json($technician->timeslots->toArray()));
 
-        // Add each unique date to the dropdown
+        // Get today's date
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+
+        // Add each unique date to the dropdown if it's today or in the future
         uniqueDates.forEach(function (date) {
-            var option = document.createElement('option');
-            option.value = date;
-            option.text = date;
-            daySelect.add(option);
+            var currentDate = new Date(date);
+            currentDate.setHours(0, 0, 0, 0);
+
+            if (currentDate >= today) {
+                var option = document.createElement('option');
+                option.value = date;
+                option.text = date;
+                daySelect.add(option);
+            }
         });
     }
 
-    // Function to load timeslots based on the selected date
     // Function to load timeslots based on the selected date
     function loadTimeSlots() {
         var daySelect = document.getElementById('daySelect');
