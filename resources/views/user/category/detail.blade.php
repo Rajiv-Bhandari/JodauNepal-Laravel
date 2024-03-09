@@ -214,87 +214,87 @@
 
 <!-- Update the JavaScript to automatically set the day when a date is selected -->
 <script>
-// Function to get unique dates from an array of timeslots
-function getUniqueDates(timeslots) {
-    return [...new Set(timeslots.map(timeslot => timeslot.date))];
-}
+    // Function to get unique dates from an array of timeslots
+    function getUniqueDates(timeslots) {
+        return [...new Set(timeslots.map(timeslot => timeslot.date))];
+    }
 
-// Function to populate the date dropdown
-function populateDateDropdown() {
-    var daySelect = document.getElementById('daySelect');
-    var timeSelect = document.getElementById('timeSelect');
-    
-    // Clear existing options
-    daySelect.innerHTML = '';
-    timeSelect.innerHTML = '';
+    // Function to populate the date dropdown
+    function populateDateDropdown() {
+        var daySelect = document.getElementById('daySelect');
+        var timeSelect = document.getElementById('timeSelect');
+        
+        // Clear existing options
+        daySelect.innerHTML = '';
+        timeSelect.innerHTML = '';
 
-    // Add the default option for date
-    var defaultDateOption = document.createElement('option');
-    defaultDateOption.value = "";
-    defaultDateOption.text = "Select Date";
-    defaultDateOption.disabled = true;
-    defaultDateOption.selected = true;
-    daySelect.add(defaultDateOption);
+        // Add the default option for date
+        var defaultDateOption = document.createElement('option');
+        defaultDateOption.value = "";
+        defaultDateOption.text = "Select Date";
+        defaultDateOption.disabled = true;
+        defaultDateOption.selected = true;
+        daySelect.add(defaultDateOption);
 
-    // Get unique dates from technician's timeslots
-    var uniqueDates = getUniqueDates(@json($technician->timeslots->toArray()));
+        // Get unique dates from technician's timeslots
+        var uniqueDates = getUniqueDates(@json($technician->timeslots->toArray()));
 
-    // Add each unique date to the dropdown
-    uniqueDates.forEach(function (date) {
-        var option = document.createElement('option');
-        option.value = date;
-        option.text = date;
-        daySelect.add(option);
-    });
-}
-
-// Function to load timeslots based on the selected date
-// Function to load timeslots based on the selected date
-function loadTimeSlots() {
-    var daySelect = document.getElementById('daySelect');
-    var timeSelect = document.getElementById('timeSelect');
-
-    // Clear existing options
-    timeSelect.innerHTML = '';
-
-    // Retrieve selected date from the dropdown
-    var selectedDate = daySelect.value;
-
-    // Filter timeslots for the selected date and not booked
-    var availableTimeslots = @json($technician->timeslots->toArray());
-
-    // Add the default option for time
-    var defaultTimeOption = document.createElement('option');
-    defaultTimeOption.value = "";
-    defaultTimeOption.text = "Select Time";
-    defaultTimeOption.disabled = true;
-    defaultTimeOption.selected = true;
-    timeSelect.add(defaultTimeOption);
-
-    // Add available times for the selected date to the dropdown
-    availableTimeslots.forEach(function (timeslot) {
-        if (timeslot.date === selectedDate && !timeslot.isBooked) {
+        // Add each unique date to the dropdown
+        uniqueDates.forEach(function (date) {
             var option = document.createElement('option');
-            option.value = timeslot.id;
-            option.text = timeslot.start_time + ' - ' + timeslot.end_time;
-            timeSelect.add(option);
-        }
+            option.value = date;
+            option.text = date;
+            daySelect.add(option);
+        });
+    }
+
+    // Function to load timeslots based on the selected date
+    // Function to load timeslots based on the selected date
+    function loadTimeSlots() {
+        var daySelect = document.getElementById('daySelect');
+        var timeSelect = document.getElementById('timeSelect');
+
+        // Clear existing options
+        timeSelect.innerHTML = '';
+
+        // Retrieve selected date from the dropdown
+        var selectedDate = daySelect.value;
+
+        // Filter timeslots for the selected date and not booked
+        var availableTimeslots = @json($technician->timeslots->toArray());
+
+        // Add the default option for time
+        var defaultTimeOption = document.createElement('option');
+        defaultTimeOption.value = "";
+        defaultTimeOption.text = "Select Time";
+        defaultTimeOption.disabled = true;
+        defaultTimeOption.selected = true;
+        timeSelect.add(defaultTimeOption);
+
+        // Add available times for the selected date to the dropdown
+        availableTimeslots.forEach(function (timeslot) {
+            if (timeslot.date === selectedDate && !timeslot.isBooked) {
+                var option = document.createElement('option');
+                option.value = timeslot.id;
+                option.text = timeslot.start_time + ' - ' + timeslot.end_time;
+                timeSelect.add(option);
+            }
+        });
+    }
+
+
+    // Event listener for date dropdown change
+    document.getElementById('daySelect').addEventListener('change', function () {
+        // Call the function to load timeslots based on the selected date
+        loadTimeSlots();
     });
-}
+    document.getElementById('timeSelect').addEventListener('change', function() {
+        var selectedTimeslotId = this.value;
+        document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
+    });
 
-
-// Event listener for date dropdown change
-document.getElementById('daySelect').addEventListener('change', function () {
-    // Call the function to load timeslots based on the selected date
-    loadTimeSlots();
-});
-document.getElementById('timeSelect').addEventListener('change', function() {
-    var selectedTimeslotId = this.value;
-    document.getElementById('selectedTimeslotId').value = selectedTimeslotId;
-});
-
-// Call the function to populate the date dropdown initially
-populateDateDropdown();
+    // Call the function to populate the date dropdown initially
+    populateDateDropdown();
 
 </script>
 

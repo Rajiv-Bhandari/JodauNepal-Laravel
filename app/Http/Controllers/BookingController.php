@@ -92,7 +92,10 @@ class BookingController extends Controller
     public function cancelBooking($id)
     {
         $booking = Booking::findOrFail($id);
+        $timeslot = TechnicianTimeslot::findOrFail($booking->technician_timeslot_id);
+
         $booking->update(['status' => \App\Enums\BookingStatus::Cancelled]);
+        $timeslot->update(['isBooked' => false]);
 
         return redirect()->back();
     }
@@ -132,7 +135,10 @@ class BookingController extends Controller
     public function cancelBookingTechnician($id)
     {
         $booking = Booking::findOrFail($id);
+        $timeslot = TechnicianTimeslot::findOrFail($booking->technician_timeslot_id);
+
         $booking->update(['status' => \App\Enums\BookingStatus::Cancelled]);
+        $timeslot->update(['isBooked' => false]);
 
         return redirect()->back();
     }
