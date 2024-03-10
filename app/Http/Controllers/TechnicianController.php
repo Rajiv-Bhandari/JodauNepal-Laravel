@@ -20,6 +20,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class TechnicianController extends Controller
 {
@@ -68,21 +69,36 @@ class TechnicianController extends Controller
         return redirect()->back()->with('success', 'Technician registered successfully! Wait for Admin approval');
     }
 
+    private function getNotifications($technicianId)
+    {
+        return DB::table('bookings')
+            ->join('users', 'bookings.user_id', '=', 'users.id')
+            ->join('techniciantimeslots', 'bookings.technician_timeslot_id', '=', 'techniciantimeslots.id')
+            ->where('bookings.technician_id', $technicianId)
+            ->select('users.name as userName', 'bookings.date_time', 'techniciantimeslots.date', 'techniciantimeslots.start_time', 'techniciantimeslots.end_time')
+            ->orderBy('bookings.date_time', 'desc')
+            ->take(5)
+            ->get();
+    }
+
     public function dashboard()
     {
         $userId = Auth::id();
         $technician = Technician::where('user_id', $userId)->first();
         $technicianId = $technician->id;
-
+    
         // Count of bookings with different statuses
         $pendingCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Pending)->count();
         $cancelledCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Cancelled)->count();
         $confirmedCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Confirmed)->count();
         $completedCount = Booking::where('technician_id', $technicianId)->where('status', BookingStatus::Completed)->count();
     
-        return view('technician.dashboard', compact('pendingCount', 'cancelledCount', 'confirmedCount', 'completedCount'));
-    }
+        // Get booking notifications for the technician
+        $notifications = $this->getNotifications($technicianId);
     
+        return view('technician.dashboard', compact('pendingCount', 'cancelledCount', 'confirmedCount', 'completedCount', 'notifications'));
+    }
+
     public function approve($id)
     {
         $technician = Technician::findOrFail($id);
@@ -142,13 +158,19 @@ class TechnicianController extends Controller
         $technicianId = $technician->id;
     
         $timeslot = TechnicianTimeSlot::where('technician_id', $technicianId)->orderBy('date')->get();
-    
-        return view('technician.timeslot.index', compact('timeslot'));
+        $notifications = $this->getNotifications($technicianId);
+
+        return view('technician.timeslot.index', compact('timeslot','notifications'));
     }
 
     public function timeslotcreate()
     {
-        return view('technician.timeslot.create');
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+        $technicianId = $technician->id;
+        $notifications = $this->getNotifications($technicianId);
+
+        return view('technician.timeslot.create',compact('notifications'));
     }
 
     public function timeslotstore(Request $request)
@@ -209,9 +231,14 @@ class TechnicianController extends Controller
 
     public function timeslotedit($id)
     {
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+        $technicianId = $technician->id;
+
         $timeslot = TechnicianTimeSlot::findOrFail($id);
-        
-        return view('technician.timeslot.edit', compact('timeslot'));
+        $notifications = $this->getNotifications($technicianId);
+
+        return view('technician.timeslot.edit', compact('timeslot','notifications'));
     }
 
     public function timeslotupdate(Request $request, $id)

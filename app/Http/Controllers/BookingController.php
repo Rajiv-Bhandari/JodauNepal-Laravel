@@ -10,6 +10,7 @@ use App\Models\Technician;
 use App\Models\TechnicianTimeslot;
 use App\Enums\BookingStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -99,12 +100,22 @@ class BookingController extends Controller
 
         return redirect()->back();
     }
-
+    private function getNotifications($technicianId)
+    {
+        return DB::table('bookings')
+            ->join('users', 'bookings.user_id', '=', 'users.id')
+            ->join('techniciantimeslots', 'bookings.technician_timeslot_id', '=', 'techniciantimeslots.id')
+            ->where('bookings.technician_id', $technicianId)
+            ->select('users.name as userName', 'bookings.date_time', 'techniciantimeslots.date', 'techniciantimeslots.start_time', 'techniciantimeslots.end_time')
+            ->orderBy('bookings.date_time', 'desc')
+            ->take(5)
+            ->get();
+    }
     public function bookingindex(Request $request)
     {
         // Retrieve the authenticated technician
         $technician = Technician::where('user_id', Auth::id())->first();
-    
+        $technicianId = $technician->id;
         $status = $request->input('status');
     
         $query = Booking::where('technician_id', $technician->id)->with('user');
@@ -120,8 +131,9 @@ class BookingController extends Controller
         }
     
         $bookings = $query->get();
-    
-        return view('technician.booking.index', compact('bookings'));
+        $notifications = $this->getNotifications($technicianId);
+
+        return view('technician.booking.index', compact('bookings','notifications'));
     }
     
     
