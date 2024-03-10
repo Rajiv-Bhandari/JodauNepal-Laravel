@@ -26,9 +26,9 @@ class TechnicianController extends Controller
 {
     public function showRegistrationForm()
     {
-        $skills = Category::pluck('name', 'id');
-        return view('register-technician',compact('skills'));
-    }
+        $skills = Category::where('status', 0)->pluck('name', 'id');
+        return view('register-technician', compact('skills'));
+    }    
 
     public function register(Request $request)
     {
