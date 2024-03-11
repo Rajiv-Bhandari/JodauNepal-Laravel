@@ -59,8 +59,8 @@
                 </li>
 
                 <li class="nav-item m-1">
-                    <a href="{{route('admin.filterreport')}}"
-                        class="nav-link">
+                    <a href="{{route('report.booking')}}"
+                        class="nav-link {{ Route::is('report.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-alt m-1 p-1"></i>
                         <p>
                             Reports

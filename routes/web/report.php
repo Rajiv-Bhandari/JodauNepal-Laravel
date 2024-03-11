@@ -6,4 +6,4 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/filter/report', [ReportController::class, 'filterbooking'])->name('admin.filterreport');
+Route::get('/filter/report', [ReportController::class, 'filterbooking'])->name('report.booking');
