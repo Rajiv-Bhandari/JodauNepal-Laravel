@@ -57,6 +57,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item m-1">
+                    <a href="#"
+                        class="nav-link">
+                        <i class="nav-icon fas fa-file-alt m-1 p-1"></i>
+                        <p>
+                            Reports
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
 
