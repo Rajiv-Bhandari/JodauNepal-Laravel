@@ -41,7 +41,7 @@ Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
     require __DIR__ . '/web/admin.php';
     require __DIR__ . '/web/category.php';
     require __DIR__ . '/web/adminuser.php';
-    
+    require __DIR__ . '/web/report.php';
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {

@@ -59,7 +59,7 @@
                 </li>
 
                 <li class="nav-item m-1">
-                    <a href="#"
+                    <a href="{{route('admin.filterreport')}}"
                         class="nav-link">
                         <i class="nav-icon fas fa-file-alt m-1 p-1"></i>
                         <p>
