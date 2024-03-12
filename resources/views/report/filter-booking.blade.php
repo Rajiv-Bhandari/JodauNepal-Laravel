@@ -22,17 +22,16 @@
                             <div class="card-body col-md-12">
                                 <div class="card-header text-bold">Bookings Report :</div>
                                 <div class="col-12 py-1" style="clear:both;">&nbsp;</div>
-                                    <form type="GET" action="#">
+                                    <form type="GET" action="{{route('report.filtered-bookings')}}">
                                         <input type="hidden" value="false" name="isPdf">                                    
-
                                         <!-- Booking Status -->
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-title">Booking Status</label>
                                                 <select class="form-control" name="booking_status">
                                                     <option value="">Select Status</option>
-                                                    @foreach(App\Enums\BookingStatus::getKeys() as $status)
-                                                        <option value="{{ $status }}">{{ ucwords($status) }}</option>
+                                                    @foreach(App\Enums\BookingStatus::getValues() as $statusValue)
+                                                        <option value="{{ $statusValue }}">{{ ucwords(App\Enums\BookingStatus::getDescription($statusValue)) }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('booking_status'))
@@ -50,7 +49,7 @@
                                                 <select class="form-control" name="technician">
                                                     <option value="">Select Technician</option>
                                                     @foreach($technicians as $technician)
-                                                        <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                                        <option value="{{ $technician->id }}">{{ $technician->fullname }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('technician'))
