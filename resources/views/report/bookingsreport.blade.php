@@ -24,6 +24,7 @@
                                                 Status - All,
                                             @endif
                                             <span style="margin-left: 15px;">Technician: {{ $selectedTechnicianName ? $selectedTechnicianName : 'All' }}</span>
+                                            <button id="exportPdfButton" class="btn btn-dark" style="margin-left:20px;">Export PDF</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,5 +77,26 @@
             </div>
         </section>
     </div>
+
+<script>
+    document.getElementById('exportPdfButton').addEventListener('click', function() {
+        // Get the selected status or technician
+        var selectedStatus = {!! json_encode($selectedStatus) !!};
+        var selectedTechnicianName = {!! json_encode($selectedTechnicianName) !!};
+        
+        // Set the title based on the selected status or technician
+        var title = 'bookingreport-';
+        if (!selectedStatus && !selectedTechnicianName) {
+            title = 'All-Status:All-Technician';
+        } else {
+            title += selectedStatus ? 'Status:' + selectedStatus : 'All-Status';
+            title += '-';
+            title += selectedTechnicianName ? 'Technician:' + selectedTechnicianName : 'All-Technician';
+        }
+        document.title = title;
+        
+        window.print();
+    });
+</script>
 
 @endsection
