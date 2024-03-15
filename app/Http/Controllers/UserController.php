@@ -19,8 +19,10 @@ class UserController extends Controller
     public function category($categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $technicians = $category->technicians()->get();
-    
+        $technicians = $category->technicians()
+        ->orderByDesc('totaljobs')
+        ->get();
+
         return view('user.category.category', compact('technicians','category'));
     }
 
