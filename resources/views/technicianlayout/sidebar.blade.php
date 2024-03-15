@@ -44,6 +44,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('technician.booking')}}" class="nav-link" >
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Report
+              </p>
+            </a>
+          </li>
         </ul>
         <!-- Logout Button -->
         <div class="text-center mt-auto p-3">
