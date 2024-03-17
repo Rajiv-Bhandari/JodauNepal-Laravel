@@ -28,14 +28,13 @@
             </ul>
         </div>
     </li>
-
       
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('user.booking')}}">
-          <i class="mdi mdi-shopping menu-icon"></i>
-          <span class="menu-title">Booking</span>
+    <li class="nav-item {{ request()->is('user.booking.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('user.booking') }}">
+            <i class="mdi mdi-shopping menu-icon"></i>
+            <span class="menu-title">Booking</span>
         </a>
-      </li>
+    </li>
 
       <li class="nav-item">
         <a class="nav-link" href="{{route('profile.user')}}">
