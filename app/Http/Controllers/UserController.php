@@ -7,13 +7,28 @@ use App\Models\Technician;
 use App\Models\Category;
 use App\Models\Address;
 use App\Models\Comment;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
     public function home()
     {
-        return view('user.home');
+        $user = Auth::user();
+        
+        $totalBookings = Booking::where('user_id', $user->id)->count();
+        $totalComments = Comment::where('user_id', $user->id)->count();
+        $totalAddresses = Address::where('user_id', $user->id)->count();
+
+        // Count technicians by skill (category)
+        $technicianCounts = Technician::select('categories.name as skill_name', DB::raw('count(*) as count'))
+        ->join('categories', 'technicians.skill_id', '=', 'categories.id')
+        ->groupBy('categories.name')
+        ->get();
+    
+        return view('user.home', compact('totalBookings', 'totalComments', 'totalAddresses','technicianCounts'));
     }
 
     public function category($categoryId)
