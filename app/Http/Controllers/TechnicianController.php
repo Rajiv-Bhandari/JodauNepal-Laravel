@@ -296,4 +296,14 @@ class TechnicianController extends Controller
         return redirect()->route('timeslot.technician');
     }
 
+    public function technicianProfile()
+    {
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+        $technicianId = $technician->id;
+
+        $notifications = $this->getNotifications($technicianId);
+        return view("technician.profile.index", compact('notifications','technician'));
+    }
+
 }

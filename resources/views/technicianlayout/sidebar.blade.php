@@ -45,7 +45,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" >
+            <a href="{{route('technicianprofile')}}" class="nav-link {{ Route::is('technicianprofile') ? 'active' : '' }}" >
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
