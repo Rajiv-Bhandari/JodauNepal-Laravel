@@ -139,9 +139,11 @@ class BookingController extends Controller
     
     public function technicianbookingdetails($id)
     {
+        $technician = Technician::where('user_id', Auth::id())->first();
+        $technicianId = $technician->id;
         $booking = Booking::findOrFail($id);
-
-        return view('technician.booking.details', compact('booking'));
+        $notifications = $this->getNotifications($technicianId);
+        return view('technician.booking.details', compact('booking','notifications'));
     }
 
     public function cancelBookingTechnician($id)

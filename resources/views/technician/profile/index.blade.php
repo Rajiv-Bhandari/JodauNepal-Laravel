@@ -11,12 +11,12 @@
                 <h4 style="margin-left:25px;margin-top:20px;">Your Details</h4>
                     <div class="image-container text-center">
                         @if($technician->profilepic)
-                          <img src="/images/profile_pictures/{{ $technician->profilepic }}" alt="Profile" class="profile-image rounded-circle img-thumbnail" >
+                          <img src="/images/profile_pictures/{{ $technician->profilepic }}" alt="Profile" class="profile-image rounded-circle img-thumbnail" style="max-width: 200px;">
                         @else
                           <img src="/images/profile_pictures/default.jpg" alt="Profile" class="profile-image rounded-circle img-thumbnail" style="max-width: 200px;">
                         @endif
                     </div>
-                    <form method="POST" action="#" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('technicianprofile.update') }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         

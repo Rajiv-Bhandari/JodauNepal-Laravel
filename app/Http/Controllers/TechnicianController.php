@@ -306,4 +306,25 @@ class TechnicianController extends Controller
         return view("technician.profile.index", compact('notifications','technician'));
     }
 
+    public function technicianProfileUpdate(Request $request)
+    {
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+       
+        $request->validate([
+            'name' => 'required|string',
+            'contactno' => 'required|string',
+            'address' => 'required|string',
+        ]);
+       
+        // Update the technician's name, contact number, and address
+        $technician->fullname = $request->input('name');
+        $technician->contactnumber = $request->input('contactno');
+        $technician->address = $request->input('address');
+        $technician->save();
+
+        Alert::toast('Profile updated successfully', 'success');
+        return redirect()->back();
+    }
+
 }
