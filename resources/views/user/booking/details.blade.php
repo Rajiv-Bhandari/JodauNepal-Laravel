@@ -77,7 +77,7 @@
 
     @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
         <a href="{{ route('user.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
-        <button id="payment-button">Pay with Khalti</button>
+        <!-- <button id="payment-button">Pay with Khalti</button> -->
     @endif
 </div>
 
@@ -198,9 +198,8 @@
 
 </script>
 
-<script>
+<!-- <script>
     var config = {
-        // replace the publicKey with yours
         "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
         "productIdentity": "1234567890",
         "productName": "Dragon",
@@ -214,7 +213,6 @@
             ],
         "eventHandler": {
             onSuccess (payload) {
-                // hit merchant api for initiating verfication
                 console.log(payload);
             },
             onError (error) {
@@ -229,10 +227,9 @@
     var checkout = new KhaltiCheckout(config);
     var btn = document.getElementById("payment-button");
     btn.onclick = function () {
-        // minimum transaction amount must be 10, i.e 1000 in paisa.
         checkout.show({amount: 1000});
     }
-</script>
+</script> -->
 
 
 @endsection
