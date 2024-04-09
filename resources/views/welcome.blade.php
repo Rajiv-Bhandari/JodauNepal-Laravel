@@ -200,13 +200,12 @@
 
                             <a href="{{ route(
                                 match($userType) {
-                                    UserType::Admin => 'admin.dashboard',
-                                    UserType::Technician => 'dashboard.technician',
-                                    UserType::User => 'user.home',
+                                    \App\Enums\UserType::Admin => 'admin.dashboard',
+                                    \App\Enums\UserType::Technician => 'dashboard.technician',
+                                    \App\Enums\UserType::User => 'user.home',
                                 }
                             ) }}">Dashboard</a>
                         @endauth
-
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-dark mx-3 p-3">Log in</a>
 
