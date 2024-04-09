@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>jadu</title>
+  <title>Jodau Nepal</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,7 +148,203 @@
     </div>
   </div>
 
- @include('frontend.navbar')
+  <nav class="main-menu d-flex navbar fixed-top navbar-expand-lg p-2 py-3 p-lg-4 py-lg-4 ">
+    <div class="container-fluid">
+      <div class="main-logo">
+        <a href="index.html">
+          <img src="{{asset('frontend/images/logo.png')}}" alt="logo" class="img-fluid">
+        </a>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body justify-content-end">
+
+          <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
+   
+
+            
+
+           
+
+          
+
+
+           
+          
+
+          <div class="d-none d-lg-flex align-items-center ms-5">
+            <ul class="d-flex justify-content-end  list-unstyled m-0">
+              <li>
+                
+           
+
+              
+                @if (Route::has('login'))
+                <div class="auth-links">
+                    @auth
+                        <!-- <a href="{{ url('/dashboard') }}">Dashboard</a> -->
+                        @auth
+                            @php
+                                $userType = auth()->user()->usertype;
+                            @endphp
+
+                            <a href="{{ route(
+                                match($userType) {
+                                    UserType::Admin => 'admin.dashboard',
+                                    UserType::Technician => 'dashboard.technician',
+                                    UserType::User => 'user.home',
+                                }
+                            ) }}">Dashboard</a>
+                        @endauth
+
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-outline-dark mx-3 p-3">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn btn-outline-dark mx-3 p-3">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+        </li>
+            </ul>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="tabs-listing mt-4">
+                        <nav>
+                          <div class="nav nav-tabs d-flex justify-content-center border-0" id="nav-tab" role="tablist">
+                            <button class="btn btn-outline-primary px-5 py-3 me-3 active" id="nav-sign-in-tab"
+                              data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab"
+                              aria-controls="nav-sign-in" aria-selected="true">Log In</button>
+                            <button class="btn btn-outline-primary px-5 py-3" id="nav-register-tab" data-bs-toggle="tab"
+                              data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register"
+                              aria-selected="false">Sign Up</button>
+                          </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                          <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                            aria-labelledby="nav-sign-in-tab">
+                            <form id="form1" class="form-group flex-wrap p-3 ">
+                              <div class="form-input col-lg-12 my-4">
+                                <label for="email"
+                                  class="form-label fs-6 text-uppercase fw-bold text-black">Email
+                                  Address</label>
+                                <input type="email" id="email" name="email" :value="old('email')" placeholder="Email" required autofocus autocomplete="username"
+                                  class="form-control ps-3">
+                                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                              </div>
+                              <div class="form-input col-lg-12 my-4">
+                                <label for="password"
+                                  class="form-label  fs-6 text-uppercase fw-bold text-black">Password</label>
+                                <input id="password"  placeholder="Password"  type="password"
+                                name="password" required autocomplete="current-password"
+                                  class="form-control ps-3" aria-describedby="passwordHelpBlock">
+                                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+                                <div id="passwordHelpBlock" class="form-text text-center">
+                                  <a href="{{ route('password.request') }}" class=" password">{{ __('Forgot your password?') }}</a>
+                                </div>
+
+                              </div>
+                              <label class="py-3" for="remember_me">
+                                <input type="checkbox" id="remember_me" required="" class="d-inline" name="remember">
+                                <span class="label-body text-black">{{ __('Remember me') }}</span>
+                              </label>
+                              <div class="d-grid my-3">
+                                <button class="btn btn-primary px-5 py-3" href="{{ route('login') }}">{{ __('Log in') }}</button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="tab-pane fade" id="nav-register" role="tabpanel"
+                            aria-labelledby="nav-register-tab">
+                            <form id="form2" class="form-group flex-wrap p-3 ">
+                              <div class="form-input col-lg-12 my-4">
+                                <label for="exampleInputEmail2"
+                                  class="form-label fs-6 text-uppercase fw-bold text-black">Email
+                                  Address</label>
+                                <input type="text" id="exampleInputEmail2" name="email" placeholder="Email"
+                                  class="form-control ps-3">
+                              </div>
+                              <div class="form-input col-lg-12 my-4">
+                                <label for="inputPassword2"
+                                  class="form-label  fs-6 text-uppercase fw-bold text-black">Password</label>
+                                <input type="password" id="inputPassword2" placeholder="Password"
+                                  class="form-control ps-3" aria-describedby="passwordHelpBlock">
+                              </div>
+                              <label class="py-3">
+                                <input type="checkbox" required="" class="d-inline">
+                                <span class="label-body text-black">I agree to the <a href="#"
+                                    class="text-black password border-bottom">Privacy Policy</a>
+                                </span>
+                              </label>
+                              <div class="d-grid my-3">
+                                <button class="btn btn-primary px-5 py-3">Sign Up</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="container-fluid d-lg-none">
+      <div class="d-flex  align-items-end mt-3">
+        <ul class="d-flex justify-content-end list-unstyled m-0">
+          <li>
+            <a href="account.html" class="me-4">
+              <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="wishlist.html" class="me-4">
+              <iconify-icon icon="mdi:heart" class="fs-4 me-2"></iconify-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+              aria-controls="offcanvasCart">
+              <iconify-icon icon="mdi:cart" class="fs-4 me-2 position-relative"></iconify-icon>
+              <span class="position-absolute translate-middle badge rounded-circle bg-primary text-black">
+                03
+              </span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
 
   <section id="hero">
     <div class="container-fluid">
