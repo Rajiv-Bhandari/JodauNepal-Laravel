@@ -102,51 +102,6 @@
     </div>
   </div>
 
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-    <div class="offcanvas-header">
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-4">
-          <span>Your <span class="text-primary"> cart</span></span>
-          <span class="badge bg-primary rounded-circle pt-2 text-dark">3</span>
-        </h4>
-
-        <ul class="list-group mb-4">
-          <li class="list-group-item d-flex justify-content-between align-items-center py-3 lh-sm">
-            <div>
-              <h6 class="my-0">Marketing Course</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$120</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center py-3 lh-sm">
-            <div>
-              <h6 class="my-0">Strategy Course</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$80</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center py-3 lh-sm">
-            <div>
-              <h6 class="my-0">Digital Course</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$50</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-            <span class="fw-bold">Total (USD)</span>
-            <strong>$250</strong>
-          </li>
-        </ul>
-
-        <div class="d-grid my-5">
-          <button class="btn btn-primary px-5 py-3" type="submit">Continue to checkout</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <nav class="main-menu d-flex navbar fixed-top navbar-expand-lg p-2 py-3 p-lg-4 py-lg-4 ">
     <div class="container-fluid">
@@ -170,24 +125,10 @@
         <div class="offcanvas-body justify-content-end">
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
-   
-
-            
-
-           
-
-          
-
-
-           
-          
 
           <div class="d-none d-lg-flex align-items-center ms-5">
             <ul class="d-flex justify-content-end  list-unstyled m-0">
               <li>
-                
-           
-
               
                 @if (Route::has('login'))
                 <div class="auth-links">
@@ -314,35 +255,7 @@
       </div>
 
     </div>
-    <div class="container-fluid d-lg-none">
-      <div class="d-flex  align-items-end mt-3">
-        <ul class="d-flex justify-content-end list-unstyled m-0">
-          <li>
-            <a href="account.html" class="me-4">
-              <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="wishlist.html" class="me-4">
-              <iconify-icon icon="mdi:heart" class="fs-4 me-2"></iconify-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-              aria-controls="offcanvasCart">
-              <iconify-icon icon="mdi:cart" class="fs-4 me-2 position-relative"></iconify-icon>
-              <span class="position-absolute translate-middle badge rounded-circle bg-primary text-black">
-                03
-              </span>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-    </div>
+ 
   </nav>
 
   <section id="hero">
@@ -351,7 +264,7 @@
         <div class="col-md-8 col-lg-3 offset-md-2 padding-large ps-lg-0 pe-lg-5">
           <h2 class="display-2 fw-semibold">Great Online Platform</h2>
           <p class="secondary-font my-4 pb-2">Looking for skilled technicians to help with your projects? You're in the right place! Our job portal connects you with talented technicians ready to tackle any task, whether it's plumbing, electrical work, carpentry, or more. Post your job, browse profiles, and hire with confidence. Get started today and make your projects a reality!</p>
-  
+          <a href="{{ route('register-technician-form') }}" class="btn btn-dark">Register for Technician</a>
         </div>
         <div class="col-md-6 col-lg-7 d-block d-md-none d-lg-block p-0">
           <img src="{{asset('frontend/images/billboard-img.jpg')}}" alt="img" class="img-fluid">
@@ -453,372 +366,6 @@
     </div>
   </section>
 
-  <section id="register">
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-md-6 ">
-          <img src="images/register-img.png" alt="img" class="img-fluid">
-        </div>
-        <div class="col-md-4 ">
-          <div class="mb-5 mt-5 mt-lg-0">
-            <h2 class="display-5 fw-semibold"> Get Your <span class="text-primary">Skills Certificate</span></h2>
-            <p class="secondary-font">Simple steps to get your quality skills certificate
-              through WorldCourse.</p>
-          </div>
-
-          <form id="form">
-            <input type="text" name="email" placeholder="Write Your Name*" class="form-control w-100 mb-4">
-            <input type="email" name="email" placeholder="Write Your Email Address*" class="form-control w-100 mb-4">
-            <button class="btn btn-primary px-5 py-3 mt-2"> Get Started now</button>
-          </form>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="top-sell" class="padding-medium">
-    <div class="container">
-
-      <div class="text-center mb-5">
-        <h2 class="display-5 fw-semibold">Check our <span class="text-primary">top selling courses</span></h2>
-        <p class="secondary-font">Peoples are not only searching but buying these products.</p>
-      </div>
-
-      <div class="text-center mb-3">
-        <p class="m-0">
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4  active" data-filter="*">All</button>
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4 " data-filter=".digital">Digital
-            marketing</button>
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4 " data-filter=".web">Web design</button>
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4 " data-filter=".photo">Photography</button>
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4 " data-filter=".business">Bussiness</button>
-          <button class="filter-button px-3 py-2 mt-2 rounded-pill me-4 " data-filter=".video">Video editing</button>
-        </p>
-      </div>
-
-      <div class="isotope-container row">
-
-        <div class="item digital col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">12 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item4.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Beginner</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">The Complete Package of Digital Marketing Courses</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">James Willam</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item web col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">10 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item3.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Expert</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Top Marketing Strategy Courses - 15 Courses in 1</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">2D Course</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:half-star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item photo col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">15 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item1.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">All Level</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Digital Marketing Masterclass - Complete Guide</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">Wokka Stary</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item business col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">20 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item2.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Beginner</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Mega Digital Marketing Course A to Z - Full Course</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">Christin Hanby</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:half-star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-line" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item video col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">12 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item5.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Beginner</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">The Complete Package of Digital Marketing Courses</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">James Willam</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item web col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">10 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item6.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Expert</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Top Marketing Strategy Courses - 15 Courses in 1</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">2D Course</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:half-star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-line" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item photo col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">15 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item7.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">All Level</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Digital Marketing Masterclass - Complete Guide</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">Wokka Stary</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item business col-md-4 col-lg-3 my-5">
-          <div class="z-1 position-absolute m-3">
-            <span class="badge text-muted bg-primary">20 Weeks</span>
-          </div>
-          <div class="card position-relative">
-            <a href="courses-details.html"><img src="images/item8.jpg" class="img-fluid rounded-3" alt="image"></a>
-            <div class="card-body p-0">
-
-              <span class="badge text-muted bg-success mt-3 mb-1">Beginner</span>
-
-              <a href="courses-details.html">
-                <h5 class="py-2 m-0">Mega Digital Marketing Course A to Z - Full Course</h5>
-              </a>
-
-              <div class="card-text">
-                <span class="rating d-flex align-items-center mb-2">
-                  <p class="text-muted fw-semibold m-0 me-2">Christin Hanby</p>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:half-star-solid" class="text-primary"></iconify-icon>
-                </span>
-
-                <h4 class=" text-primary">$180.00 <span
-                    class="fs-6 text-black opacity-25 text-decoration-line-through">240.00</span></h4>
-
-                <div class="d-flex flex-wrap mt-2">
-                  <a href="#" class=" btn btn-outline-dark text-capitalize me-2 px-4 py-3">Enroll Now</a>
-                  <a href="#" class=" btn btn-outline-dark text-capitalize ">
-                    <iconify-icon icon="mdi:heart-outline" class="fs-5 pt-1"></iconify-icon>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-    </div>
-  </section>
-
   <section id="achivement" style="background-color: #f5f5f5;">
     <div class="container padding-medium">
       <div class="row">
@@ -860,7 +407,7 @@
   <section id="testimonial" style="background-image:url(images/background-img.jpg); background-repeat: no-repeat; ">
     <div class="container padding-medium">
       <div class="text-center">
-        <h2 class="display-5 fw-semibold">see what our <span class="text-primary"> learners say</span></h2>
+        <h2 class="display-5 fw-semibold">see what our <span class="text-primary"> users say</span></h2>
         <p class="secondary-font">Here we got the real proof to express our work. Our learners expressed our work.</p>
       </div>
       <div class="row">
@@ -921,13 +468,13 @@
         <div class="col-md-4 my-3">
           <h5 class="text-uppercase fw-bold mb-4">Contact us</h5>
           <p><iconify-icon class="social-icon text-primary fs-5 me-2" icon="mdi:location"
-              style="vertical-align:text-bottom"></iconify-icon> <span class="fw-bold">Address: </span> 30 E Lake St,
-            Chicago, USA</p>
+              style="vertical-align:text-bottom"></iconify-icon> <span class="fw-bold">Address: </span> Swoyambhu,
+            Kathmandu, Nepal</p>
           <p><iconify-icon class="social-icon text-primary fs-5 me-2" icon="solar:phone-bold"
-              style="vertical-align:text-bottom"></iconify-icon> <span class="fw-bold">Phone: </span> (510) 710-3464</p>
+              style="vertical-align:text-bottom"></iconify-icon> <span class="fw-bold">Phone: </span> 9802263597</p>
           <p><iconify-icon class="social-icon text-primary fs-5 me-2" icon="ic:baseline-email"
               style="vertical-align:text-bottom"></iconify-icon> <span class="fw-bold">Email: </span>
-            info@worldcourse.com
+            bhandarirajiv22@gmail.com
           </p>
         </div>
         <div class="col-md-2 my-3">
@@ -935,19 +482,19 @@
             <h5 class="text-uppercase fw-bold mb-4">Links</h5>
             <ul class="menu-list list-unstyled">
               <li class="menu-item mb-2">
-                <a href="#" class="footer-link">HEllo Rajiv</a>
+                <a href="{{ route('login') }}" class="footer-link">Login</a>
               </li>
               <li class="menu-item mb-2">
-                <a href="#" class="footer-link">About us</a>
+                <a href="{{ route('register') }}" class="footer-link">Regsiter</a>
               </li>
               <li class="menu-item mb-2">
-                <a href="#" class="footer-link">Courses</a>
+                <a href="{{ route('register-technician-form') }}" class="footer-link">Join as our Technician</a>
               </li>
               <li class="menu-item mb-2">
-                <a href="#" class="footer-link">Blogs</a>
+                <a href="{{ route('user.booking') }}" class="footer-link">Your Bookings</a>
               </li>
               <li class="menu-item mb-2">
-                <a href="#" class="footer-link">Contact</a>
+                <a href="{{ route('user.home') }}" class="footer-link">Analytics</a>
               </li>
             </ul>
           </div>
@@ -1009,11 +556,11 @@
     <div class="container py-3">
       <div class="row mt-3">
         <div class="col-md-6 copyright">
-          <p>© 2024 WorldCourse. All rights reserved.</p>
+          <p>© 2024 Jodau Nepal. All rights reserved.</p>
         </div>
         <div class="col-md-6 text-md-end">
-          <p>Free HTML Template by <a href="https://templatesjungle.com/" target="_blank"
-              class="text-decoration-underline fw-bold"> TemplatesJungle</a> </p>
+          <p>Version: <a target="_blank"
+              class="text-decoration-underline fw-bold"> 1.0</a> </p>
         </div>
       </div>
     </div>
