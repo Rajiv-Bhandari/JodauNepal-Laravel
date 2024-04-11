@@ -350,18 +350,8 @@
       <div class="row">
         <div class="col-md-8 col-lg-3 offset-md-2 padding-large ps-lg-0 pe-lg-5">
           <h2 class="display-2 fw-semibold">Great Online Platform</h2>
-          <p class="secondary-font my-4 pb-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-            fugit at quia
-            tenetur expedita, consequuntur aspernatur explicabo earum odio.</p>
-          <div>
-            <form id="form" class="d-flex justify-content-between position-relative">
-              <input type="text" name="email" placeholder="Search Your Courses ..." class="form-control w-100">
-              <button class="btn btn-primary px-4 py-2 position-absolute end-0"
-                style="height: -webkit-fill-available;"><iconify-icon icon="ion:search" class="fs-4 py-1"
-                  style="vertical-align: middle;"></iconify-icon></button>
-            </form>
-
-          </div>
+          <p class="secondary-font my-4 pb-2">Looking for skilled technicians to help with your projects? You're in the right place! Our job portal connects you with talented technicians ready to tackle any task, whether it's plumbing, electrical work, carpentry, or more. Post your job, browse profiles, and hire with confidence. Get started today and make your projects a reality!</p>
+  
         </div>
         <div class="col-md-6 col-lg-7 d-block d-md-none d-lg-block p-0">
           <img src="{{asset('frontend/images/billboard-img.jpg')}}" alt="img" class="img-fluid">

@@ -4,7 +4,7 @@
 
     <div class="content">
         <section class="content-header">
-            <!-- Your existing content header goes here -->
+            
         </section>
         <section class="content">
             <div class="container-fluid">
