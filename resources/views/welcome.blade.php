@@ -408,7 +408,7 @@
 
               <div class="swiper-slide">
                 <div class="text-center my-4">
-                  <img src="images/reviewer-1.jpg" alt="img" class="img-fluid rounded-circle">
+                  <img src="/images/profile_pictures/1711858742.jpeg" alt="img" class="img-fluid rounded-circle" style="width:250px; height:250px; border-radius:50%; ">
                   <h5 class="m-0 mt-2">Rajiv Bhandari</h5>
                   <p class="text-muted">Php Developer</p>
                   <p class="lh-lg fw-bold text-black-50">"The job portal's intuitive interface streamlined my technician search, offering a seamless experience from start to finish.
@@ -418,7 +418,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="text-center my-4">
-                  <img src="images/reviewer-2.jpg" alt="img" class="img-fluid rounded-circle">
+                  <img src="/images/profile_pictures/1704521231.jpeg" alt="img" class="img-fluid rounded-circle" style="width:250px; height:250px; border-radius:50%; ">
                   <h5 class="m-0 mt-2">Sujash Joshi</h5>
                   <p class="text-muted">Digital Marketer</p>
                   <p class="lh-lg fw-bold text-black-50">"Navigating through technician profiles was effortless, thanks to the portal's user-friendly layout.
@@ -428,7 +428,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="text-center my-4">
-                  <img src="images/reviewer-3.jpg" alt="img" class="img-fluid rounded-circle">
+                <img src="/images/profile_pictures/1706613532.jpg" alt="img" class="img-fluid rounded-circle" style="width:250px; height:250px; border-radius:50%; ">
                   <h5 class="m-0 mt-2">Min Chettri</h5>
                   <p class="text-muted">Photographer</p>
                   <p class="lh-lg fw-bold text-black-50">"The job portal's search filters allowed me to find technicians tailored to my specific needs with ease.
