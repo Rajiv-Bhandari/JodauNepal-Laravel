@@ -288,9 +288,8 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">Professional Instruction</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Expert Technicians</h4>
+              <p>Our highly skilled professionals bring extensive expertise to every job, ensuring precise and effective solutions tailored to your needs.</p>
             </div>
           </div>
         </div>
@@ -301,9 +300,8 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">Certified Courses</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Reliable Service</h4>
+              <p>Count on us for trustworthy assistance delivered with a commitment to reliability and integrity, providing peace of mind for every task.</p>
             </div>
           </div>
         </div>
@@ -314,9 +312,9 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">Learn Courses Online</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Transparent Pricing</h4>
+              <p>We believe in transparent pricing, offering clear and upfront cost estimates without any hidden fees, so you know exactly what to expect.
+              </p>
             </div>
           </div>
         </div>
@@ -327,9 +325,9 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">5000+ Online Courses</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Quick Response</h4>
+              <p>With our swift response times, we're always ready to address your technical issues promptly, minimizing downtime and inconvenience.
+              </p>
             </div>
           </div>
         </div>
@@ -340,9 +338,8 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">Free Online Ebooks</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Quality Workmanship</h4>
+              <p>Experience our dedication to quality workmanship, delivering exceptional service that meets the highest standards for lasting results you can rely on.</p>
             </div>
           </div>
         </div>
@@ -353,9 +350,8 @@
             </div>
 
             <div class="ps-3">
-              <h4 class="py-2 m-0">Global Location</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sint dolores cupiditate, commodi
-                voluptatem corrupti voluptatibus quisquam officiis quod id.</p>
+              <h4 class="py-2 m-0">Customer Satisfaction</h4>
+              <p>Your satisfaction is our priority, and we go above and beyond to ensure you're completely satisfied with every aspect of our service, striving to exceed your expectations.</p>
             </div>
           </div>
         </div>
@@ -366,41 +362,36 @@
     </div>
   </section>
 
-  <section id="achivement" style="background-color: #f5f5f5;">
+  <section id="benefits" style="background-color: #f5f5f5;">
     <div class="container padding-medium">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="text-center">
-            <img src="images/topic.png" alt="img" class="img-fluid">
-            <h4 class="py-2 mt-3 m-0">300+ Topics</h4>
-            <p class="text-uppercase">choose your choice</p>
-          </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="text-center">
+                    <h4 class="py-2 mt-3 m-0">Skilled Professionals</h4>
+                    <p class="text-uppercase">Highly trained experts</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <h4 class="py-2 mt-3 m-0">Dependable Support</h4>
+                    <p class="text-uppercase">Reliable assistance</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <h4 class="py-2 mt-3 m-0">Transparent Estimates</h4>
+                    <p class="text-uppercase">Clear cost breakdowns</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <h4 class="py-2 mt-3 m-0">Prompt Solutions</h4>
+                    <p class="text-uppercase">Quick problem resolution</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-          <div class="text-center">
-            <img src="images/student.png" alt="img" class="img-fluid">
-            <h4 class="py-2 mt-3 m-0">1000+ Students</h4>
-            <p class="text-uppercase">bright future</p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="text-center">
-            <img src="images/instruction.png" alt="img" class="img-fluid">
-            <h4 class="py-2 mt-3 m-0">300+ Instructors</h4>
-            <p class="text-uppercase">trained professionals</p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="text-center">
-            <img src="images/award.png" alt="img" class="img-fluid">
-            <h4 class="py-2 mt-3 m-0">120+ Awards</h4>
-            <p class="text-uppercase">hard process</p>
-          </div>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
 
  
 
@@ -418,34 +409,31 @@
               <div class="swiper-slide">
                 <div class="text-center my-4">
                   <img src="images/reviewer-1.jpg" alt="img" class="img-fluid rounded-circle">
-                  <h5 class="m-0 mt-2">Recco Gracia</h5>
-                  <p class="text-muted">Web Developer</p>
-                  <p class="lh-lg fw-bold text-black-50">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea. Consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt enim ad minim veniam”</p>
+                  <h5 class="m-0 mt-2">Rajiv Bhandari</h5>
+                  <p class="text-muted">Php Developer</p>
+                  <p class="lh-lg fw-bold text-black-50">"The job portal's intuitive interface streamlined my technician search, offering a seamless experience from start to finish.
+                    Communication with technicians was hassle-free, thanks to the portal's efficient messaging system.
+                    I appreciated the platform's attention to detail, ensuring a smooth hiring process and quality service."</p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="text-center my-4">
                   <img src="images/reviewer-2.jpg" alt="img" class="img-fluid rounded-circle">
-                  <h5 class="m-0 mt-2">Georgie Maggie</h5>
+                  <h5 class="m-0 mt-2">Sujash Joshi</h5>
                   <p class="text-muted">Digital Marketer</p>
-                  <p class="lh-lg fw-bold text-black-50">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea. Consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt enim ad minim veniam”</p>
+                  <p class="lh-lg fw-bold text-black-50">"Navigating through technician profiles was effortless, thanks to the portal's user-friendly layout.
+                    The portal's diverse range of skilled technicians provided ample options to fulfill my project requirements.
+                    I found the portal's verification process reassuring, ensuring credibility and reliability in the technicians I hired."</p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="text-center my-4">
                   <img src="images/reviewer-3.jpg" alt="img" class="img-fluid rounded-circle">
-                  <h5 class="m-0 mt-2">Emmy Watson</h5>
+                  <h5 class="m-0 mt-2">Min Chettri</h5>
                   <p class="text-muted">Photographer</p>
-                  <p class="lh-lg fw-bold text-black-50">“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea. Consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt enim ad minim veniam”</p>
+                  <p class="lh-lg fw-bold text-black-50">"The job portal's search filters allowed me to find technicians tailored to my specific needs with ease.
+                    I was impressed by the prompt responses and professionalism of the technicians I connected with through the portal.
+                    The feedback section provided valuable insights, helping me make informed decisions and choose the right technician for my project."</p>
                 </div>
               </div>
 

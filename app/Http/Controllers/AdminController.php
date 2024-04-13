@@ -17,8 +17,8 @@ class AdminController extends Controller
 
     public function welcome()
     {
-        $categories = Category::all();
-        return view('welcome', compact('categories'));
+        // $categories = Category::all();
+        return view('welcome');
     }
     public function dashboard(Request $request)
     {
