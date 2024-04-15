@@ -76,9 +76,12 @@
     </h2>
 
     @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
-        <a href="{{ route('user.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger">Cancel</a>
-        <!-- <button id="payment-button">Pay with Khalti</button> -->
+        <div style="text-align: right;">
+            <a href="{{ route('user.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger" style="margin-right:10px;">Cancel</a>
+            <button id="payment-button" style="background-color: purple; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Pay with Khalti</button>
+        </div>
     @endif
+
 </div>
 
 <div class="technicians-list">
@@ -198,12 +201,12 @@
 
 </script>
 
-<!-- <script>
+<script>
     var config = {
-        "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+        "publicKey": "test_public_key_d8e696fa836245d8b3f070425cb45208",
         "productIdentity": "1234567890",
         "productName": "Dragon",
-        "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+        "productUrl": "http://127.0.0.1:8000/user/booking/1/details",
         "paymentPreference": [
             "KHALTI",
             "EBANKING",
@@ -213,6 +216,7 @@
             ],
         "eventHandler": {
             onSuccess (payload) {
+                console.log("inside success function");
                 console.log(payload);
             },
             onError (error) {
@@ -227,9 +231,9 @@
     var checkout = new KhaltiCheckout(config);
     var btn = document.getElementById("payment-button");
     btn.onclick = function () {
-        checkout.show({amount: 1000});
+        checkout.show({amount: 100000});
     }
-</script> -->
+</script>
 
 
 @endsection

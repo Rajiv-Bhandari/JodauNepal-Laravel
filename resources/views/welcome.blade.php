@@ -158,96 +158,6 @@
             @endif
         </li>
             </ul>
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="tabs-listing mt-4">
-                        <nav>
-                          <div class="nav nav-tabs d-flex justify-content-center border-0" id="nav-tab" role="tablist">
-                            <button class="btn btn-outline-primary px-5 py-3 me-3 active" id="nav-sign-in-tab"
-                              data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab"
-                              aria-controls="nav-sign-in" aria-selected="true">Log In</button>
-                            <button class="btn btn-outline-primary px-5 py-3" id="nav-register-tab" data-bs-toggle="tab"
-                              data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register"
-                              aria-selected="false">Sign Up</button>
-                          </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                          <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
-                            aria-labelledby="nav-sign-in-tab">
-                            <form id="form1" class="form-group flex-wrap p-3 ">
-                              <div class="form-input col-lg-12 my-4">
-                                <label for="email"
-                                  class="form-label fs-6 text-uppercase fw-bold text-black">Email
-                                  Address</label>
-                                <input type="email" id="email" name="email" :value="old('email')" placeholder="Email" required autofocus autocomplete="username"
-                                  class="form-control ps-3">
-                                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                              </div>
-                              <div class="form-input col-lg-12 my-4">
-                                <label for="password"
-                                  class="form-label  fs-6 text-uppercase fw-bold text-black">Password</label>
-                                <input id="password"  placeholder="Password"  type="password"
-                                name="password" required autocomplete="current-password"
-                                  class="form-control ps-3" aria-describedby="passwordHelpBlock">
-                                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
-                                <div id="passwordHelpBlock" class="form-text text-center">
-                                  <a href="{{ route('password.request') }}" class=" password">{{ __('Forgot your password?') }}</a>
-                                </div>
-
-                              </div>
-                              <label class="py-3" for="remember_me">
-                                <input type="checkbox" id="remember_me" required="" class="d-inline" name="remember">
-                                <span class="label-body text-black">{{ __('Remember me') }}</span>
-                              </label>
-                              <div class="d-grid my-3">
-                                <button class="btn btn-primary px-5 py-3" href="{{ route('login') }}">{{ __('Log in') }}</button>
-                              </div>
-                            </form>
-                          </div>
-                          <div class="tab-pane fade" id="nav-register" role="tabpanel"
-                            aria-labelledby="nav-register-tab">
-                            <form id="form2" class="form-group flex-wrap p-3 ">
-                              <div class="form-input col-lg-12 my-4">
-                                <label for="exampleInputEmail2"
-                                  class="form-label fs-6 text-uppercase fw-bold text-black">Email
-                                  Address</label>
-                                <input type="text" id="exampleInputEmail2" name="email" placeholder="Email"
-                                  class="form-control ps-3">
-                              </div>
-                              <div class="form-input col-lg-12 my-4">
-                                <label for="inputPassword2"
-                                  class="form-label  fs-6 text-uppercase fw-bold text-black">Password</label>
-                                <input type="password" id="inputPassword2" placeholder="Password"
-                                  class="form-control ps-3" aria-describedby="passwordHelpBlock">
-                              </div>
-                              <label class="py-3">
-                                <input type="checkbox" required="" class="d-inline">
-                                <span class="label-body text-black">I agree to the <a href="#"
-                                    class="text-black password border-bottom">Privacy Policy</a>
-                                </span>
-                              </label>
-                              <div class="d-grid my-3">
-                                <button class="btn btn-primary px-5 py-3">Sign Up</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              
-            </ul>
 
           </div>
 
@@ -392,8 +302,6 @@
         </div>
     </div>
 </section>
-
- 
 
   <section id="testimonial" style="background-image:url(images/background-img.jpg); background-repeat: no-repeat; ">
     <div class="container padding-medium">
