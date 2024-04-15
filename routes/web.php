@@ -35,6 +35,7 @@ Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
     require __DIR__ . '/web/user.php';
     require __DIR__ . '/web/booking.php';
     require __DIR__ . '/web/comment.php';
+    Route::post('/khaltipayment', [PaymentController::class, 'khaltiPayment'])->name('khaltipayment');
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {

@@ -198,12 +198,14 @@
         });
     });
 });
-
 </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 <script>
     var config = {
-        "publicKey": "test_public_key_d8e696fa836245d8b3f070425cb45208",
+        "publicKey": "test_public_key_850bbcc5a5074adb8c92a79e5bf21dc8",
         "productIdentity": "1234567890",
         "productName": "Dragon",
         "productUrl": "http://127.0.0.1:8000/user/booking/1/details",
@@ -213,11 +215,23 @@
             "MOBILE_BANKING",
             "CONNECT_IPS",
             "SCT",
-            ],
+        ],
         "eventHandler": {
             onSuccess (payload) {
                 console.log("inside success function");
                 console.log(payload);
+                // Send payload data to PaymentController using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/khaltipayment',
+                    data: payload,
+                    success: function(response) {
+                        console.log('Payment data sent to PaymentController.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error sending payment data:', error);
+                    }
+                });
             },
             onError (error) {
                 console.log(error);
@@ -231,7 +245,7 @@
     var checkout = new KhaltiCheckout(config);
     var btn = document.getElementById("payment-button");
     btn.onclick = function () {
-        checkout.show({amount: 100000});
+        checkout.show({amount: 1000});
     }
 </script>
 
