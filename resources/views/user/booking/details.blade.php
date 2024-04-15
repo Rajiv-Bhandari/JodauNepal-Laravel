@@ -224,7 +224,12 @@
                 $.ajax({
                     type: 'POST',
                     url: '/khaltipayment',
-                    data: payload,
+                    data: {
+                        // Include CSRF token in the data sent to the server
+                        '_token': '{{ csrf_token() }}',
+                        // Include other payload data as needed
+                        'payload': payload
+                    },
                     success: function(response) {
                         console.log('Payment data sent to PaymentController.');
                     },
