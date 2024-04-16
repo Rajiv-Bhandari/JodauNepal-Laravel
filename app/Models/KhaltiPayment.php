@@ -21,5 +21,6 @@ class KhaltiPayment extends Model
         'widget_id',
         'paid_by',
         'paid_to',
+        'booking_id'
     ];
 }
