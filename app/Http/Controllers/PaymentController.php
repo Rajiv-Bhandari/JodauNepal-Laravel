@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KhaltiPayment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
     public function khaltiPayment(Request $request)
     {
         $args = http_build_query(array(
-            'token' => $request->token,
+            'token' =>$request->payload['token'],
             'amount'  => 1000
           ));
           
@@ -34,7 +35,39 @@ class PaymentController extends Controller
 
           if($status_code == 200)
           {
-            return response()->json(['message' => 'Payment data stored successfully'], 200);
+            $payload = $request->payload;
+            $technicianId = $request->technician_id;
+            $bookingId = $request->booking_id;
+
+            $validator = Validator::make($payload, [
+                'amount' => 'required', 
+                'idx' => 'required',
+                'mobile' => 'required',
+                'product_identity' => 'required',
+                'product_name' => 'required',
+                'product_url' => 'required',
+                'token' => 'required',
+                'widget_id' => 'required',
+            ]);
+        
+            if ($validator->fails()) {
+                return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 400);
+            }
+        
+            $payment = KhaltiPayment::create([
+                'amount_in_paisa' => $payload['amount'],
+                'idx' => $payload['idx'],
+                'mobile' => $payload['mobile'],
+                'product_identity' => $payload['product_identity'],
+                'product_name' => $payload['product_name'],
+                'product_url' => $payload['product_url'],
+                'token' => $payload['token'],
+                'widget_id' => $payload['widget_id'],
+                'paid_by' => auth()->id(),
+                'paid_to' => $technicianId,
+            ]);
+
+            return response()->json(['message' => 'Payment verified and stored successfully'], 200);
           }
           else
           {
@@ -44,29 +77,7 @@ class PaymentController extends Controller
                 'response' => $response
             ], 400);    
           }
-        // $validatedData = $request->validate([
-        //     'amount' => 'required', 
-        //     'idx' => 'required',
-        //     'mobile' => 'required',
-        //     'product_identity' => 'required',
-        //     'product_name' => 'required',
-        //     'product_url' => 'required',
-        //     'token' => 'required',
-        //     'widget_id' => 'required',
-        // ]);
 
-        // $payment = KhaltiPayment::create([
-        //     'amount_in_paisa' => $validatedData['amount'],
-        //     'idx' => $validatedData['idx'],
-        //     'mobile' => $validatedData['mobile'],
-        //     'product_identity' => $validatedData['product_identity'],
-        //     'product_name' => $validatedData['product_name'],
-        //     'product_url' => $validatedData['product_url'],
-        //     'token' => $validatedData['token'],
-        //     'widget_id' => $validatedData['widget_id'],
-        //     'paid_by' => auth()->id(),
-        //     'paid_to' => 1,
-        // ]);
 
         // return response()->json(['message' => 'Payment data stored successfully'], 200);
     }

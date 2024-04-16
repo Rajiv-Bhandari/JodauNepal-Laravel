@@ -227,7 +227,9 @@
                     url: '/khaltipayment',
                     data: {
                         '_token': '{{ csrf_token() }}',
-                        'payload': payload
+                        'payload': payload,
+                        'technician_id': {{ $booking->technician->id }},
+                        'booking_id' : {{ $booking->booking_code }}
                     },
                     success: function(response) {
                         console.log('Payment data sent to PaymentController.');
