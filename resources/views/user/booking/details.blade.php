@@ -78,7 +78,9 @@
     @if($booking->status != \App\Enums\BookingStatus::Completed && $booking->status != \App\Enums\BookingStatus::Cancelled)
         <div style="text-align: right;">
             <a href="{{ route('user.booking.cancel', ['id' => $booking->id]) }}" class="btn btn-danger" style="margin-right:10px;">Cancel</a>
-            <button id="payment-button" style="background-color: purple; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Pay with Khalti</button>
+            @if($booking->advance == 0)
+                <button id="payment-button" style="background-color: purple; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Pay with Khalti</button>
+            @endif
         </div>
     @endif
 
