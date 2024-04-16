@@ -233,6 +233,7 @@
                     },
                     success: function(response) {
                         console.log('Payment data sent to PaymentController.');
+                        // window.location.href = '{{ route("khalti.verified") }}';
                     },
                     error: function(xhr, status, error) {
                         console.error('Error sending payment data:', error);

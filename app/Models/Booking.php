@@ -22,6 +22,7 @@ class Booking extends Model
         'date_time',
         'status',
         'total_cost',
+        'advance',
         'problem_statement',
         'rating',
     ];

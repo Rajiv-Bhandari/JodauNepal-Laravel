@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\KhaltiPayment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Booking;
 
 class PaymentController extends Controller
 {
@@ -68,6 +69,16 @@ class PaymentController extends Controller
                 'booking_id' => $bookingId
             ]);
 
+            $booking = Booking::find($bookingId);
+            if ($booking) 
+            {
+              $advanceAmount = $payload['amount'] / 100;
+          
+              $booking->advance = $advanceAmount;
+          
+              $booking->save();
+            }
+
             return response()->json(['message' => 'Payment verified and stored successfully'], 200);
           }
           else
@@ -78,8 +89,10 @@ class PaymentController extends Controller
                 'response' => $response
             ], 400);    
           }
+    }
 
-
-        // return response()->json(['message' => 'Payment data stored successfully'], 200);
+    public function khaltiVerified()
+    {
+      return redirect()->back(); 
     }
 }
