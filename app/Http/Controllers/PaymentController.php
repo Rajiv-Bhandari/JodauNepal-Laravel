@@ -65,6 +65,7 @@ class PaymentController extends Controller
                 'widget_id' => $payload['widget_id'],
                 'paid_by' => auth()->id(),
                 'paid_to' => $technicianId,
+                'booking_id' => $bookingId
             ]);
 
             return response()->json(['message' => 'Payment verified and stored successfully'], 200);

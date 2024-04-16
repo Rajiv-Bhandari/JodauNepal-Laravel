@@ -229,7 +229,7 @@
                         '_token': '{{ csrf_token() }}',
                         'payload': payload,
                         'technician_id': {{ $booking->technician->id }},
-                        'booking_id' : {{ $booking->booking_code }}
+                        'booking_id' : {{ $booking->id }}
                     },
                     success: function(response) {
                         console.log('Payment data sent to PaymentController.');
