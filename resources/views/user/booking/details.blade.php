@@ -220,14 +220,13 @@
             onSuccess (payload) {
                 console.log("inside success function");
                 console.log(payload);
+
                 // Send payload data to PaymentController using AJAX
                 $.ajax({
                     type: 'POST',
                     url: '/khaltipayment',
                     data: {
-                        // Include CSRF token in the data sent to the server
                         '_token': '{{ csrf_token() }}',
-                        // Include other payload data as needed
                         'payload': payload
                     },
                     success: function(response) {
