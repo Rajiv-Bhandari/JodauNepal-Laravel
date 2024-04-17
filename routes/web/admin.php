@@ -12,3 +12,4 @@ Route::get('/technician/approve/{id}', [TechnicianController::class, 'approve'])
 Route::get('/technician/reject/{id}', [TechnicianController::class, 'reject'])->name('technician.reject');
 Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
 Route::get('/admin-dashboard', [AdminController::class, 'home'])->name('admin.home');
+Route::get('/admin/payment', [AdminController::class, 'Payments'])->name('payment.admin');

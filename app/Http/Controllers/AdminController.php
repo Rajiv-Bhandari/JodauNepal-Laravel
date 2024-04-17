@@ -7,6 +7,7 @@ use App\Models\Technician;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\KhaltiPayment;
 use App\Enums\TechnicianStatus;
 use App\Enums\BookingStatus;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -89,7 +90,12 @@ class AdminController extends Controller
         return view('admin.home', compact('category', 'users','pending','approved','rejected','totalbooking','pieChartData', 'totalUsersLastFiveWeeks', 'labels'));
     }
     
+    public function Payments()
+    {
+        $payment = KhaltiPayment::all();
     
+        return view('admin.payment.index', compact('payment'));
+    }
     
 }
 

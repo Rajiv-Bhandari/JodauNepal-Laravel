@@ -68,6 +68,16 @@
                     </a>
                 </li>
 
+                <li class="nav-item m-1">
+                    <a href="{{route('payment.admin')}}"
+                        class="nav-link {{ Route::is('payment.admin') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-money-bill-alt m-1 p-1"></i>
+                        <p>
+                            Payments
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
 
