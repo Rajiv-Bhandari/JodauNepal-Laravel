@@ -9,4 +9,5 @@ Route::get('/user/booking/{id}/details', [BookingController::class, 'details'])-
 Route::get('/user/booking/success/{bookingCode}', [BookingController::class, 'bookingsuccessful'])->name('user.bookingsuccessful');
 Route::get('/user/booking/cancel/{id}', [BookingController::class, 'cancelBooking'])->name('user.booking.cancel');
 Route::post('/user/booking/rate/{id}',  [BookingController::class, 'rateTechnician'])->name('user.booking.rate');
+Route::get('/user/payment', [BookingController::class, 'userPayment'])->name('user.payment');
 

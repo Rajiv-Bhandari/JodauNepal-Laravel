@@ -36,6 +36,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ request()->is('user.payment.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('user.payment') }}">
+            <i class="mdi mdi-credit-card menu-icon"></i>
+            <span class="menu-title">Payments</span>
+        </a>
+    </li>
+
       <li class="nav-item">
         <a class="nav-link" href="{{route('profile.user')}}">
           <i class="mdi mdi-account-circle menu-icon"></i>

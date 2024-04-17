@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Technician;
 use App\Models\TechnicianTimeslot;
+use App\Models\KhaltiPayment;
 use App\Enums\BookingStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,14 @@ class BookingController extends Controller
         $bookings = Booking::where('user_id', $userId)->get();
     
         return view('user.booking.index', compact('bookings'));
+    }
+
+    public function userPayment()
+    {
+        $userId = Auth::id();
+        $payment = KhaltiPayment::where('paid_by', $userId)->get();
+    
+        return view('user.payment.index', compact('payment'));
     }
 
     public function details($id)
