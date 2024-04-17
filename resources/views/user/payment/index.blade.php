@@ -33,7 +33,7 @@
                                         <td>{{$payment->booking_id}}</td>
                                         <td>{{$payment->amount_in_paisa}}</td>
                                         <td>{{$payment->mobile}}</td>
-                                        <td>{{$payment->paid_to}}</td>
+                                        <td>{{$payment->technician->fullname}}</td>
                                         <td>{{$payment->created_at}}</td>
                                     </tr>
                                     @endforeach

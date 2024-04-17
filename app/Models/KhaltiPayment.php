@@ -23,4 +23,9 @@ class KhaltiPayment extends Model
         'paid_to',
         'booking_id'
     ];
+
+    public function technician()
+    {
+        return $this->belongsTo(Technician::class, 'paid_to');
+    }    
 }
