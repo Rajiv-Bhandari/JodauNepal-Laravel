@@ -14,7 +14,7 @@ class PaymentController extends Controller
     {
         $args = http_build_query(array(
             'token' =>$request->payload['token'],
-            'amount'  => 1000
+            'amount'  => $request->payload['amount']
           ));
           
           $url = "https://khalti.com/api/v2/payment/verify/";
@@ -89,10 +89,5 @@ class PaymentController extends Controller
                 'response' => $response
             ], 400);    
           }
-    }
-
-    public function khaltiVerified()
-    {
-      return redirect()->back(); 
     }
 }

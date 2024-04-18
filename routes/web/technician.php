@@ -24,3 +24,5 @@ Route::post('/technician/booking/{id}/complete', [BookingController::class, 'com
 // technician profile
 Route::get('/technician/profile', [TechnicianController::class, 'technicianProfile'])->name('technicianprofile');
 Route::put('/technician/profile/update', [TechnicianController::class, 'technicianProfileUpdate'])->name('technicianprofile.update');
+
+Route::get('/technician/payment', [TechnicianController::class, 'technicianPayment'])->name('technicianpayment');

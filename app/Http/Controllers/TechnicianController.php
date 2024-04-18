@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Booking;
 use App\Models\TechnicianTimeSlot;
+use App\Models\KhaltiPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\TechnicianStatus;
@@ -161,6 +162,19 @@ class TechnicianController extends Controller
         $notifications = $this->getNotifications($technicianId);
 
         return view('technician.timeslot.index', compact('timeslot','notifications'));
+    }
+
+    public function technicianPayment()
+    {
+        $userId = Auth::id();
+        $technician = Technician::where('user_id', $userId)->first();
+    
+        $technicianId = $technician->id;
+    
+        $payment = KhaltiPayment::where('paid_to', $technicianId)->get();
+        $notifications = $this->getNotifications($technicianId);
+
+        return view('technician.payment.index', compact('notifications','payment'));
     }
 
     public function timeslotcreate()

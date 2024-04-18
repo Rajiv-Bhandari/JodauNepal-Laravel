@@ -5,6 +5,7 @@ use App\Enums\UserType;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::middleware(['auth', 'userType:' . UserType::User])->group(function () {
     require __DIR__ . '/web/booking.php';
     require __DIR__ . '/web/comment.php';
     Route::post('/khaltipayment', [PaymentController::class, 'khaltiPayment'])->name('khaltipayment');
-    Route::get('/khalti/verified', [PaymentController::class, 'khaltiVerified'])->name('khalti.verified');
+    Route::get('/khalti/verified', [BookingController::class, 'khaltiVerified'])->name('khalti.verified');
 });
 
 Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
@@ -49,5 +50,5 @@ Route::middleware(['auth', 'userType:' . UserType::Admin])->group(function () {
 
 Route::middleware(['auth', 'userType:' . UserType::Technician])->group(function () {
     require __DIR__ . '/web/technician.php';
-
+    
 });

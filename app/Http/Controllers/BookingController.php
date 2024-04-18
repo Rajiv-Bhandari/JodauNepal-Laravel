@@ -11,6 +11,7 @@ use App\Models\KhaltiPayment;
 use App\Enums\BookingStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookingController extends Controller
 {
@@ -72,8 +73,15 @@ class BookingController extends Controller
     {
         $userId = Auth::id();
         $bookings = Booking::where('user_id', $userId)->get();
-    
+        
         return view('user.booking.index', compact('bookings'));
+    }
+
+    public function khaltiVerified()
+    {
+        Alert::toast("Payment Successful", 'success');
+
+        return redirect()->back(); 
     }
 
     public function userPayment()

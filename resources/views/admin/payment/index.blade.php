@@ -29,7 +29,7 @@
                                     <tr>
                                         <th>S.N</th>
                                         <th>Booking Id</th>
-                                        <th>Amount In Paisa</th>
+                                        <th>Amount (Rs.)</th>
                                         <th>Mobile Number</th>
                                         <th>Paid To</th>
                                         <th>Transaction Date</th>
@@ -40,7 +40,7 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$payment->booking_id}}</td>
-                                        <td>{{$payment->amount_in_paisa}}</td>
+                                        <td>{{$payment->amount_in_paisa / 100 }}</td>
                                         <td>{{$payment->mobile}}</td>
                                         <td>{{$payment->technician->fullname}}</td>
                                         <td>{{$payment->created_at}}</td>

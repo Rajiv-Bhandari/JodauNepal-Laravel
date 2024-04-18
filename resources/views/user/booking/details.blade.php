@@ -236,7 +236,7 @@
                     },
                     success: function(response) {
                         console.log('Payment data sent to PaymentController.');
-                        // window.location.href = '{{ route("khalti.verified") }}';
+                        window.location.href = '{{ route("khalti.verified") }}';
                     },
                     error: function(xhr, status, error) {
                         console.error('Error sending payment data:', error);
@@ -255,7 +255,7 @@
     var checkout = new KhaltiCheckout(config);
     var btn = document.getElementById("payment-button");
     btn.onclick = function () {
-        checkout.show({amount: 1000});
+        checkout.show({amount: 20000});
     }
 </script>
 

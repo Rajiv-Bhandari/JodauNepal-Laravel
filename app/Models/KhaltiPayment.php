@@ -27,5 +27,10 @@ class KhaltiPayment extends Model
     public function technician()
     {
         return $this->belongsTo(Technician::class, 'paid_to');
-    }    
+    } 
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'paid_by');
+    }
 }
