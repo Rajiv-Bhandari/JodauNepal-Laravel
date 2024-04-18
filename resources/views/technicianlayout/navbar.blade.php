@@ -54,3 +54,20 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notificationsDropdown = document.getElementById('notificationsDropdown');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+
+        notificationsDropdown.addEventListener('click', function(event) {
+            event.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>

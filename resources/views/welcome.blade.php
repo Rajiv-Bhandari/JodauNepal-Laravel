@@ -336,7 +336,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="text-center my-4">
-                <img src="/images/profile_pictures/1706613532.jpg" alt="img" class="img-fluid rounded-circle" style="width:250px; height:250px; border-radius:50%; ">
+                <img src="/images/profile_pictures/1706585458.jpeg" alt="img" class="img-fluid rounded-circle" style="width:250px; height:250px; border-radius:50%; ">
                   <h5 class="m-0 mt-2">Min Chettri</h5>
                   <p class="text-muted">Photographer</p>
                   <p class="lh-lg fw-bold text-black-50">"The job portal's search filters allowed me to find technicians tailored to my specific needs with ease.
