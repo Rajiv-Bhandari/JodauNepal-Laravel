@@ -107,7 +107,7 @@
     <div class="container-fluid">
       <div class="main-logo">
         <a href="index.html">
-          <img src="{{asset('frontend/images/logo.png')}}" alt="logo" class="img-fluid">
+        <img src="images/profile_pictures/logo.png" alt="logo" class="img-fluid" style="width: 180px; height: auto;">
         </a>
       </div>
 
