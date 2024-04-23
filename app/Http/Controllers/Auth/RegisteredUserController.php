@@ -16,19 +16,11 @@ use App\Enums\UserType;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
         return view('auth.register');
     }
-
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+     
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -50,15 +42,5 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect()->route('user.home');
-        // switch ($user->usertype) {
-        //     case UserType::Admin:
-        //         return redirect()->route('admin.dashboard');
-        //     case UserType::Technician:
-        //         return redirect()->route('technician.dashboard');
-        //     case UserType::User:
-        //         return redirect()->route('user.home');
-        //     default:
-        //         return redirect(RouteServiceProvider::HOME);
-        // }
     }
 }
