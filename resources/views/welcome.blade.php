@@ -102,11 +102,10 @@
     </div>
   </div>
 
-
   <nav class="main-menu d-flex navbar fixed-top navbar-expand-lg p-2 py-3 p-lg-4 py-lg-4 ">
     <div class="container-fluid">
       <div class="main-logo">
-        <a href="index.html">
+        <a href="{{url('/')}}">
         <img src="images/profile_pictures/logo.png" alt="logo" class="img-fluid" style="width: 180px; height: auto;">
         </a>
       </div>
